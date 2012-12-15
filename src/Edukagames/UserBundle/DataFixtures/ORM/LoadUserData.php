@@ -20,12 +20,12 @@ class LoadUserData implements FixtureInterface
 			$alumnoFixture->setCurso("1");
 			$alumnoFixture->setDiagnostico("Diagnostico");
 			$alumnoFixture->setEdad($i);
- 			$alumnoFixture->setFechaNacimiento(new \DateTime("now"));
+			$alumnoFixture->setFechaNacimiento(new \DateTime("now"));
 			$alumnoFixture->setPassword("alumno".$i);
 			$alumnoFixture->setSalt("aleatorio");
 			
 			$manager->persist($alumnoFixture);
-        	$manager->flush();
+			$manager->flush();
 		}
 	}
 }
