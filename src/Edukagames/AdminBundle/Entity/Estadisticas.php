@@ -35,7 +35,7 @@ class Estadisticas
     /**
      * @var Alumnos $alumno
      *
-     * @ORM\ManyToOne (targetEntity="Edukagames\UserBundle\Entity\Alumnos")
+     * @ORM\ManyToOne (targetEntity="Edukagames\UserBundle\Entity\Alumno")
      */
     private $alumno;
 

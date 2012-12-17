@@ -19,11 +19,10 @@ class LoadAlumnoData implements FixtureInterface
 			$alumnoFixture->setApellidos("Apellidos".$i);
 			$alumnoFixture->setCurso("1");
 			$alumnoFixture->setDiagnostico("Diagnostico");
-			$alumnoFixture->setEdad($i);
 			$alumnoFixture->setFechaNacimiento(new \DateTime("now"));
 			$alumnoFixture->setPassword("alumno".$i);
 			$alumnoFixture->setSalt(md5($alumnoFixture->getNombre()));
-			
+			$alumnoFixture->setUserName("alumno".$i);
 			$manager->persist($alumnoFixture);
 		}
 		$manager->flush();

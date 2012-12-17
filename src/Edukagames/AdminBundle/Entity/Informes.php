@@ -26,7 +26,7 @@ class Informes
     /**
      * @var Alumnos $Alumno
      *
-     * @ORM\ManyToOne(targetEntity="Edukagames\UserBundle\Entity\Alumnos")
+     * @ORM\ManyToOne(targetEntity="Edukagames\UserBundle\Entity\Alumno")
      */
     private $alumno;
 
