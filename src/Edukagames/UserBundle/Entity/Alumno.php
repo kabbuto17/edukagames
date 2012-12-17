@@ -5,12 +5,12 @@ namespace Edukagames\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Edukagames\UserBundle\Entity\Alumnos
+ * Edukagames\UserBundle\Entity\Alumno
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class Alumnos
+class Alumno
 {
     /**
      * @var integer $id
@@ -71,12 +71,11 @@ class Alumnos
     private $fechaNacimiento;
 
     /**
-     * @var integer $Edad
-     *
-     * @ORM\Column(name="Edad", type="integer")
+     * @var string $username
+     * 
+     * @ORM\Column(name="userName", type="string")
      */
-    private $Edad;
-
+    private $userName;
 
     /**
      * Get id
@@ -92,7 +91,7 @@ class Alumnos
      * Set nombre
      *
      * @param string $nombre
-     * @return Alumnos
+     * @return alumno
      */
     public function setNombre($nombre)
     {
@@ -115,7 +114,7 @@ class Alumnos
      * Set apellidos
      *
      * @param string $apellidos
-     * @return Alumnos
+     * @return alumno
      */
     public function setApellidos($apellidos)
     {
@@ -138,7 +137,7 @@ class Alumnos
      * Set password
      *
      * @param string $password
-     * @return Alumnos
+     * @return alumno
      */
     public function setPassword($password)
     {
@@ -161,7 +160,7 @@ class Alumnos
      * Set salt
      *
      * @param string $salt
-     * @return Alumnos
+     * @return alumno
      */
     public function setSalt($salt)
     {
@@ -184,7 +183,7 @@ class Alumnos
      * Set diagnostico
      *
      * @param string $diagnostico
-     * @return Alumnos
+     * @return alumno
      */
     public function setDiagnostico($diagnostico)
     {
@@ -207,7 +206,7 @@ class Alumnos
      * Set curso
      *
      * @param string $curso
-     * @return Alumnos
+     * @return alumno
      */
     public function setCurso($curso)
     {
@@ -230,7 +229,7 @@ class Alumnos
      * Set fechaNacimiento
      *
      * @param \DateTime $fechaNacimiento
-     * @return Alumnos
+     * @return alumno
      */
     public function setFechaNacimiento($fechaNacimiento)
     {
@@ -248,27 +247,23 @@ class Alumnos
     {
         return $this->fechaNacimiento;
     }
-
-    /**
-     * Set Edad
-     *
-     * @param integer $edad
-     * @return Alumnos
-     */
-    public function setEdad($edad)
-    {
-        $this->Edad = $edad;
     
-        return $this;
+    public function getUserName()
+    {
+    	return $this->userName;
     }
-
-    /**
-     * Get Edad
-     *
-     * @return integer 
-     */
+    
+    public function setUserName($userName)
+    {
+    	$this->userName = $userName;
+    	return $this;
+    }
+    
     public function getEdad()
     {
-        return $this->Edad;
+    	$fechaActual = date("now");
+    	$fechaNacimiento = $this->getFechaNacimiento();
+    	return ($fechaActual-$fechaNacimiento);
     }
+
 }
