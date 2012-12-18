@@ -33,15 +33,17 @@ class AlumnoTest extends WebTestCase
 		$alumno->setApellidos("grillo");
 		$alumno->setCurso("1");
 		$alumno->setDiagnostico("tdh");
-		$alumno->setFechaNacimiento(date("now"));
+		$alumno->setFechaNacimiento(new \DateTime("now"));
 		$alumno->setNombre("pepito");
 		$alumno->setPassword("pepitogrillo");
 		$alumno->setSalt(md5($alumno->getNombre()));
 		$alumno->setUserName("pegri");
-		$this->$em->persist($alumno);
+
+		$em = $this->em;
+		$em->persist($alumno);
 		$em->flush();
-		
-		$alumn = $this->getDotrine()->getEntityManager()->getRepository('UserBundle:Alumno')->findByNombre("pepito");
+
+		$alumn = $em->getRepository('UserBundle:Alumno')->find(1);
 		$this->assertEquals("pepito", $alumn->getNombre());
 	}
 	
