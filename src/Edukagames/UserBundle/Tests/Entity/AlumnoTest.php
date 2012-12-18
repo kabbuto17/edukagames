@@ -38,7 +38,6 @@ class AlumnoTest extends WebTestCase
 		$alumno->setPassword("pepitogrillo");
 		$alumno->setSalt(md5($alumno->getNombre()));
 		$alumno->setUserName("pegri");
-		ldd($this->em);
 		$this->$em->persist($alumno);
 		$em->flush();
 		
