@@ -233,7 +233,7 @@ class Alumno implements UserInterface {
 		return $this->fechaNacimiento;
 	}
 
-	public function getUserName() {
+	public function getUsername() {
 		return $this->userName;
 	}
 
@@ -248,7 +248,7 @@ class Alumno implements UserInterface {
 		return ($fechaActual - $fechaNacimiento);
 	}
 	public function getRoles() {
-		return Array('ROLE_ADMIN');
+		return Array('ROLE_USER');
 	}
     /*
      * No implement

@@ -17,7 +17,6 @@ class LoadAdminData implements FixtureInterface
 			$profesorFixture = new Profesor();
 			$profesorFixture->setNombre("profesor".$i);
 			$profesorFixture->setPassword("profesor".$i);
-			$profesorFixture->setSalt(md5($profesorFixture->getNombre()));
 			
 			$manager->persist($profesorFixture);
 		}
