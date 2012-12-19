@@ -1,0 +1,44 @@
+<!-- Nombre en h1 -->
+<div>
+{% if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') %}
+	{{ app.user.userName }}
+{% endif %}
+</div>
+<!-- Fin nombre en h1 -->
+
+<div class="span9">
+<!-- Pestañas del panel -->
+    <ul class="nav nav-tabs">
+    <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+    <li><a href="#perfil" onclick="ajax()" data-toggle="tab">Perfil</a></li>
+    {% if is_granted('ROLE_ADMIN') %}
+    <li><a href="#messages" data-toggle="tab">Messages</a></li>
+    <li><a href="#settings" data-toggle="tab">Settings</a></li>
+    {% endif %}
+    </ul>
+<!-- Fin Pestañas del panel -->
+<!-- Contenido de las pestañas del panel -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="home">Tab Home</div>
+        <div class="tab-pane" id="perfil"></div>
+       	{% if is_granted('ROLE_ADMIN') %}
+        <div class="tab-pane" id="messages">Tab Messages</div>
+        <div class="tab-pane" id="settings">Tab Settings</div>
+        {% endif %}
+    </div>
+<!-- Fin Contenido de las pestañas del panel -->
+</div>
+<script language="JavaScript" type="text/JavaScript">
+function ajax(){
+	$("div#perfil").empty();
+	$.ajax({
+		type: 'post',
+		cache: "true",
+		dataType: 'html',
+		url: '{{ path(class~'_show_roles', { 'id': entity.id }) }}',
+		success: function(data){
+			$("div#perfil").append(data);
+		}                        
+	})
+}                         
+</script> 

@@ -13,7 +13,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('UserBundle:Default:index.html.twig');
+        return $this->render('UserBundle:base:index.html.twig');
     }
     
     public function loginAction() {
@@ -28,7 +28,7 @@ class DefaultController extends Controller
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
         }
     
-        return $this->render('UserBundle:Default:login_template.html.twig',array(
+        return $this->render('UserBundle:Base:loginBox.html.twig',array(
                 // last username entered by the user
                 'last_username' => $session->get(SecurityContext::LAST_USERNAME),
                 'error' => $error)
