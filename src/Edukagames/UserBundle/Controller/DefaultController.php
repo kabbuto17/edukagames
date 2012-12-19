@@ -36,11 +36,11 @@ class DefaultController extends Controller
     }
     public function perfilAction()
     {
-    	$token = $this->container->get('security.context')->getToken();    	
+    	$token = $this->container->get('security.context')->getToken();
     	$userConnected = $token->getUser();
 
     	$formulario = $this->createForm(new AlumnoPerfilType(),$userConnected);
-		
+		ldd($formulario);
     	return $this->render('UserBundle:Default:perfil.html.twig', array(
     			'form' => $formulario->createView(),
     			'user' => $userConnected
