@@ -12,7 +12,8 @@
         	{% block header %}{% endblock %}
         </header>
         <div class="row-fluid">
-            {% block content %}{% endblock %}
+        	<div>{% block menus %}{% endblock %}</div>
+        	<div>{% block panels %}{% endblock %}</div>
         </div>
         <footer>{% block footer %}{% endblock %}</footer>
      </div>

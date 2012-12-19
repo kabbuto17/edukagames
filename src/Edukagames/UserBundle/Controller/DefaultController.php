@@ -13,7 +13,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('UserBundle:Default:index.html.twig');
+        return $this->render('UserBundle:Base:index.html.twig');
     }
     
     public function loginAction() {
@@ -27,8 +27,8 @@ class DefaultController extends Controller
         } else {
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
         }
-
-        return $this->render('UserBundle:Default:login_template.html.twig',array(
+    
+        return $this->render('UserBundle:Base:loginBox.html.twig',array(
                 // last username entered by the user
                 'last_username' => $session->get(SecurityContext::LAST_USERNAME),
                 'error' => $error)
@@ -36,11 +36,11 @@ class DefaultController extends Controller
     }
     public function perfilAction()
     {
-    	$token = $this->container->get('security.context')->getToken();
+    	$token = $this->container->get('security.context')->getToken();    	
     	$userConnected = $token->getUser();
 
     	$formulario = $this->createForm(new AlumnoPerfilType(),$userConnected);
-		ldd($formulario);
+		
     	return $this->render('UserBundle:Default:perfil.html.twig', array(
     			'form' => $formulario->createView(),
     			'user' => $userConnected
