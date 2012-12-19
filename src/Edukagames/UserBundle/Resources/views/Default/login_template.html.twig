@@ -1,9 +1,11 @@
     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
        Bienvenido {{ app.user.userName }} <a href="{{ path('logout') }}">Cerrar Sesion</a> 
     {% else %}
+    
     {% if error %}
         <div class="error">{{ error.message }}</div>
     {% endif %}
+    
     <form action="{{ path("login_check") }}" method="post" id="login">
         <div>
             <label for="username">Username</label>
@@ -15,6 +17,6 @@
             <input type="password" id="password" name="_password" />
         </div>
 
-        <input type="submit" class="symfony-button-grey" value="LOGIN" />
+        <input type="submit" class="symfony-button-grey" value="Loggin" />
     </form>
     {% endif %}
