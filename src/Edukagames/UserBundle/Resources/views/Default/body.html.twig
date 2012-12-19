@@ -1,0 +1,64 @@
+{% if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') %}
+	{{ app.user.userName }}
+{% endif %}
+<div class="span3">
+	<div class="accordion" id="accordion2">
+	  <div class="accordion-group">
+	    <div class="accordion-heading">
+	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+	        Home
+	      </a>
+	    </div>
+	    <div id="collapseOne" class="accordion-body collapse in">
+	      <div class="accordion-inner">
+	        las opciones
+	      </div>
+	    </div>
+	  </div>
+	  {% if is_granted('ROLE_ADMIN') %}
+	  <div class="accordion-group">
+	    <div class="accordion-heading">
+	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+	        Gestion de juegos
+	      </a>
+	    </div>
+	    <div id="collapseTwo" class="accordion-body collapse">
+	      <div class="accordion-inner">
+	        las opciones
+	      </div>
+	    </div>
+	  </div>
+	  <div class="accordion-group">
+	    <div class="accordion-heading">
+	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+	        Gestion de alumnos
+	      </a>
+	    </div>
+	    <div id="collapseThree" class="accordion-body collapse">
+	      <div class="accordion-inner">
+            <form class="form-search">
+                <input class="span9" type="text" placeholder="Buscar" input-medium search-query">
+                <button type="submit" class="btn"><i class="icon-search"></i></button>
+            </form>
+            [Lista de alumno por ajax]
+	      </div>
+	    </div>
+	  </div>
+	  {% endif %}
+	</div>
+</div>
+<div class="span9">
+    <ul class="nav nav-tabs">
+    <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+    <li><a href="#profile" data-toggle="tab">Profile</a></li>
+    <li><a href="#messages" data-toggle="tab">Messages</a></li>
+    <li><a href="#settings" data-toggle="tab">Settings</a></li>
+    </ul>
+     
+    <div class="tab-content">
+        <div class="tab-pane active" id="home">Tab Home</div>
+        <div class="tab-pane" id="profile">Tab Profile</div>
+        <div class="tab-pane" id="messages">Tab Messages</div>
+        <div class="tab-pane" id="settings">Tab Settings</div>
+    </div>
+ </div>
