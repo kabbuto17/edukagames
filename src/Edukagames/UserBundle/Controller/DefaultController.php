@@ -2,6 +2,8 @@
 
 namespace Edukagames\UserBundle\Controller;
 
+use Edukagames\UserBundle\Form\AlumnoPerfilType;
+
 use Symfony\Component\Security\Core\SecurityContext;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -30,5 +32,16 @@ class DefaultController extends Controller
                 'last_username' => $session->get(SecurityContext::LAST_USERNAME),
                 'error' => $error)
             );
+    }
+    public function perfilAction()
+    {
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$alumn = $em->getRepository('UserBundle:Alumno')->find(1);
+    	$formulario = $this->createForm(new AlumnoPerfilType(),$alumn);
+    	return $this->render('UserBundle:Default:perfil.html.twig', array(
+    			'form' => $formulario->createView(),
+    			'user' => $alumn
+    	));
+    	
     }
 }
