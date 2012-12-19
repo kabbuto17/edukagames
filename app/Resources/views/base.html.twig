@@ -8,7 +8,9 @@
     </head>
     <body>
     <div class="container-fluid offset1">
-        <header class="navbar">{% block header %}{% endblock %}</header>
+        <header class="navbar">
+        	{% block header %}{% endblock %}
+        </header>
         <div class="row-fluid">
             {% block content %}{% endblock %}
         </div>
