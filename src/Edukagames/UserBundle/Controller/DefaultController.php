@@ -27,7 +27,7 @@ class DefaultController extends Controller
         } else {
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
         }
-    
+
         return $this->render('UserBundle:Default:login_template.html.twig',array(
                 // last username entered by the user
                 'last_username' => $session->get(SecurityContext::LAST_USERNAME),
@@ -36,12 +36,14 @@ class DefaultController extends Controller
     }
     public function perfilAction()
     {
-    	$em = $this->getDoctrine()->getEntityManager();
-    	$alumn = $em->getRepository('UserBundle:Alumno')->find(1);
-    	$formulario = $this->createForm(new AlumnoPerfilType(),$alumn);
+    	$token = $this->container->get('security.context')->getToken();    	
+    	$userConnected = $token->getUser();
+
+    	$formulario = $this->createForm(new AlumnoPerfilType(),$userConnected);
+		
     	return $this->render('UserBundle:Default:perfil.html.twig', array(
     			'form' => $formulario->createView(),
-    			'user' => $alumn
+    			'user' => $userConnected
     	));
     	
     }
