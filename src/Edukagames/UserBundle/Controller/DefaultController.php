@@ -13,7 +13,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('UserBundle:base:index.html.twig');
+        return $this->render('UserBundle:Base:index.html.twig');
     }
     
     public function loginAction() {
