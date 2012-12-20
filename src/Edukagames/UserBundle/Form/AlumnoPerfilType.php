@@ -14,8 +14,9 @@ class AlumnoPerfilType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder	
 			->add('userName')
-			->add('password', 'repeated',
+			->add('password', 'repeated', 
 					array('type' => 'password',
+							'required' => false,
 							'invalid_message' => 'Las dos contrasenas deben coincidir',
 							'first_name' =>"Contrasena",
 							'second_name' =>"Repita_contrasena",

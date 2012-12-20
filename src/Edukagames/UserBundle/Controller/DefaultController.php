@@ -47,19 +47,24 @@ class DefaultController extends Controller
     		$formulario->bindRequest($this->getRequest());
     		if ($formulario->isValid()) {
     			$em = $this->getDoctrine()->getEntityManager();
+    			$alumno = $this->getDoctrine()->getEntityManager()->getRepository('UserBundle:Alumno')->find($userConnected->getId());
     			$passwordNoEncriptado = $formulario->getData()->getPassword();
+    			$newUser = $formulario->getData()->getUserName();
     			if ($passwordNoEncriptado != null) {
-    				$alumno = $this->getDoctrine()->getEntityManager()->getRepository('UserBundle:Alumno')->find($userConnected->getId());
+    				
 	    			
     				$encoder = $this->get('security.encoder_factory')->getEncoder($alumno);
 	    			$passwordCodificado = $encoder->encodePassword($passwordNoEncriptado, $alumno->getSalt());
 	    			$alumno->setPassword($passwordCodificado);
-    				
-    				$em->persist($alumno);
-    				$em->flush($alumno);
-    				
-    				$this->redirect($this->generateUrl('user_profile_edit'));
+    				$alumno->setUserName($newUser);
+    			} else {
+    				$alumno->setUserName($newUser);
     			}
+    			
+    			$em->persist($alumno);
+    			$em->flush($alumno);
+    			
+//     			$this->redirect($this->generateUrl('user_profile_edit'));
     		}
     		
     	}
