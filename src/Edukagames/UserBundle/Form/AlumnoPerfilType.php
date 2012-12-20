@@ -12,21 +12,21 @@ class AlumnoPerfilType extends AbstractType
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$builder
-			->add('password','repeated',array(
-				'type' => 'password',
-				'invalid_message' => 'Las dos contraseñas deben coincidir',
-				'options' => array('label' => 'Contraseña')
-			));
-					
-		
-
+		$builder	
+			->add('userName')
+			->add('password', 'repeated',
+					array('type' => 'password',
+							'invalid_message' => 'Las dos contrasenas deben coincidir',
+							'first_name' =>"Contrasena",
+							'second_name' =>"Repita_contrasena",
+							'error_bubbling' => 'true'))
+			;
 	}
 	
 	public function getName()
 	{
 		return "Alumno_Perfil";
 	}
-
+	
 }
 ?>

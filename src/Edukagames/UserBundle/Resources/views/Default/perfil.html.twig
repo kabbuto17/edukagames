@@ -1,1 +1,17 @@
+{% extends '::base.html.twig' %}
+{% block menus %}
+<div class="infoNoModificable">
+{{ "Nombre: " }}
+{{ user.nombre }}
+<p></p>
+{{ "Apellidos: " }}
+{{ user.apellidos }}
+<p></p>
+</div>
+<form action='#' method="POST"{{ form_enctype(form) }}>
+{{ form_errors(form) }}
 {{ form_rest(form) }}
+<input type="submit" />
+</form>
+
+{% endblock %}
