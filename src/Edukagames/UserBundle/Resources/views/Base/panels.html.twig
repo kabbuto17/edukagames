@@ -28,17 +28,3 @@
     </div>
 <!-- Fin Contenido de las pestañas del panel -->
 </div>
-<script language="JavaScript" type="text/JavaScript">
-function ajax(){
-	$("div#perfil").empty();
-	$.ajax({
-		type: 'post',
-		cache: "true",
-		dataType: 'html',
-		url: '{{ path(class~'_show_roles', { 'id': entity.id }) }}',
-		success: function(data){
-			$("div#perfil").append(data);
-		}                        
-	})
-}                         
-</script> 

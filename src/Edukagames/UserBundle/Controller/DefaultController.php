@@ -2,6 +2,8 @@
 
 namespace Edukagames\UserBundle\Controller;
 
+use Edukagames\UserBundle\Entity\Alumno;
+
 use Edukagames\UserBundle\Form\AlumnoPerfilType;
 
 use Symfony\Component\Security\Core\SecurityContext;
@@ -36,11 +38,32 @@ class DefaultController extends Controller
     }
     public function perfilAction()
     {
-    	$token = $this->container->get('security.context')->getToken();    	
+    	$token = $this->container->get('security.context')->getToken();
     	$userConnected = $token->getUser();
 
     	$formulario = $this->createForm(new AlumnoPerfilType(),$userConnected);
-		
+    	
+    	if ($this->getRequest()->getMethod() == "POST") {
+    		$formulario->bindRequest($this->getRequest());
+    		if ($formulario->isValid()) {
+    			$em = $this->getDoctrine()->getEntityManager();
+    			$passwordNoEncriptado = $formulario->getData()->getPassword();
+    			if ($passwordNoEncriptado != null) {
+    				$alumno = $this->getDoctrine()->getEntityManager()->getRepository('UserBundle:Alumno')->find($userConnected->getId());
+	    			
+    				$encoder = $this->get('security.encoder_factory')->getEncoder($alumno);
+	    			$passwordCodificado = $encoder->encodePassword($passwordNoEncriptado, $alumno->getSalt());
+	    			$alumno->setPassword($passwordCodificado);
+    				
+    				$em->persist($alumno);
+    				$em->flush($alumno);
+    				
+    				$this->redirect($this->generateUrl('user_profile_edit'));
+    			}
+    		}
+    		
+    	}
+
     	return $this->render('UserBundle:Default:perfil.html.twig', array(
     			'form' => $formulario->createView(),
     			'user' => $userConnected

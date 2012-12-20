@@ -1,3 +1,0 @@
-user_profile_edit:
-    pattern: /profile
-    defaults: { _controller: UserBundle:Default:perfil }
