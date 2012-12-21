@@ -51,8 +51,6 @@ class DefaultController extends Controller
     			$passwordNoEncriptado = $formulario->getData()->getPassword();
     			$newUser = $formulario->getData()->getUserName();
     			if ($passwordNoEncriptado != null) {
-    				
-	    			
     				$encoder = $this->get('security.encoder_factory')->getEncoder($alumno);
 	    			$passwordCodificado = $encoder->encodePassword($passwordNoEncriptado, $alumno->getSalt());
 	    			$alumno->setPassword($passwordCodificado);
@@ -64,7 +62,7 @@ class DefaultController extends Controller
     			$em->persist($alumno);
     			$em->flush($alumno);
     			
-//     			$this->redirect($this->generateUrl('user_profile_edit'));
+     			return $this->redirect($this->generateUrl('index'));
     		}
     		
     	}

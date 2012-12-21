@@ -10,9 +10,7 @@ logout:
     pattern: /logout
 #FIN Login
 
-index:
-    pattern: /
-    defaults: { _controller: UserBundle:Default:index }
+
 
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"

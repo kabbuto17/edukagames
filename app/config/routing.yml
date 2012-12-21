@@ -10,3 +10,7 @@ user:
 #_internal:
 #    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
 #    prefix:   /_internal
+
+index:
+    pattern: /
+    defaults: { _controller: UserBundle:Default:index }
