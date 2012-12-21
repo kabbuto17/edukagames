@@ -6,7 +6,7 @@
 	{{ user.apellidos }}
 <p></p>
 </div>
-<form class="formulario" action='{{ path("user_profile_edit") }}' method="POST"{{ form_enctype(form) }} ">
+<form class="formulario" action='{{ path("user_profile_edit") }}' method="POST">
 	{{ form_errors(form) }}
 	{{ form_rest(form) }}
 	<input type="submit">
