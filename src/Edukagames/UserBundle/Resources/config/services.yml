@@ -2,6 +2,15 @@ parameters:
 #    user.example.class: Edukagames\UserBundle\Example
 
 services:
-#    user.example:
-#        class: %user.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+# Creamos un listener para que cuando el usuario se logee se recoja su id
+# y se le redirija a www.dominio.com/{id}
+
+    login_listener:
+        class: Edukagames\UserBundle\Listener\LoginListener #donde estara el listener
+        arguments: [@router] #los argumentos que nos haran falta, en este caso router porque mandaremos que se genere una ruta
+        tags:
+            #interactive_login es el que se usa en el login con el tenemos acceso al user conectado
+            - { name: kernel.event_listener, event: security.interactive_login }
+            #kernel.response para poder responder la respuesta y redirigirlo a la pagina.
+            - { name: kernel.event_listener, event: kernel.response }
+

@@ -11,6 +11,7 @@
     <ul class="nav nav-tabs">
     <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
     <li><a href="#perfil" onclick="ajax()" data-toggle="tab">Perfil</a></li>
+    <li><a href="#perfil" data-toggle="tab">Puntuaciones</a></li>
     {% if is_granted('ROLE_ADMIN') %}
     <li><a href="#messages" data-toggle="tab">Messages</a></li>
     <li><a href="#settings" data-toggle="tab">Settings</a></li>
@@ -20,7 +21,7 @@
 <!-- Contenido de las pestañas del panel -->
     <div class="tab-content">
         <div class="tab-pane active" id="home">Tab Home</div>
-        <div class="tab-pane" id="perfil"></div>
+        <div class="tab-pane" id="perfil">{% block perfil %}{% endblock %}</div>
        	{% if is_granted('ROLE_ADMIN') %}
         <div class="tab-pane" id="messages">Tab Messages</div>
         <div class="tab-pane" id="settings">Tab Settings</div>
@@ -28,8 +29,3 @@
     </div>
 <!-- Fin Contenido de las pestañas del panel -->
 </div>
-<script language="JavaScript" type="text/JavaScript">
-function ajax(){
-	$('#perfil').load("{{ path('user_profile_edit') }}");
-  }             
-</script>
