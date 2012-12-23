@@ -7,12 +7,12 @@ use Doctrine\Common\Annotations\Annotation\Target;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Edukagames\AdminBundle\Entity\Archivos
+ * Edukagames\AdminBundle\Entity\Archivo
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class Archivos
+class Archivo
 {
     /**
      * @var integer $id
@@ -26,7 +26,7 @@ class Archivos
     /**
      * @var Informes $informe
      *
-     * @ORM\ManyToOne (targetEntity="Edukagames\AdminBundle\Entity\Informes")
+     * @ORM\ManyToOne (targetEntity="Edukagames\AdminBundle\Entity\Informe")
      */
     private $informe;
 
@@ -59,9 +59,9 @@ class Archivos
      * Set informe
      *
      * @param integer $informe
-     * @return Archivos
+     * @return Archivo
      */
-    public function setInforme(\Edukagames\AdminBundle\Entity\Informes $informe)
+    public function setInforme(\Edukagames\AdminBundle\Entity\Informe $informe)
     {
         $this->informe = $informe;
     

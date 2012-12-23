@@ -78,6 +78,34 @@ class Alumno implements UserInterface {
 	private $userName;
 
 	/**
+	 * @var string $foto
+	 *
+	 * @ORM\Column(name="foto", type="string")
+	 */
+	private $foto;
+
+	/**
+	 * Get foto 
+	 * 
+	 * @return string
+	 */
+	public function getFoto() {
+		return $this->foto;
+	}
+	
+	/**
+	 * Set foto
+	 *
+	 * @param string $foto
+	 * @return alumno
+	 */
+	public function setFoto($foto) {
+		$this->foto = $foto;
+	
+		return $this;
+	}
+	
+	/**
 	 * Get id
 	 *
 	 * @return integer 

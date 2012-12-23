@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Informes
+class Informe
 {
     /**
      * @var integer $id
@@ -61,7 +61,7 @@ class Informes
      * @param integer $alumno
      * @return Informe
      */
-    public function setAlumno(\Edukagames\UserBundle\Entity\Alumnos $alumno)
+    public function setAlumno(\Edukagames\UserBundle\Entity\Alumno $alumno)
     {
         $this->alumno = $alumno;
     

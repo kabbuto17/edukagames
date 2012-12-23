@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Juegos
+class Juego
 {
     /**
      * @var integer $id
@@ -71,7 +71,7 @@ class Juegos
      * Set nombre
      *
      * @param string $nombre
-     * @return Juegos
+     * @return Juego
      */
     public function setNombre($nombre)
     {
@@ -94,7 +94,7 @@ class Juegos
      * Set descripcion
      *
      * @param string $descripcion
-     * @return Juegos
+     * @return Juego
      */
     public function setDescripcion($descripcion)
     {
@@ -117,7 +117,7 @@ class Juegos
      * Set imagen
      *
      * @param string $imagen
-     * @return Juegos
+     * @return Juego
      */
     public function setImagen($imagen)
     {
@@ -140,7 +140,7 @@ class Juegos
      * Set rutaXML
      *
      * @param string $rutaXML
-     * @return Juegos
+     * @return Juego
      */
     public function setRutaXML($rutaXML)
     {
@@ -163,7 +163,7 @@ class Juegos
      * Set link
      *
      * @param string $link
-     * @return Juegos
+     * @return Juego
      */
     public function setLink($link)
     {

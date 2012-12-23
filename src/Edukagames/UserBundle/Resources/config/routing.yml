@@ -9,9 +9,9 @@ logout:
     pattern: /logout
 
 index:
-    pattern: /{id}
+    pattern: /usuario
     defaults: { _controller: UserBundle:Default:index }
     
 user_profile_edit:
-    pattern: /{id}/profile
+    pattern: /usuario/profile
     defaults: { _controller: UserBundle:Default:perfil }
