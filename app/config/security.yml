@@ -17,10 +17,12 @@ security:
 
     firewalls:
         login_user:
-            pattern: ^/*
-            anonymous: ~
+            pattern: ^/
+#            anonymous: ~
             form_login:
-                provider: chain_provider    
+                provider: chain_provider
+                always_use_default_target_path: true
+                default_target_path: /usuario   
                 login_path: /
                 check_path: /login_check
             logout:

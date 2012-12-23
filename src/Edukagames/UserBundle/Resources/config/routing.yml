@@ -8,10 +8,10 @@ login_check:
 logout:
     pattern: /logout
 
-index:
+user_index:
     pattern: /usuario
     defaults: { _controller: UserBundle:Default:index }
     
-user_profile_edit:
+user_perfil_edit:
     pattern: /usuario/profile
     defaults: { _controller: UserBundle:Default:perfil }

@@ -24,14 +24,14 @@ class Alumno implements UserInterface {
 	/**
 	 * @var string $nombre
 	 *
-	 * @ORM\Column(name="nombre", type="string", length=255)
+	 * @ORM\Column(name="nombre", type="string", length=25)
 	 */
 	private $nombre;
 
 	/**
 	 * @var string $apellidos
 	 *
-	 * @ORM\Column(name="apellidos", type="string", length=255)
+	 * @ORM\Column(name="apellidos", type="string", length=50)
 	 */
 	private $apellidos;
 
@@ -52,14 +52,14 @@ class Alumno implements UserInterface {
 	/**
 	 * @var string $diagnostico
 	 *
-	 * @ORM\Column(name="diagnostico", type="string", length=255)
+	 * @ORM\Column(name="diagnostico", type="string", length=255, nullable=true)
 	 */
 	private $diagnostico;
 
 	/**
 	 * @var string $curso
 	 *
-	 * @ORM\Column(name="curso", type="string", length=255)
+	 * @ORM\Column(name="curso", type="string", length=100, nullable=true)
 	 */
 	private $curso;
 
@@ -73,7 +73,7 @@ class Alumno implements UserInterface {
 	/**
 	 * @var string $username
 	 * 
-	 * @ORM\Column(name="userName", type="string")
+	 * @ORM\Column(name="userName", type="string", unique=true)
 	 */
 	private $userName;
 

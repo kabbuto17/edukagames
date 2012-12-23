@@ -60,7 +60,7 @@ class DefaultController extends Controller
     			$em->persist($alumno);
     			$em->flush($alumno);
     			
-     			return $this->redirect($this->generateUrl('user_profile_edit'));
+     			return $this->redirect($this->generateUrl('user_perfil_edit'));
 
     		}
     		

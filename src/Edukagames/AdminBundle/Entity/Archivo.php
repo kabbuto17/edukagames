@@ -2,6 +2,8 @@
 
 namespace Edukagames\AdminBundle\Entity;
 
+use Symfony\Component\Validator\Constraints\Date;
+
 use Doctrine\Common\Annotations\Annotation\Target;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -31,11 +33,11 @@ class Archivo
     private $informe;
 
     /**
-     * @var string $rutaInforme
+     * @var string $nombreArchivo
      *
-     * @ORM\Column(name="rutaInforme", type="string", length=255)
+     * @ORM\Column(name="nombreArchivo", type="string", length=255)
      */
-    private $rutaInforme;
+    private $nombreArchivo;
 
     /**
      * @var string $salt
@@ -44,7 +46,15 @@ class Archivo
      */
     private $salt;
 
-
+    /**
+     * @var string $fecha
+     *
+     * @ORM\Column(name="fecha", type="date")
+     */
+    private $fecha;
+    
+    
+    
     /**
      * Get id
      *
@@ -122,5 +132,28 @@ class Archivo
     public function getSalt()
     {
         return $this->salt;
+    }
+    
+    /**
+     * Set fecha
+     *
+     * @param Date $fecha
+     * @return Archivos
+     */
+    public function setFecha($fecha)
+    {
+    	$this->fecha = $fecha;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get fecha
+     *
+     * @return Date
+     */
+    public function getFecha()
+    {
+    	return $this->fecha;
     }
 }

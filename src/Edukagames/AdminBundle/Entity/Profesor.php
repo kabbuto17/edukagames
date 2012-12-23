@@ -24,7 +24,7 @@ class Profesor implements UserInterface {
 	/**
 	 * @var string $nombre
 	 *
-	 * @ORM\Column(name="nombre", type="string", length=255)
+	 * @ORM\Column(name="nombre", type="string", length=100, unique=true)
 	 */
 	private $nombre;
 

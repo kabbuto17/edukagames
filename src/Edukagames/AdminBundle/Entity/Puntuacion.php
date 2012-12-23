@@ -42,35 +42,35 @@ class Puntuacion
     /**
      * @var integer
      *
-     * @ORM\Column(name="Nivel", type="integer")
+     * @ORM\Column(name="Nivel", type="integer", nullable=true)
      */
     private $Nivel;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="Fase", type="integer")
+     * @ORM\Column(name="Fase", type="integer", nullable=true)
      */
     private $Fase;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="Puntos", type="float")
+     * @ORM\Column(name="Puntos", type="float", nullable=true)
      */
     private $Puntos;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="Aciertos", type="integer")
+     * @ORM\Column(name="Aciertos", type="integer", nullable=true)
      */
     private $Aciertos;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="Tiempo", type="time")
+     * @ORM\Column(name="Tiempo", type="time", nullable=true)
      */
     private $Tiempo;
 
