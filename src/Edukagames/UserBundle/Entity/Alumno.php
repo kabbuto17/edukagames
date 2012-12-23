@@ -80,7 +80,7 @@ class Alumno implements UserInterface {
 	/**
 	 * @var string $foto
 	 *
-	 * @ORM\Column(name="foto", type="string")
+	 * @ORM\Column(name="foto", type="string", nullable=true)
 	 */
 	private $foto;
 
