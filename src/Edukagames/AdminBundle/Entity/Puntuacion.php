@@ -68,9 +68,9 @@ class Puntuacion
     private $Aciertos;
 
     /**
-     * @var \DateTime
+     * @var float
      *
-     * @ORM\Column(name="Tiempo", type="time", nullable=true)
+     * @ORM\Column(name="Tiempo", type="float", nullable=true)
      */
     private $Tiempo;
 
@@ -226,7 +226,7 @@ class Puntuacion
     /**
      * Set Tiempo
      *
-     * @param \DateTime $tiempo
+     * @param float $tiempo
      * @return Puntuacion
      */
     public function setTiempo($tiempo)
@@ -239,7 +239,7 @@ class Puntuacion
     /**
      * Get Tiempo
      *
-     * @return \DateTime 
+     * @return Puntuacion 
      */
     public function getTiempo()
     {
