@@ -28,6 +28,7 @@ class LoadAlumnoData implements FixtureInterface, ContainerAwareInterface {
 			$alumnoFixture->setCurso("1");
 			$alumnoFixture->setDiagnostico("Diagnostico");
 			$alumnoFixture->setSalt($salt);
+			$alumnoFixture->setFoto('defaultprofile.png');
 			$alumnoFixture->setFechaNacimiento(new \DateTime("now"));
 
 			$alumnoFixture->setPassword($enconder->encodePassword($pwd, $salt));
