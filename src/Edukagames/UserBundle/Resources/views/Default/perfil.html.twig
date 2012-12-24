@@ -1,4 +1,10 @@
 <div class="infoNoModificable">
+	{% if (user.foto == null) %}
+	<img alt="gayyyyyy" src="{{ asset('bundles/user/img/anonima.png') }}">
+	{% else %}
+	{#TODO hay k sustituir la ruta buahhh #}
+	<img alt="gayyyyyy" src="{{ asset('bundles/user/img/anonima.png') }}"> 
+	{% endif %}
 	{{ "Nombre: " }}
 	{{ user.nombre }}
 	<p></p>
@@ -6,7 +12,7 @@
 	{{ user.apellidos }}
 <p></p>
 </div>
-<form class="formulario" action='{{ path("user_profile_edit") }}' method="POST"{{ form_enctype(form) }} ">
+<form class="formulario" action='{{ path("user_perfil_edit") }}' method="POST"{{ form_enctype(form) }} ">
 	{{ form_errors(form) }}
 	{{ form_rest(form) }}
 	<input type="submit">
