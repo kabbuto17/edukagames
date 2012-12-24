@@ -13,5 +13,5 @@ user_index:
     defaults: { _controller: UserBundle:Default:index }
     
 user_perfil_edit:
-    pattern: /usuario/profile
+    pattern: /usuario/perfil
     defaults: { _controller: UserBundle:Default:perfil }

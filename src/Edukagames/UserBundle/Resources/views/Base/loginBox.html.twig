@@ -1,17 +1,25 @@
-    {% if error %}
+{% extends 'UserBundle:Base:index.html.twig' %}
+{% block title %}EdukaGames{% endblock %}
+{% block menus %}
+ 
+{% endblock %}
+{% block panels %}
+ 	{% if error %}
         <div class="error">{{ error.message }}</div>
     {% endif %}
     
     <form action="{{ path("login_check") }}" method="post" id="login">
         <div>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+{#             <label for="username">Username</label>#}
+            <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Usuario"/>
         </div>
 
         <div>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="_password" />
+{#             <label for="password">Password</label>#}
+            <input type="password" id="password" name="_password" placeholder="Contraseña"/>
         </div>
 
         <input type="submit" class="symfony-button-grey" value="Loggin" />
     </form>
+ 
+{% endblock %}    

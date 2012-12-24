@@ -1,10 +1,14 @@
 <div class="infoNoModificable">
+<<<<<<< HEAD
 	{% if (user.foto == null) %}
 	<img alt="gayyyyyy" src="{{ asset('bundles/user/img/anonima.png') }}">
 	{% else %}
 	{#TODO hay k sustituir la ruta buahhh #}
 	<img alt="gayyyyyy" src="{{ asset('bundles/user/img/anonima.png') }}"> 
 	{% endif %}
+=======
+	<img src="{{ asset( 'bundles/user/img/'~ user.foto ) }}">
+>>>>>>> branch 'master' of ssh://git@github.com/kabbuto17/edukagames.git
 	{{ "Nombre: " }}
 	{{ user.nombre }}
 	<p></p>
