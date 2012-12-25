@@ -285,5 +285,9 @@ class Alumno implements UserInterface {
 		// TODO: Auto-generated method stub
 
 	}
+	
+	public function __toString(){
+		return "alumno";
+	}
 
 }

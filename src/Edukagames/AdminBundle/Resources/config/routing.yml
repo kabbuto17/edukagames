@@ -5,3 +5,8 @@ admin_index:
 AdminBundle_profesor:
         resource: "@AdminBundle/Resources/config/routing/profesor.yml"
         prefix:   /profesor
+
+AdminBundle_informe:
+        resource: "@AdminBundle/Resources/config/routing/informe.yml"
+        prefix:   /informe
+

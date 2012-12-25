@@ -77,6 +77,11 @@ class ProfesorController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setSalt("aleatoriototalmuaahahahhahaha");
+            $encoder = $enconder = $this->container->get('security.encoder_factory')->getEncoder($entity);
+            $passwordEncriptado= $encoder->encodePassword($form->getData()->getPassword(),$entity->getSalt());
+            $entity->setPassword($passwordEncriptado);
+
             $em->persist($entity);
             $em->flush();
 
@@ -132,6 +137,10 @@ class ProfesorController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+        	$encoder = $enconder = $this->container->get('security.encoder_factory')->getEncoder($entity);
+        	$passwordEncriptado= $encoder->encodePassword($editForm->getData()->getPassword(),$entity->getSalt());
+        	$entity->setPassword($passwordEncriptado);
+        	
             $em->persist($entity);
             $em->flush();
 

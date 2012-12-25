@@ -13,7 +13,6 @@ class ProfesorType extends AbstractType
         $builder
             ->add('nombre')
             ->add('password')
-            ->add('salt')
         ;
     }
 

@@ -1,0 +1,30 @@
+informe:
+    pattern:  /
+    defaults: { _controller: "AdminBundle:Informe:index" }
+
+informe_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AdminBundle:Informe:show" }
+
+informe_new:
+    pattern:  /new
+    defaults: { _controller: "AdminBundle:Informe:new" }
+
+informe_create:
+    pattern:  /create
+    defaults: { _controller: "AdminBundle:Informe:create" }
+    requirements: { _method: post }
+
+informe_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AdminBundle:Informe:edit" }
+
+informe_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AdminBundle:Informe:update" }
+    requirements: { _method: post }
+
+informe_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AdminBundle:Informe:delete" }
+    requirements: { _method: post }
