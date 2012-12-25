@@ -47,9 +47,9 @@ class Archivo
     private $salt;
 
     /**
-     * @var string $fecha
+     * @var \DateTime $fecha
      *
-     * @ORM\Column(name="fecha", type="date")
+     * @ORM\Column(name="fecha", type="datetime")
      */
     private $fecha;
     
@@ -89,26 +89,26 @@ class Archivo
     }
 
     /**
-     * Set rutaInforme
+     * Set NombreArchivo
      *
-     * @param string $rutaInforme
-     * @return Archivos
+     * @param string $nombreArchivo
+     * @return Archivo
      */
-    public function setRutaInforme($rutaInforme)
+    public function setNombreArchivo($nombreArchivo)
     {
-        $this->rutaInforme = $rutaInforme;
+        $this->nombreArchivo = $nombreArchivo;
     
         return $this;
     }
 
     /**
-     * Get rutaInforme
+     * Get NombreArchivo
      *
      * @return string 
      */
-    public function getRutaInforme()
+    public function getNombreArchivo()
     {
-        return $this->rutaInforme;
+        return $this->nombreArchivo;
     }
 
     /**

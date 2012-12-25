@@ -43,19 +43,11 @@ class Juego
     private $imagen;
 
     /**
-     * @var string $rutaXML
+     * @var string $XML
      *
-     * @ORM\Column(name="rutaXML", type="string", length=255)
+     * @ORM\Column(name="XML", type="string", length=255)
      */
-    private $rutaXML;
-
-    /**
-     * @var string $link
-     *
-     * @ORM\Column(name="link", type="string", length=255)
-     */
-    private $link;
-
+    private $XML;
 
     /**
      * Get id
@@ -137,48 +129,25 @@ class Juego
     }
 
     /**
-     * Set rutaXML
+     * Set XML
      *
-     * @param string $rutaXML
+     * @param string $XML
      * @return Juego
      */
-    public function setRutaXML($rutaXML)
+    public function setXML($XML)
     {
-        $this->rutaXML = $rutaXML;
+        $this->XML = $XML;
     
         return $this;
     }
 
     /**
-     * Get rutaXML
+     * Get XML
      *
      * @return string 
      */
-    public function getRutaXML()
+    public function getXML()
     {
-        return $this->rutaXML;
-    }
-
-    /**
-     * Set link
-     *
-     * @param string $link
-     * @return Juego
-     */
-    public function setLink($link)
-    {
-        $this->link = $link;
-    
-        return $this;
-    }
-
-    /**
-     * Get link
-     *
-     * @return string 
-     */
-    public function getLink()
-    {
-        return $this->link;
+        return $this->XML;
     }
 }
