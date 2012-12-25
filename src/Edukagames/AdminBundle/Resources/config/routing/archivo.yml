@@ -1,0 +1,30 @@
+archivo:
+    pattern:  /
+    defaults: { _controller: "AdminBundle:Archivo:index" }
+
+archivo_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AdminBundle:Archivo:show" }
+
+archivo_new:
+    pattern:  /new
+    defaults: { _controller: "AdminBundle:Archivo:new" }
+
+archivo_create:
+    pattern:  /create
+    defaults: { _controller: "AdminBundle:Archivo:create" }
+    requirements: { _method: post }
+
+archivo_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AdminBundle:Archivo:edit" }
+
+archivo_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AdminBundle:Archivo:update" }
+    requirements: { _method: post }
+
+archivo_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AdminBundle:Archivo:delete" }
+    requirements: { _method: post }
