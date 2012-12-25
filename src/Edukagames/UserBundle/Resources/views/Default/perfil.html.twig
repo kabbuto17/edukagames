@@ -1,6 +1,6 @@
 <div class="infoNoModificable">
-	{% if (user.foto == null) %}
-	<img alt="gayyyyyy" src="{{ asset('bundles/user/img/anonima.png') }}">
+	{% if (user.foto == "defaultprofile.png") %}
+	<img alt="gayyyyyy" src="{{ asset('bundles/user/img/defaultprofile.png') }}">
 	{% else %}
 	<img alt="gayyyyyy" src="{{ asset(rutaImg) }}"> 
 	{% endif %}

@@ -1,3 +1,7 @@
 admin_index:
     pattern: /admin/
     defaults: { _controller: AdminBundle:Default:index }
+    
+AdminBundle_profesor:
+        resource: "@AdminBundle/Resources/config/routing/profesor.yml"
+        prefix:   /profesor

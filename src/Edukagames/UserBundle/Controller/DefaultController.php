@@ -39,14 +39,15 @@ class DefaultController extends Controller
     	$token = $this->container->get('security.context')->getToken();
     	$userConnected = $token->getUser();
     	$rutaImagen = "bundles/user/img/".$userConnected->getId()."/".$userConnected->getFoto();
-
     	$formulario = $this->createForm(new AlumnoPerfilType(),$userConnected);
+    	$passwordOriginal = $userConnected->getPassword();
+    	$imagenOriginal = $userConnected->getFoto();
     	
     	if ($this->getRequest()->getMethod() == "POST") {
     		$formulario->bindRequest($this->getRequest());
     		if ($formulario->isValid()) {
-    			$em = $this->getDoctrine()->getEntityManager();
-    			$alumno = $this->getDoctrine()->getEntityManager()->getRepository('UserBundle:Alumno')->find($userConnected->getId());
+    			$em = $this->getDoctrine()->getManager();
+    			$alumno = $em->getRepository('UserBundle:Alumno')->find($userConnected->getId());
     			$passwordNoEncriptado = $formulario->getData()->getPassword();
     			$newUser = $formulario->getData()->getUserName();
 
@@ -57,6 +58,7 @@ class DefaultController extends Controller
     				$alumno->setUserName($newUser);
     			} else {
     				$alumno->setUserName($newUser);
+    				$alumno->setPassword($passwordOriginal);
     			}
     			
     			if($formulario->getData()->getFoto() != null){
@@ -67,6 +69,8 @@ class DefaultController extends Controller
     					mkdir($raizImagen);
     				}
     				move_uploaded_file($_FILES['Alumno_Perfil']['tmp_name']["foto"], 'bundles/user/img/'.$userConnected->getId().'/'.$nombreArchivo);
+    			}else {
+    				$alumno->setFoto($imagenOriginal);
     			}
 
     			$em->persist($alumno);
@@ -77,7 +81,7 @@ class DefaultController extends Controller
     		}
     		
     	}
-
+		
     	return $this->render('UserBundle:Default:perfil.html.twig', array(
     			'form' => $formulario->createView(),
     			'user' => $userConnected,
