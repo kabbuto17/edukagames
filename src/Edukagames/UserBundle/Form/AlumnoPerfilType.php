@@ -20,7 +20,11 @@ class AlumnoPerfilType extends AbstractType
 							'invalid_message' => 'Las dos contrasenas deben coincidir',
 							'first_name' =>"Contrasena",
 							'second_name' =>"Repita_contrasena",
-							'error_bubbling' => 'true'));
+							'error_bubbling' => 'true'))
+			->add('foto','file', array(
+					'required' => false,
+					'data_class' => null
+		));
 	}
 	
 	public function getName()

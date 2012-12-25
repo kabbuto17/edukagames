@@ -38,6 +38,7 @@ class DefaultController extends Controller
     {
     	$token = $this->container->get('security.context')->getToken();
     	$userConnected = $token->getUser();
+    	$rutaImagen = "bundles/user/img/".$userConnected->getId()."/".$userConnected->getFoto();
 
     	$formulario = $this->createForm(new AlumnoPerfilType(),$userConnected);
     	
@@ -48,6 +49,7 @@ class DefaultController extends Controller
     			$alumno = $this->getDoctrine()->getEntityManager()->getRepository('UserBundle:Alumno')->find($userConnected->getId());
     			$passwordNoEncriptado = $formulario->getData()->getPassword();
     			$newUser = $formulario->getData()->getUserName();
+
     			if ($passwordNoEncriptado != null) {
     				$encoder = $this->get('security.encoder_factory')->getEncoder($alumno);
 	    			$passwordCodificado = $encoder->encodePassword($passwordNoEncriptado, $alumno->getSalt());
@@ -57,10 +59,20 @@ class DefaultController extends Controller
     				$alumno->setUserName($newUser);
     			}
     			
+    			if($formulario->getData()->getFoto() != null){
+    				$nombreArchivo = $formulario->getData()->getFoto()->getClientOriginalName();
+    				$alumno->setFoto($nombreArchivo);
+    				$raizImagen = 'bundles/user/img/'.$userConnected->getId();
+    				if(!file_exists($raizImagen)){
+    					mkdir($raizImagen);
+    				}
+    				move_uploaded_file($_FILES['Alumno_Perfil']['tmp_name']["foto"], 'bundles/user/img/'.$userConnected->getId().'/'.$nombreArchivo);
+    			}
+
     			$em->persist($alumno);
     			$em->flush($alumno);
-    			
-     			return $this->redirect($this->generateUrl('user_perfil_edit'));
+
+    			return $this->redirect($this->generateUrl('user_perfil_edit'));
 
     		}
     		
@@ -68,7 +80,8 @@ class DefaultController extends Controller
 
     	return $this->render('UserBundle:Default:perfil.html.twig', array(
     			'form' => $formulario->createView(),
-    			'user' => $userConnected
+    			'user' => $userConnected,
+    			'rutaImg' => $rutaImagen
     	));
     	
     }
