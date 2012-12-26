@@ -1,0 +1,30 @@
+profesor:
+    pattern:  /
+    defaults: { _controller: "AdminBundle:Profesor:index" }
+
+profesor_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AdminBundle:Profesor:show" }
+
+profesor_new:
+    pattern:  /new
+    defaults: { _controller: "AdminBundle:Profesor:new" }
+
+profesor_create:
+    pattern:  /create
+    defaults: { _controller: "AdminBundle:Profesor:create" }
+    requirements: { _method: post }
+
+profesor_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AdminBundle:Profesor:edit" }
+
+profesor_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AdminBundle:Profesor:update" }
+    requirements: { _method: post }
+
+profesor_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AdminBundle:Profesor:delete" }
+    requirements: { _method: post }
