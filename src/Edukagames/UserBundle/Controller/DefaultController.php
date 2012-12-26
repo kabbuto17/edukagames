@@ -2,6 +2,8 @@
 
 namespace Edukagames\UserBundle\Controller;
 
+use Edukagames\UserBundle\Util\SaveFile;
+
 use Edukagames\UserBundle\Entity\Alumno;
 
 use Edukagames\UserBundle\Form\AlumnoPerfilType;
@@ -62,13 +64,15 @@ class DefaultController extends Controller
     			}
     			
     			if($formulario->getData()->getFoto() != null){
+    				
     				$nombreArchivo = $formulario->getData()->getFoto()->getClientOriginalName();
-    				$alumno->setFoto($nombreArchivo);
+//     				$alumno->setFoto($nombreArchivo);
     				$raizImagen = 'bundles/user/img/'.$userConnected->getId();
-    				if(!file_exists($raizImagen)){
-    					mkdir($raizImagen);
-    				}
-    				move_uploaded_file($_FILES['Alumno_Perfil']['tmp_name']["foto"], 'bundles/user/img/'.$userConnected->getId().'/'.$nombreArchivo);
+//     				if(!file_exists($raizImagen)){
+//     					mkdir($raizImagen);
+//     				}
+//     				move_uploaded_file($_FILES['Alumno_Perfil']['tmp_name']["foto"], 'bundles/user/img/'.$userConnected->getId().'/'.$nombreArchivo);
+    				SaveFile::saveFile($raizImagen, $_FILES['Alumno_Perfil']['tmp_name']["foto"], $nombreArchivo);
     			}else {
     				$alumno->setFoto($imagenOriginal);
     			}
