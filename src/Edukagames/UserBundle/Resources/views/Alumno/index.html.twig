@@ -1,0 +1,53 @@
+<h1>Alumno list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Password</th>
+            <th>Salt</th>
+            <th>Diagnostico</th>
+            <th>Curso</th>
+            <th>Fechanacimiento</th>
+            <th>Username</th>
+            <th>Foto</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('alumno_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.nombre }}</td>
+            <td>{{ entity.apellidos }}</td>
+            <td>{{ entity.password }}</td>
+            <td>{{ entity.salt }}</td>
+            <td>{{ entity.diagnostico }}</td>
+            <td>{{ entity.curso }}</td>
+            <td>{% if entity.fechaNacimiento %}{{ entity.fechaNacimiento|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ entity.userName }}</td>
+            <td>{{ entity.foto }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('alumno_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('alumno_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('alumno_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>

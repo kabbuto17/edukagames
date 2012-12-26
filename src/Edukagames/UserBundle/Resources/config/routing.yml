@@ -8,10 +8,14 @@ login_check:
 logout:
     pattern: /logout
 
-user_index:
-    pattern: /usuario
-    defaults: { _controller: UserBundle:Default:index }
-    
-user_perfil_edit:
-    pattern: /usuario/perfil
-    defaults: { _controller: UserBundle:Default:perfil }
+#user_index:
+#    pattern: /usuario
+#    defaults: { _controller: UserBundle:Default:index }
+#    
+#user_perfil_edit:
+#    pattern: /usuario/perfil
+#    defaults: { _controller: UserBundle:Default:perfil }
+#    
+UserBundle_alumno:
+    resource: "@UserBundle/Resources/config/routing/alumno.yml"
+    prefix: /alumno

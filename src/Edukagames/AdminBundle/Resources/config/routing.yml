@@ -13,4 +13,3 @@ AdminBundle_informe:
 AdminBundle_archivo:
         resource: "@AdminBundle/Resources/config/routing/archivo.yml"
         prefix:   /archivo
-
