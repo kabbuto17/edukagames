@@ -77,6 +77,13 @@ class AlumnoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            $encoder = $this->get('security.encoder_factory')->getEncoder($entity);
+            $entity->setSalt(md5(time()));
+            $passRAW = $entity->getPassword();
+            $passCOD = $encoder->encodePassword($passRAW, $entity->getSalt());
+            $entity->setPassword($passCOD);
+            
             $em->persist($entity);
             $em->flush();
 
@@ -122,6 +129,7 @@ class AlumnoController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('UserBundle:Alumno')->find($id);
+        $passOrin = $entity->getPassword();
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Alumno entity.');
@@ -130,8 +138,17 @@ class AlumnoController extends Controller
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new AlumnoType(), $entity);
         $editForm->bind($request);
-
+        
         if ($editForm->isValid()) {
+        	$encoder = $this->get('security.encoder_factory')->getEncoder($entity);
+        	$passRAW = $entity->getPassword();
+        	$passCOD = $encoder->encodePassword($passRAW, $entity->getSalt());
+        	if ($editForm->getData()->getPassword() == NULL)
+         		$entity->setPassword($passOrin);
+         	else 
+         		$entity->setPassword($passCOD);
+        	$entity->setPassword($passCOD);
+        	
             $em->persist($entity);
             $em->flush();
 

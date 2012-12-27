@@ -13,13 +13,25 @@ class AlumnoType extends AbstractType
         $builder
             ->add('nombre')
             ->add('apellidos')
-            ->add('password')
-            ->add('salt')
+            ->add('password', 'repeated', array(
+            		'type' => 'password',
+					'required' => false,
+					'invalid_message' => 'Las dos contrasenas deben coincidir',
+					'first_name' =>"Contrasena",
+					'second_name' =>"Repita_contrasena",
+					'error_bubbling' => 'true'))
+//             ->add('salt')
             ->add('diagnostico')
             ->add('curso')
-            ->add('fechaNacimiento')
+            ->add('fechaNacimiento', 'date', array(
+				    'input'  => 'datetime',
+				    'widget' => 'choice',
+            		'format' => 'dd-MM-yyyy',
+            		'years' => range(1950,2013)))
             ->add('userName')
-            ->add('foto')
+            ->add('foto','file', array(
+					'required' => false,
+					'data_class' => null))
         ;
     }
 
