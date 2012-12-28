@@ -2,9 +2,13 @@
 
 namespace Edukagames\UserBundle\Controller;
 
+use Symfony\Component\Validator\Constraints\Length;
+
+use Doctrine\ORM\EntityManager;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Edukagames\UserBundle\Util\SaveFile;
 use Edukagames\UserBundle\Entity\Alumno;
 use Edukagames\UserBundle\Form\AlumnoType;
 
@@ -77,7 +81,6 @@ class AlumnoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            
             $encoder = $this->get('security.encoder_factory')->getEncoder($entity);
             $entity->setSalt(md5(time()));
             $passRAW = $entity->getPassword();
@@ -143,12 +146,20 @@ class AlumnoController extends Controller
         	$encoder = $this->get('security.encoder_factory')->getEncoder($entity);
         	$passRAW = $entity->getPassword();
         	$passCOD = $encoder->encodePassword($passRAW, $entity->getSalt());
+        	
         	if ($editForm->getData()->getPassword() == NULL)
          		$entity->setPassword($passOrin);
          	else 
          		$entity->setPassword($passCOD);
-        	$entity->setPassword($passCOD);
         	
+         	if($editForm->getData()->getFoto() != null){
+         		$nombreArchivo = $editForm->getData()->getFoto()->getClientOriginalName();
+         		$raizImagen = 'bundles/user/img/'.$id;
+          		SaveFile::saveFile($raizImagen, $_FILES['edukagames_userbundle_alumnotype']['tmp_name']["foto"], $nombreArchivo);
+         	}else {
+         		$alumno->setFoto($entity->getFoto());
+         	}
+         	
             $em->persist($entity);
             $em->flush();
 
