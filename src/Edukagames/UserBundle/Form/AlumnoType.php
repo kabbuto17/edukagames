@@ -15,7 +15,7 @@ class AlumnoType extends AbstractType
             ->add('apellidos')
             ->add('password', 'repeated', array(
             		'type' => 'password',
-					'required' => false,
+// 					'required' => true,
 					'invalid_message' => 'Las dos contrasenas deben coincidir',
 					'first_name' =>"Contrasena",
 					'second_name' =>"Repita_contrasena",

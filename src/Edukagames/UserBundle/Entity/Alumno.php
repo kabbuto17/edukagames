@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table()
  * @ORM\Entity
- * @UniqueEntity("userName")
+ * @UniqueEntity(fields= "userName", message="El nombre de usuario ya esta en uso")
  */
 class Alumno implements UserInterface {
 	/**
@@ -29,7 +29,6 @@ class Alumno implements UserInterface {
 	 * @ORM\Column(name="nombre", type="string", length=25)
 	 * 
 	 * @Assert\NotBlank(message = "El nombre no puede estar vacio")
-	 * @Assert\NotNull()
 	 */
 	private $nombre;
 
@@ -39,7 +38,7 @@ class Alumno implements UserInterface {
 	 * @ORM\Column(name="apellidos", type="string", length=50)
 	 * 
 	 * @Assert\NotBlank(message = "Los apellidos no pueden estar vacio")
-	 * @Assert\NotNull()
+	 * 
 	 */
 	private $apellidos;
 
@@ -48,7 +47,7 @@ class Alumno implements UserInterface {
 	 *
 	 * @ORM\Column(name="password", type="string", length=255)
 	 * 
-	 * @Assert\NotNull()
+	 * @Assert\NotBlank()
 	 * @Assert\MaxLength(limit = "9", message = "La contraseña debe tener entre 6 y 9 caracteres")
 	 * @Assert\MinLength(limit = "6", message = "La contraseña debe tener entre 6 y 9 caracteres")
 	 */
