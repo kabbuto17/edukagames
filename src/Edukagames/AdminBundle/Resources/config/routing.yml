@@ -5,15 +5,3 @@ admin_index:
 AdminBundle_profesor:
         resource: "@AdminBundle/Resources/config/routing/profesor.yml"
         prefix:   /profesor
-
-AdminBundle_informe:
-        resource: "@AdminBundle/Resources/config/routing/informe.yml"
-        prefix:   /informe
-
-AdminBundle_archivo:
-        resource: "@AdminBundle/Resources/config/routing/archivo.yml"
-        prefix:   /archivo
-
-backoffice_show_informes:
-    pattern: /bo/informes/{id}
-    defaults: { _controller: AdminBundle:Default:show }

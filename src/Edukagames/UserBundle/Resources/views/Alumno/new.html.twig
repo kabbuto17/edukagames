@@ -1,0 +1,50 @@
+{#
+ <h1>Alumno creation</h1>
+
+ <form action="{{ path('alumno_create') }}" method="post" {{ form_enctype(form) }}>
+ {{ ld (form.userName) }}
+	   	{{ form_errors(form.userName) }}
+ 		{{ form_errors(form.password.Contrasena) }}
+ 		{{ form_errors(form.password.Repita_contrasena) }}
+     {{ form_widget(form) }}
+     <p>
+         <button type="submit">Create</button>
+     </p>
+ </form>
+
+ <ul class="record_actions">
+     <li>
+         <a href="{{ path('alumno') }}">
+             Back to the list
+         </a>
+     </li>
+ </ul>
+#}
+
+{% extends "::base.html.twig" %}
+
+{% block body %}
+   	<form action="{{ path('alumno_create') }}" method="post" {{ form_enctype(form) }}>
+	{% if not(form.getVars().valid)  %}
+ 	   <div id="errors" class="alert alert-error"> 
+	   	{{ form_errors(form.userName) }}
+ 		{{ form_errors(form.password.Contrasena) }}
+ 		{{ form_errors(form.password.Repita_contrasena) }}
+	   </div>
+	{% endif %}
+   	{{ form_widget(form.userName, { 'attr': {'placeholder': 'Nombre de Usuario'} }) }}<br />
+   	{{ form_widget(form.password.Contrasena, { 'attr': {'placeholder': 'Password'} }) }}
+   	{{ form_widget(form.password.Repita_contrasena, { 'attr': {'placeholder': 'Repita el password'} }) }}<br />
+
+  	{{ form_widget(form.nombre, { 'attr': {'placeholder': 'Nombre'} }) }}
+   	{{ form_widget(form.apellidos, { 'attr': {'placeholder': 'Apellidos'} }) }}<br />
+   	{{ form_widget(form.diagnostico, { 'attr': {'placeholder': 'Diagnostico'} }) }}<br />
+  	{{ form_widget(form.curso, { 'attr': {'placeholder': 'Curso'} }) }}<br />
+   Fecha Nacimiento <br/>{{ form_widget(form.fechaNacimiento.day, {'attr': {'class': 'span1'} }) }}
+					   {{ form_widget(form.fechaNacimiento.month, {'attr': {'class': 'span1'} }) }}
+					   {{ form_widget(form.fechaNacimiento.year, {'attr': {'class': 'span1'} }) }}
+   {{ form_widget(form._token) }}
+ <br /> 
+  <button type="submit">Crear Usuario</button>
+ </form> 
+{% endblock %}

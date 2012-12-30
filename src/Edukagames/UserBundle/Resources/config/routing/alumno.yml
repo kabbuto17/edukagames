@@ -1,0 +1,30 @@
+alumno:
+    pattern:  /
+    defaults: { _controller: "UserBundle:Alumno:index" }
+
+alumno_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "UserBundle:Alumno:show" }
+
+alumno_new:
+    pattern:  /new
+    defaults: { _controller: "UserBundle:Alumno:new" }
+
+alumno_create:
+    pattern:  /create
+    defaults: { _controller: "UserBundle:Alumno:create" }
+    requirements: { _method: post }
+
+alumno_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "UserBundle:Alumno:edit" }
+
+alumno_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "UserBundle:Alumno:update" }
+    requirements: { _method: post }
+
+alumno_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "UserBundle:Alumno:delete" }
+    requirements: { _method: post }

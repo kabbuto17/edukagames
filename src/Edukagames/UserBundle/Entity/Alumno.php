@@ -2,14 +2,16 @@
 
 namespace Edukagames\UserBundle\Entity;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Edukagames\UserBundle\Entity\Alumno
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @UniqueEntity(fields= "userName", message="El nombre de usuario ya esta en uso")
  */
 class Alumno implements UserInterface {
 	/**
@@ -25,6 +27,8 @@ class Alumno implements UserInterface {
 	 * @var string $nombre
 	 *
 	 * @ORM\Column(name="nombre", type="string", length=25)
+	 * 
+	 * @Assert\NotBlank(message = "El nombre no puede estar vacio")
 	 */
 	private $nombre;
 
@@ -32,6 +36,9 @@ class Alumno implements UserInterface {
 	 * @var string $apellidos
 	 *
 	 * @ORM\Column(name="apellidos", type="string", length=50)
+	 * 
+	 * @Assert\NotBlank(message = "Los apellidos no pueden estar vacio")
+	 * 
 	 */
 	private $apellidos;
 
@@ -39,6 +46,10 @@ class Alumno implements UserInterface {
 	 * @var string $password
 	 *
 	 * @ORM\Column(name="password", type="string", length=255)
+	 * 
+	 * @Assert\NotBlank()
+	 * @Assert\MaxLength(limit = "9", message = "La contraseña debe tener entre 6 y 9 caracteres")
+	 * @Assert\MinLength(limit = "6", message = "La contraseña debe tener entre 6 y 9 caracteres")
 	 */
 	private $password;
 
@@ -74,6 +85,10 @@ class Alumno implements UserInterface {
 	 * @var string $username
 	 * 
 	 * @ORM\Column(name="userName", type="string", unique=true)
+	 * 
+	 * @Assert\NotBlank(message = "El nombre de usuario no puede estar vacio")
+	 * @Assert\MaxLength(limit = "9", message = "El nombre de usuario no puede tener mas de 9 letras")
+	 * @Assert\MinLength(limit = "3", message = "El nombre de usuario no puede tener menos de 3 letras")
 	 */
 	private $userName;
 
@@ -81,6 +96,12 @@ class Alumno implements UserInterface {
 	 * @var string $foto
 	 *
 	 * @ORM\Column(name="foto", type="string", nullable=true)
+	 * 
+	 * @Assert\File(
+	 *     maxSize = "2048k",
+	 *     mimeTypes = {"image/jpeg", "image/jpeg", "image/png"},
+	 *     mimeTypesMessage = "Porfavor seleccione un archivo de imagen válido jpg, jpeg o png"
+	 * )
 	 */
 	private $foto;
 
@@ -92,7 +113,7 @@ class Alumno implements UserInterface {
 	public function getFoto() {
 		return $this->foto;
 	}
-	
+
 	/**
 	 * Set foto
 	 *
@@ -101,10 +122,10 @@ class Alumno implements UserInterface {
 	 */
 	public function setFoto($foto) {
 		$this->foto = $foto;
-	
+
 		return $this;
 	}
-	
+
 	/**
 	 * Get id
 	 *
@@ -278,15 +299,15 @@ class Alumno implements UserInterface {
 	public function getRoles() {
 		return Array('ROLE_USER');
 	}
-    /*
-     * No implement
-     */
+	/*
+	 * No implement
+	 */
 	public function eraseCredentials() {
 		// TODO: Auto-generated method stub
 
 	}
-	
-	public function __toString(){
+
+	public function __toString() {
 		return "alumno";
 	}
 
