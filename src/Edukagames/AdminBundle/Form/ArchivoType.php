@@ -11,9 +11,8 @@ class ArchivoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombreArchivo')
-            ->add('salt')
-            ->add('fecha')
+            ->add('nombreArchivo','file')
+            ->add('fecha','date')
             ->add('informe')
         ;
     }
