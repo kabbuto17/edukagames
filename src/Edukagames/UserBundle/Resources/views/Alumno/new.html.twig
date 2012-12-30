@@ -46,5 +46,12 @@
    {{ form_widget(form._token) }}
  <br /> 
   <button type="submit">Crear Usuario</button>
- </form> 
+ </form>
+  <ul class="record_actions">
+     <li>
+         <a href="{{ path('alumno') }}">
+             Volver a la lista de alumnos
+         </a>
+     </li>
+ </ul>
 {% endblock %}
