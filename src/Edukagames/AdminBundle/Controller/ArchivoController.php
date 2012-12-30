@@ -23,9 +23,9 @@ class ArchivoController extends Controller
 		$em = $this->getDoctrine()->getEntityManager();
 		$ficheros = $em->getRepository('AdminBundle:Fichero')->findby(array('alumno' => $id));
 		foreach($ficheros as $fichero){
-			$archivos = $fichero;
+			$archivos[] = $fichero;
 		}
-		ldd($archivos);
+
 		return $this->render('AdminBundle:Archivo:index.html.twig', array(
 				'archivos' => $archivos
 				));
