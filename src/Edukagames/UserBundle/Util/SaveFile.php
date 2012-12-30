@@ -16,9 +16,9 @@ class SaveFile
     public static function saveFile($destination, $tmp_filename, $filename)
     {
     	if(!file_exists($destination)){
-        	mkdir($destination);
+        	mkdir($destination, 0775);
     	}
-        move_uploaded_file($tmp_filename, $destination.'/'.$filename);
+        move_uploaded_file($tmp_filename, "$destination/$filename");
     }
 }
 

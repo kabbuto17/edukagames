@@ -15,13 +15,12 @@ class AlumnoType extends AbstractType
             ->add('apellidos')
             ->add('password', 'repeated', array(
             		'type' => 'password',
-// 					'required' => true,
+ 					'required' => false,
 					'invalid_message' => 'Las dos contrasenas deben coincidir',
 					'first_name' =>"Contrasena",
 					'second_name' =>"Repita_contrasena",
 					'error_bubbling' => 'true'))
-//             ->add('salt')
-            ->add('diagnostico')
+            ->add('diagnostico', 'textarea')
             ->add('curso')
             ->add('fechaNacimiento', 'date', array(
 				    'input'  => 'datetime',

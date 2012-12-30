@@ -47,7 +47,6 @@ class Alumno implements UserInterface {
 	 *
 	 * @ORM\Column(name="password", type="string", length=255)
 	 * 
-	 * @Assert\NotBlank()
 	 * @Assert\MaxLength(limit = "9", message = "La contraseña debe tener entre 6 y 9 caracteres")
 	 * @Assert\MinLength(limit = "6", message = "La contraseña debe tener entre 6 y 9 caracteres")
 	 */
@@ -84,9 +83,9 @@ class Alumno implements UserInterface {
 	/**
 	 * @var string $username
 	 * 
-	 * @ORM\Column(name="userName", type="string", unique=true)
+	 * @ORM\Column(name="userName", type="string")
 	 * 
-	 * @Assert\NotBlank(message = "El nombre de usuario no puede estar vacio")
+	 * 
 	 * @Assert\MaxLength(limit = "9", message = "El nombre de usuario no puede tener mas de 9 letras")
 	 * @Assert\MinLength(limit = "3", message = "El nombre de usuario no puede tener menos de 3 letras")
 	 */

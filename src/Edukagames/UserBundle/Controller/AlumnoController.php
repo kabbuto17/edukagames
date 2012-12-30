@@ -86,6 +86,7 @@ class AlumnoController extends Controller
             $passRAW = $entity->getPassword();
             $passCOD = $encoder->encodePassword($passRAW, $entity->getSalt());
             $entity->setPassword($passCOD);
+            $entity->setFoto("defaultprofile.png");
             
             $em->persist($entity);
             $em->flush();
@@ -132,6 +133,7 @@ class AlumnoController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('UserBundle:Alumno')->find($id);
+        $fotoOrin = $entity->getFoto();
         $passOrin = $entity->getPassword();
 
         if (!$entity) {
@@ -141,7 +143,7 @@ class AlumnoController extends Controller
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new AlumnoType(), $entity);
         $editForm->bind($request);
-        
+
         if ($editForm->isValid()) {
         	$encoder = $this->get('security.encoder_factory')->getEncoder($entity);
         	$passRAW = $entity->getPassword();
@@ -151,13 +153,14 @@ class AlumnoController extends Controller
          		$entity->setPassword($passOrin);
          	else 
          		$entity->setPassword($passCOD);
-        	
+
          	if($editForm->getData()->getFoto() != null){
          		$nombreArchivo = $editForm->getData()->getFoto()->getClientOriginalName();
+         		$entity->setFoto($nombreArchivo);
          		$raizImagen = 'bundles/user/img/'.$id;
           		SaveFile::saveFile($raizImagen, $_FILES['edukagames_userbundle_alumnotype']['tmp_name']["foto"], $nombreArchivo);
-         	}else {
-         		$alumno->setFoto($entity->getFoto());
+           	} else {
+          		$entity->setFoto($fotoOrin);
          	}
          	
             $em->persist($entity);
