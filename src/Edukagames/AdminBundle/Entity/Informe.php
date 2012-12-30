@@ -43,12 +43,11 @@ class Informe
     private $fecha;
 
     /**
-     * @var Alumno $alumno
-     * Alumno al que esta asociado un informe
-     * 
+     * @var Alumno
+     *
      * @ORM\ManyToOne(targetEntity="Edukagames\UserBundle\Entity\Alumno")
      */
-    private $alumno;
+    private $Alumno;
     
     /**
      * @var string $descripcion
