@@ -1,7 +1,7 @@
 <?php
 namespace Edukagames\AdminBundle\DataFixtures\ORM;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
+use Edukagames\AdminBundle\Entity\Archivo;
 
 use Edukagames\AdminBundle\Entity\Informe;
 use Edukagames\UserBundle\Entity;
@@ -22,12 +22,13 @@ class LoadInformeData implements FixtureInterface, ContainerAwareInterface {
 		$em = $this->container->get('doctrine')->getEntityManager()->getRepository('UserBundle:Alumno')->findAll();
 		
 		foreach ($em as $alumno){
-			for ($i = 0; $i < 2; $i++) {
-				
+			
+			for ($i = 0; $i < 3; $i++) {
 				$InformeFixture = new Informe();
-				$InformeFixture->setNombreInforme('Informe - '.$i);
 				$InformeFixture->setFecha(new \DateTime('now'));
 				$InformeFixture->setAlumno($alumno);
+				$InformeFixture->setDescripcion("descripcion de prueba de no mas de 255 caracteres");
+				$InformeFixture->setNombreInforme("Informe-".$i.".pdf");
 				
 				$manager->persist($InformeFixture);
 			}
