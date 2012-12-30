@@ -16,15 +16,15 @@ class Fichero
 {
     /**
      * @var Alumnos $alumno
-     *
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Edukagames\UserBundle\Entity\Alumno")
      */
     private $alumno;
 
     /**
      * @var Archivo $archivo
-     *
-     * @ORM\ManyToOne(targetEntity="Edukagames\UserBundle\Entity\Archivo")
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Edukagames\AdminBundle\Entity\Archivo")
      */
     private $archivo;
 

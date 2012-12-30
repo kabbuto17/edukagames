@@ -34,9 +34,9 @@ security:
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
-        - { path: /usuario, roles: ROLE_USER }
-        - { path: /admin, roles: ROLE_ADMIN }
-        - { path: %kernel.root_dir%/../web/, roles: ROLE_USER }
-        - { path: /, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: /usuario, roles: ROLE_USER }
+#        - { path: /admin, roles: ROLE_ADMIN }
+#        - { path: %kernel.root_dir%/../web/, roles: ROLE_USER }
+#        - { path: /, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: /user/profile, roles: ROLE_ADMIN }
 #        - { path: /.*, roles: ROLE_ADMIN }
