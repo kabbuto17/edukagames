@@ -12,8 +12,9 @@ class InformeType extends AbstractType
     {
         $builder
             ->add('nombreInforme')
-            ->add('fecha')
+            ->add('fecha','date')
             ->add('alumno')
+            ->add('descripcion')
         ;
     }
 

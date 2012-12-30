@@ -25,26 +25,14 @@ class Archivo
      */
     private $id;
 
-    /**
-     * @var Informes $informe
-     *
-     * @ORM\ManyToOne (targetEntity="Edukagames\AdminBundle\Entity\Informe")
-     */
-    private $informe;
+
 
     /**
-     * @var string $nombreArchivo
+     * @var string $Archivo
      *
      * @ORM\Column(name="nombreArchivo", type="string", length=255)
      */
-    private $nombreArchivo;
-
-    /**
-     * @var string $salt
-     *
-     * @ORM\Column(name="salt", type="string", length=255)
-     */
-    private $salt;
+    private $Archivo;
 
     /**
      * @var \DateTime $fecha
@@ -52,9 +40,21 @@ class Archivo
      * @ORM\Column(name="fecha", type="datetime")
      */
     private $fecha;
+
+    /**
+     * @var string $informe
+     * 
+     * @ORM\Column(name="informe", type="string", length=255)
+     */
+    private $informe;
     
-    
-    
+    /**
+     * @var string $salt
+     *
+     * @ORM\Column(name="salt", type="string", length=255)
+     */
+    private $salt;
+
     /**
      * Get id
      *
@@ -65,39 +65,10 @@ class Archivo
         return $this->id;
     }
 
-    /**
-     * Set informe
-     *
-     * @param integer $informe
-     * @return Archivo
-     */
-    public function setInforme(\Edukagames\AdminBundle\Entity\Informe $informe)
-    {
-        $this->informe = $informe;
-    
-        return $this;
-    }
-
-    /**
-     * Get informe
-     *
-     * @return integer 
-     */
-    public function getInforme()
-    {
-        return $this->informe;
-    }
-
-    /**
-     * Set NombreArchivo
-     *
-     * @param string $nombreArchivo
-     * @return Archivo
-     */
-    public function setNombreArchivo($nombreArchivo)
+    public function setArchivo($Archivo)
     {
         $this->nombreArchivo = $nombreArchivo;
-    
+
         return $this;
     }
 
@@ -106,7 +77,7 @@ class Archivo
      *
      * @return string 
      */
-    public function getNombreArchivo()
+    public function getArchivo()
     {
         return $this->nombreArchivo;
     }
@@ -155,5 +126,15 @@ class Archivo
     public function getFecha()
     {
     	return $this->fecha;
+    }
+    
+    public function getInforme()
+    {
+    	return $this->informe;
+    }
+    
+    public function setInforme($informe)
+    {
+    	$this->informe = $informe;
     }
 }

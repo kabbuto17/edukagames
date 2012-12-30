@@ -2,6 +2,12 @@
 
 namespace Edukagames\AdminBundle\Controller;
 
+use Symfony\Component\Validator\Constraints\Date;
+
+use Edukagames\UserBundle\UserBundle;
+
+use Edukagames\UserBundle\Util\SaveFile;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -77,6 +83,18 @@ class ArchivoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+			$fileName =$_FILES ["edukagames_adminbundle_archivotype"] ["name"]["nombreArchivo"];
+			$fileName_temp = $_FILES["edukagames_adminbundle_archivotype"] ["tmp_name"]["nombreArchivo"];
+// 			Util::SaveFile("/uploads/",$fileName_temp,$fileName); TODO	 mirar porke no me pilla la clase savefile
+// 			ldd($form);
+			if(!file_exists('uploads/')){
+				mkdir($destination);
+			}
+			move_uploaded_file($fileName_temp, 'uploads/'.$fileName);
+// mirar porque no me pilla la clase savefile de util
+			$entity->setSalt(md5(time()));
+			$entity->setNombreArchivo($fileName);
             $em->persist($entity);
             $em->flush();
 

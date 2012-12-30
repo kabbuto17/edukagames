@@ -14,3 +14,6 @@ AdminBundle_archivo:
         resource: "@AdminBundle/Resources/config/routing/archivo.yml"
         prefix:   /archivo
 
+backoffice_show_informes:
+    pattern: /bo/informes/{id}
+    defaults: { _controller: AdminBundle:Default:show }
