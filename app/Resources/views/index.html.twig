@@ -1,0 +1,17 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}EdukaGames{% endblock %}
+
+{% block header %}
+{{ parent() }}
+	<div>
+	{% if is_granted('ROLE_USER') %}
+	Bienvenid@ {{ app.user.userName }} <a href="{{ path('logout') }}">Cerrar sesión</a>
+	{% endif %}
+	</div>
+{% endblock %}
+
+{% block body %}
+{% block menu %} {% include '::menu.html.twig' %} {% endblock %}
+{% block content %}{% endblock %}
+{% endblock %}

@@ -1,18 +1,20 @@
-<div class="span3">
-	<div class="accordion" id="accordion2">
+	<div class="accordion container span4" id="accordion2">
 	  <div class="accordion-group">
 	    <div class="accordion-heading">
 	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
 	        Home
 	      </a>
 	    </div>
-	    <div id="collapseOne" class="accordion-body collapse in">
+	    <div id="collapseOne" class="accordion-body collapse">
 	      <div class="accordion-inner">
-	        las opciones
+	        Juegos
+	      </div>
+	      <div class="accordion-inner">
+	        Ultimas puntuaciones
 	      </div>
 	    </div>
 	  </div>
-	  {% if is_granted('ROLE_ADMIN') %}
+
 	  <div class="accordion-group">
 	    <div class="accordion-heading">
 	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
@@ -33,14 +35,24 @@
 	    </div>
 	    <div id="collapseThree" class="accordion-body collapse">
 	      <div class="accordion-inner">
-            <form class="form-search">
-                <input id="search" class="span9" type="text" placeholder="Buscar" input-medium search-query">
-                <button type="submit" class="btn" ><i class="icon-search"></i></button>
+	        <i class="icon-plus"></i> <a href="{{ path('alumno_new') }}">Crear usuario</a>
+	      </div>
+	      <div class="accordion-inner">
+            <form class="form-search span3">
+                <input id="search" type="text" placeholder="Buscar">
             </form>
-            <div id='contentSearch'></div>
+            <div id='contentSearch'>
+            	<div class="accordion-inner span3">
+            		<p>
+	        		Alfonso Cueto Crespo <i class="icon-remove"></i> <i class="icon-pencil"></i><p>
+	        		Jose Maria Martin Bernal <i class="icon-remove"></i> <i class="icon-pencil"></i><p>
+	        		Gonzalo Muriel Mora <i class="icon-remove"></i> <i class="icon-pencil"></i><p>
+	        		Gayer total <i class="icon-remove"></i> <i class="icon-pencil"></i><p>
+	        		manolito perez <i class="icon-remove"></i> <i class="icon-pencil"></i><p>
+	      		</div>
+            </div>
 	      </div>
 	    </div>
 	  </div>
-	  {% endif %}
+
 	</div>
-</div>

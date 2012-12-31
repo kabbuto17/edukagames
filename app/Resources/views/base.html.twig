@@ -9,8 +9,17 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+    	<header>
+	    	{% block header %}
+	    		{% include '::header.html.twig' %}
+	    	{% endblock %}
+    	</header>
 		{% block body %}{% endblock %}
-        <footer>{% block footer %}{% endblock %}</footer>
+        <footer>
+	        {% block footer %}
+	        	{% include '::footer.html.twig' %}
+	        {% endblock %}
+        </footer>
         {% block javascripts %}{% endblock %}
 		<script src="{{ asset('bundles/user/js/bootstrap.min.js') }}" type="text/javascript"></script>
     </body>
