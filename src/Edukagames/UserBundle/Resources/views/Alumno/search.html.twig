@@ -4,7 +4,7 @@
       	</form>
    		<div>
 {#     	    <div class="accordion-inner span3">#}
-   		      	<div id="content">
+   		      	<div id="result">
    		      	{% for res in result %}
    		      		<p><a href="{{path('alumno_edit', { 'id': res.id }) }}">{{ res.nombre }}</a></p>
    		      	{% endfor %}
@@ -21,7 +21,7 @@
    		        data: $(this).serialize(),
    		        dataType: "html",
    		        success: function(msg){
-   		           $('#content').html($(msg).find("#content").html());
+   		           $('#result').html($(msg).find("#result").html());
    		        }
    		    });
    		    return false;

@@ -3,15 +3,17 @@
 {% block title %}EdukaGames{% endblock %}
 
 {% block header %}
-{{ parent() }}
-	<div>
+	{{ parent() }}
 	{% if is_granted('ROLE_USER') %}
-	Bienvenid@ {{ app.user.userName }} <a href="{{ path('logout') }}">Cerrar sesión</a>
-	{% endif %}
+	<div class=pull-right>
+		Bienvenid@ {{ app.user.userName }} <a href="{{ path('logout') }}">Cerrar sesión</a>
 	</div>
+	{% endif %}
 {% endblock %}
 
 {% block body %}
-{% block menu %} {% include '::menu.html.twig' %} {% endblock %}
-{% block content %}{% endblock %}
+<div class="row">
+	<div class="span4">{% block menu %} {% include '::menu.html.twig' %} {% endblock %}</div>
+	<div class="span8">{% block content %} {% include '::content.html.twig' %} {% endblock %}</div>
+</div>
 {% endblock %}

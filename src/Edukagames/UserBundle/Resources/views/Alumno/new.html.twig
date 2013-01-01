@@ -19,12 +19,13 @@
          </a>
      </li>
  </ul>
-#}
+
 
 {% extends "::base.html.twig" %}
 
 {% block body %}
-   	<form action="{{ path('alumno_create') }}" method="post" {{ form_enctype(form) }}>
+#}
+	<form action="{{ path('alumno_create') }}" method="post" {{ form_enctype(form) }}>
 	{% if not(form.getVars().valid)  %}
  	   <div id="errors" class="alert alert-error"> 
 	   	{{ form_errors(form.userName) }}
@@ -54,4 +55,4 @@
          </a>
      </li>
  </ul>
-{% endblock %}
+{# {% endblock %} #}

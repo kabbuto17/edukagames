@@ -224,6 +224,7 @@ class AlumnoController extends Controller
 		    	$result = $query->getResult();
      		}
      	}
+     	($form['search']->getData()== "") ? $result = "" : $result;
     	return $this->render('UserBundle:Alumno:search.html.twig', array(
         		'result' => $result,
         		'form'   => $form->createView(),
