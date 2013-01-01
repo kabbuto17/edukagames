@@ -6,6 +6,7 @@ AdminBundle_profesor:
         resource: "@AdminBundle/Resources/config/routing/profesor.yml"
         prefix:   /profesor
 
-Admin_show_archivo:
-    pattern: /admin/show/{id}
-    defaults: { _controller: AdminBundle:Archivo:show }
+AdminBundle_informe:
+        resource: "@AdminBundle/Resources/config/routing/informe.yml"
+        prefix:   /informe
+
