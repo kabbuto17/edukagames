@@ -104,6 +104,7 @@ class Alumno implements UserInterface {
 	 */
 	private $foto;
 
+	private $NombreCompleto;
 	/**
 	 * Get foto 
 	 * 
@@ -309,5 +310,4 @@ class Alumno implements UserInterface {
 	public function __toString() {
 		return "alumno";
 	}
-
 }

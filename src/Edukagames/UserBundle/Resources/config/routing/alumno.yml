@@ -28,3 +28,8 @@ alumno_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "UserBundle:Alumno:delete" }
     requirements: { _method: post }
+    
+alumno_search:
+    pattern:  /search
+    defaults: { _controller: "UserBundle:Alumno:search" }
+#    requirements: { _method: post }

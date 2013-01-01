@@ -38,19 +38,20 @@
 	        <i class="icon-plus"></i> <a href="{{ path('alumno_new') }}">Crear usuario</a>
 	      </div>
 	      <div class="accordion-inner">
-            <form class="form-search span3">
-                <input id="search" type="text" placeholder="Buscar">
-            </form>
-            <div id='contentSearch'>
-            	<div class="accordion-inner span3">
-            		<p>
-	        		Alfonso Cueto Crespo <i class="icon-remove"></i> <i class="icon-pencil"></i><p>
-	        		Jose Maria Martin Bernal <i class="icon-remove"></i> <i class="icon-pencil"></i><p>
-	        		Gonzalo Muriel Mora <i class="icon-remove"></i> <i class="icon-pencil"></i><p>
-	        		Gayer total <i class="icon-remove"></i> <i class="icon-pencil"></i><p>
-	        		manolito perez <i class="icon-remove"></i> <i class="icon-pencil"></i><p>
-	      		</div>
-            </div>
+				{% render('UserBundle:Alumno:search') %}	      
+<!--             <form class="form-search span3"> -->
+<!--                 <input id="search" type="text" placeholder="Buscar"> -->
+<!--             </form> -->
+<!--             <div id='contentSearch'> -->
+<!--             	<div class="accordion-inner span3"> -->
+<!--             		<p> -->
+<!-- 	        		Alfonso Cueto Crespo <i class="icon-remove"></i> <i class="icon-pencil"></i><p> -->
+<!-- 	        		Jose Maria Martin Bernal <i class="icon-remove"></i> <i class="icon-pencil"></i><p> -->
+<!-- 	        		Gonzalo Muriel Mora <i class="icon-remove"></i> <i class="icon-pencil"></i><p> -->
+<!-- 	        		Gayer total <i class="icon-remove"></i> <i class="icon-pencil"></i><p> -->
+<!-- 	        		manolito perez <i class="icon-remove"></i> <i class="icon-pencil"></i><p> -->
+<!-- 	      		</div> -->
+<!--             </div> -->
 	      </div>
 	    </div>
 	  </div>

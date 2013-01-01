@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Edukagames\UserBundle\Util\SaveFile;
 use Edukagames\UserBundle\Entity\Alumno;
 use Edukagames\UserBundle\Form\AlumnoType;
+use Edukagames\UserBundle\Form\SearchType;
 
 /**
  * Alumno controller.
@@ -206,5 +207,27 @@ class AlumnoController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+	
+    public function searchAction(){
+    	
+    	$form = $this->createForm(new SearchType());
+    	$result ="";
+     	if ($this->getRequest()->getMethod() == 'POST') {
+    		$form->bindRequest($this->getRequest());
+     		if ($form->isValid()) {
+		   		$em = $this->getDoctrine()->getEntityManager();
+		    	$query = $em->createQuery(
+		    			'SELECT alumno FROM UserBundle:Alumno alumno 
+		    			WHERE alumno.userName 
+		    			LIKE :search ORDER BY alumno.userName ASC')->setParameter('search', '%'.$form["search"]->getData().'%');
+		    	$result = $query->getResult();
+     		}
+     	}
+    	return $this->render('UserBundle:Alumno:search.html.twig', array(
+        		'result' => $result,
+        		'form'   => $form->createView(),
+        		));
+    	
     }
 }
