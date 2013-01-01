@@ -1,38 +1,32 @@
-	      	{% extends '::base.html.twig' %}
-	      	{% block body %}
-		      	<form id="search"  action={{ path('alumno_search') }} method="post" {{ form_enctype(form) }}>
-	      		{{ form_widget(form) }}
+      	<form id="search"  action={{ path('alumno_search') }} method="post" {{ form_enctype(form) }}>
+      		{{ form_widget(form, { 'attr': {'placeholder': 'Buscar'} }) }}
 	      		<button type="submit">Buscar</button>
 	      	</form>
 	   		<div>
    		      	<div class="accordion-inner span3">
    		      	<div id="content">
-   		      	{{ ld(result) }}
+   		      	
    		      	{% for res in result %}
-   		      		<a href="{{path('alumno_edit', { 'id': res.id }) }}">{{ res.nombre }}</a><p>
+   		      		<p><a href="{{path('alumno_edit', { 'id': res.id }) }}">{{ res.nombre }}</a></p>
+
    		      	{% endfor %}
-	       		</div>
-	       		</div>
-	   		</div>
-	   		<a href="{{path('alumno_search')}}">buscar</a>
-	   		<script type="text/javascript">
-	   		$('#search').submit(function(e) {
+       		</div>
+       		</div>
+   		</div>
+   		<script type="text/javascript">
+   		$('#Search_search').bind('keyup', function() { $('#search').submit(); } );
+		$('#search').submit(function(e) {
+   		    var url = $(this).attr("action");
+   		    $.ajax({
+   		        type: "POST",
+   		        url: url, // Or your url generator like Routing.generate('discussion_create')
+   		        data: $(this).serialize(),
+   		        dataType: "html",
+   		        success: function(msg){
+   		           $('#content').html($(msg).find("#content").html());
+   		        }
+   		    });
+   		    return false;
+   		});
+		</script>      	 
 
-	   		    var url = $(this).attr("action");
-
-	   		    $.ajax({
-	   		        type: "POST",
-	   		        url: url, // Or your url generator like Routing.generate('discussion_create')
-	   		        data: $(this).serialize(),
-	   		        dataType: "html",
-	   		        success: function(msg){
-	   		            alert(msg);
-	   		            //$('#content').html(msg);
-	   		        }
-	   		    });
-
-	   		    return false;
-
-	   		});
-			</script>      	 
-	      	{% endblock %}
