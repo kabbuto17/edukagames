@@ -1,16 +1,5 @@
-{% extends 'UserBundle:Base:index.html.twig' %}
+{% extends '::index.html.twig' %}
 
-{% block menus %}
-{{ parent() }}
- <a id="link" href='#'>Archivos</a> 
- 
-<script> 
-$('#link').click(function () {
-	$('#panel').load('{{ path('archivo') }}');
-	});
-</script>
- 
-{% endblock %}
 
 
 

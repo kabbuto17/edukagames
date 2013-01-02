@@ -14,7 +14,7 @@
 	      </div>
 	    </div>
 	  </div>
-
+{% if is_granted('ROLE_ADMIN') %}
 	  <div class="accordion-group">
 	    <div class="accordion-heading">
 	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
@@ -39,23 +39,10 @@
 	      </div>
 	      <div class="accordion-inner">
 				{% render('UserBundle:Alumno:search') %}	      
-<!--             <form class="form-search span3"> -->
-<!--                 <input id="search" type="text" placeholder="Buscar"> -->
-<!--             </form> -->
-<!--             <div id='contentSearch'> -->
-<!--             	<div class="accordion-inner span3"> -->
-<!--             		<p> -->
-<!-- 	        		Alfonso Cueto Crespo <i class="icon-remove"></i> <i class="icon-pencil"></i><p> -->
-<!-- 	        		Jose Maria Martin Bernal <i class="icon-remove"></i> <i class="icon-pencil"></i><p> -->
-<!-- 	        		Gonzalo Muriel Mora <i class="icon-remove"></i> <i class="icon-pencil"></i><p> -->
-<!-- 	        		Gayer total <i class="icon-remove"></i> <i class="icon-pencil"></i><p> -->
-<!-- 	        		manolito perez <i class="icon-remove"></i> <i class="icon-pencil"></i><p> -->
-<!-- 	      		</div> -->
-<!--             </div> -->
 	      </div>
 	    </div>
 	  </div>
-
+{% endif %}
 	</div>
 <script type="text/javascript">
 $('#new').click(function () {

@@ -6,12 +6,23 @@
 {#     	    <div class="accordion-inner span3">#}
    		      	<div id="result">
    		      	{% for res in result %}
-   		      		<p><a href="{{path('alumno_edit', { 'id': res.id }) }}">{{ res.nombre }}</a></p>
+   		      		<p>
+	   		      		{{ res.nombre }}
+	   		      		<a id="{{ res.id }}delete" href="{{ path('alumno_delete', { 'id': res.id }) }}"><i class="icon-remove"></i></a>
+	   		      		<a id="{{ res.id }}edit" href="{{ path('alumno_edit', { 'id': res.id }) }}"><i class="icon-pencil"></i></a>
+   		      		</p>
    		      	{% endfor %}
 	       		</div>
 {#         	</div>#}
-   		</div>
+   		</div>	
    		<script type="text/javascript">
+/**   		
+			$('#result p a').click(function (){
+			alert(this.href);
+			//$('#content').load(url);
+			return false;
+   	   	});
+*/
    		$('#Search_search').bind('keyup', function() { $('#search').submit(); } );
 		$('#search').submit(function(e) {
    		    var url = $(this).attr("action");
@@ -27,4 +38,13 @@
    		    return false;
    		});
 		</script>      	 
+{#
+Parece que no se puede cargar por load la lista de alumno que da el search,
+pienso que es porque aunq se incruste en el html la respuesta del ajax, el dom
+no sabe que existe y no lo encuentra... 
 
+posible solucion:
+click en el nombre -> redirije a plantilla index pero cargada con toda la info del alumno clicado
+click en edit -> ventana modal para editar 
+click en remove -> ventana modal para eliminar
+#}
