@@ -22,11 +22,12 @@
     </li>
 </ul>
 #}
-
+{#
 {% extends "::base.html.twig" %}
 
 {% block body %}
-{# {% if is_granted('ROLE_ADMIN') %}#}
+#}
+{% if is_granted('ROLE_ADMIN') %}
    	<form action="{{ path('alumno_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
 	{% if not(edit_form.getVars().valid)  %}
  	   <div id="errors" class="alert alert-error"> 
@@ -53,27 +54,28 @@
 	{% if (entity.foto == 'defaultprofile.png') %}
 		<img alt="" width="150" src="{{ asset('bundles/user/img/defaultprofile.png') }}">
 	{% else %}				   
- 		<img alt="" width="150" src="{{ asset('bundles/user/img/'~entity.id~'/'~entity.foto) }}">
+ 		<img alt="" width="150" src="{{ asset('uploads/'~entity.id~'/img/'~entity.foto) }}">
     {% endif %}
 	{{ form_widget(edit_form.foto) }}
     {{ form_widget(edit_form._token) }}
  <br /> 
-  <button type="submit">Editar Usuario</button>
+  <button type="submit">Editar Alumno</button>
  </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('alumno') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
+<!-- <ul class="record_actions"> -->
+<!--     <li> -->
+{#        <a href="{{ path('alumno') }}">#}
+<!--             Back to the list -->
+<!--         </a> -->
+<!--     </li> -->
+<!--     <li> -->
         <form action="{{ path('alumno_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button class="btn-danger" type="submit">Borrar Alumno</button>
         </form>
-    </li>
-</ul>
+<!--     </li> -->
+<!-- </ul> -->
+{% endif %}
 {# {% else %}#}
 {# 	<form action="{{ path('alumno_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>#}
 {# 	{% if not(edit_form.getVars().valid)  %}#}
@@ -103,5 +105,5 @@
 {#  <br /> #}
 {#   <button type="submit">Editar Usuario</button>#}
 {#  </form>#}
-{# {% endif %}#}
-{% endblock %}
+{# {% endif %}
+{% endblock %} #}

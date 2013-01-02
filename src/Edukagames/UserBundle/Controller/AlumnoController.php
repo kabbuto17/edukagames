@@ -158,7 +158,7 @@ class AlumnoController extends Controller
          	if($editForm->getData()->getFoto() != null){
          		$nombreArchivo = $editForm->getData()->getFoto()->getClientOriginalName();
          		$entity->setFoto($nombreArchivo);
-         		$raizImagen = 'bundles/user/img/'.$id;
+         		$raizImagen = 'uploads/'.$id.'/img';
           		SaveFile::saveFile($raizImagen, $_FILES['edukagames_userbundle_alumnotype']['tmp_name']["foto"], $nombreArchivo);
            	} else {
           		$entity->setFoto($fotoOrin);
@@ -229,6 +229,8 @@ class AlumnoController extends Controller
         		'result' => $result,
         		'form'   => $form->createView(),
         		));
-    	
+    //TODO cambiar userName por un compuesto del nombre y apellidos, hay q crearlo en la entity pero como?? 	
     }
 }
+//TODO editar al guardar cambios hay que mirar a donde redirije, se podria cambiar y poner un flush emergente de que se creo correctamente.
+//TODO al crear te manda al view, se podria cambiar y poner un flush emergente de que se creo correctamente.

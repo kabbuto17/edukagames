@@ -34,12 +34,12 @@
 	   </div>
 	{% endif %}
    	{{ form_widget(form.userName, { 'attr': {'placeholder': 'Nombre de Usuario'} }) }}<br />
-   	{{ form_widget(form.password.Contrasena, { 'attr': {'placeholder': 'Password'} }) }}
-   	{{ form_widget(form.password.Repita_contrasena, { 'attr': {'placeholder': 'Repita el password'} }) }}<br />
+   	{{ form_widget(form.password.Contrasena, { 'attr': {'placeholder': 'Password', 'required': "required"} }) }}
+   	{{ form_widget(form.password.Repita_contrasena, { 'attr': {'placeholder': 'Repita el password', 'required': "required"} }) }}<br />
 
   	{{ form_widget(form.nombre, { 'attr': {'placeholder': 'Nombre'} }) }}
    	{{ form_widget(form.apellidos, { 'attr': {'placeholder': 'Apellidos'} }) }}<br />
-   	{{ form_widget(form.diagnostico, { 'attr': {'placeholder': 'Diagnostico'} }) }}<br />
+   	{{ form_widget(form.diagnostico, { 'attr': {'placeholder': 'Diagnostico', 'class': 'span6', 'resize': 'none'} }) }}<br />
   	{{ form_widget(form.curso, { 'attr': {'placeholder': 'Curso'} }) }}<br />
    Fecha Nacimiento <br/>{{ form_widget(form.fechaNacimiento.day, {'attr': {'class': 'span1'} }) }}
 					   {{ form_widget(form.fechaNacimiento.month, {'attr': {'class': 'span1'} }) }}
