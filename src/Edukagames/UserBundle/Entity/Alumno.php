@@ -99,12 +99,16 @@ class Alumno implements UserInterface {
 	 * @Assert\File(
 	 *     maxSize = "2048k",
 	 *     mimeTypes = {"image/jpeg", "image/jpeg", "image/png"},
-	 *     mimeTypesMessage = "Porfavor seleccione un archivo de imagen válido jpg, jpeg o png"
+	 *     mimeTypesMessage = "Por favor seleccione un archivo de imagen válido jpg, jpeg o png de no mas de 2 Mbytes"
 	 * )
 	 */
 	private $foto;
-
-	private $NombreCompleto;
+	/**
+	 * @var string $foto
+	 *
+	 * @ORM\Column(name="nombreCompleto", type="string")
+	 */
+	private $nombreCompleto;
 	/**
 	 * Get foto 
 	 * 
@@ -305,6 +309,26 @@ class Alumno implements UserInterface {
 	public function eraseCredentials() {
 		// TODO: Auto-generated method stub
 
+	}
+	/**
+	 * Set nombreCompleto
+	 *
+	 * @param string $nombreCompleto
+	 * @return alumno
+	 */
+	public function setNombreCompleto($nombreCompleto) {
+		$this->nombreCompleto = $nombreCompleto;
+	
+		return $this;
+	}
+	
+	/**
+	 * Get nombreCompleto
+	 *
+	 * @return string
+	 */
+	public function getNombreCompleto() {
+		return $this->nombreCompleto;
 	}
 
 	public function __toString() {

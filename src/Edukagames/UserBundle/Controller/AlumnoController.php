@@ -2,6 +2,8 @@
 
 namespace Edukagames\UserBundle\Controller;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 use Symfony\Component\Validator\Constraints\Length;
 
 use Doctrine\ORM\EntityManager;
@@ -87,6 +89,7 @@ class AlumnoController extends Controller
             $passRAW = $entity->getPassword();
             $passCOD = $encoder->encodePassword($passRAW, $entity->getSalt());
             $entity->setPassword($passCOD);
+            $entity->setNombreCompleto($entity->getNombre().' '.$entity->getApellidos());
             $entity->setFoto("defaultprofile.png");
             
             $em->persist($entity);
@@ -149,12 +152,13 @@ class AlumnoController extends Controller
         	$encoder = $this->get('security.encoder_factory')->getEncoder($entity);
         	$passRAW = $entity->getPassword();
         	$passCOD = $encoder->encodePassword($passRAW, $entity->getSalt());
-        	
+        	$entity->setNombreCompleto($entity->getNombre().' '.$entity->getApellidos());
+        	//si el password esta vacio no se cambia nada
         	if ($editForm->getData()->getPassword() == NULL)
          		$entity->setPassword($passOrin);
          	else 
          		$entity->setPassword($passCOD);
-
+			//si se pone una foto nueva se actualiza y se guarda	
          	if($editForm->getData()->getFoto() != null){
          		$nombreArchivo = $editForm->getData()->getFoto()->getClientOriginalName();
          		$entity->setFoto($nombreArchivo);
@@ -167,7 +171,10 @@ class AlumnoController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('alumno_edit', array('id' => $id)));
+            //return $this->redirect($this->generateUrl('alumno_edit', array('id' => $id)));
+            $this->container->get("session")->setFlash("success", "El alumno se ha editado con exito ^^");
+            $url = $this->getRequest()->headers->get("referer");
+            return $this->redirect($this->generateUrl('admin_index'));
         }
 
         return $this->render('UserBundle:Alumno:edit.html.twig', array(
@@ -199,6 +206,7 @@ class AlumnoController extends Controller
         }
 
         return $this->redirect($this->generateUrl('alumno'));
+        //TODO esto falla por que hace falta un DELETE ON CASCADE..
     }
 
     private function createDeleteForm($id)
@@ -219,8 +227,8 @@ class AlumnoController extends Controller
 		   		$em = $this->getDoctrine()->getEntityManager();
 		    	$query = $em->createQuery(
 		    			'SELECT alumno FROM UserBundle:Alumno alumno 
-		    			WHERE alumno.userName 
-		    			LIKE :search ORDER BY alumno.userName ASC')->setParameter('search', '%'.$form["search"]->getData().'%');
+		    			WHERE alumno.nombreCompleto
+		    			LIKE :search ORDER BY alumno.nombreCompleto ASC')->setParameter('search', '%'.$form["search"]->getData().'%');
 		    	$result = $query->getResult();
      		}
      	}
@@ -228,8 +236,7 @@ class AlumnoController extends Controller
     	return $this->render('UserBundle:Alumno:search.html.twig', array(
         		'result' => $result,
         		'form'   => $form->createView(),
-        		));
-    //TODO cambiar userName por un compuesto del nombre y apellidos, hay q crearlo en la entity pero como?? 	
+        		));	
     }
 }
 //TODO editar al guardar cambios hay que mirar a donde redirije, se podria cambiar y poner un flush emergente de que se creo correctamente.

@@ -25,6 +25,7 @@ class LoadAlumnoData implements FixtureInterface, ContainerAwareInterface {
 
 			$alumnoFixture->setNombre("alumno" . $i);
 			$alumnoFixture->setApellidos("Apellidos" . $i);
+			$alumnoFixture->setNombreCompleto($alumnoFixture->getNombre().' '.$alumnoFixture->getApellidos());
 			$alumnoFixture->setCurso("1");
 			$alumnoFixture->setDiagnostico("Diagnostico");
 			$alumnoFixture->setSalt($salt);
