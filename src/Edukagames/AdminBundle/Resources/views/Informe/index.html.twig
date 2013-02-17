@@ -1,29 +1,27 @@
-<h1>Informe list</h1>
+<h1>Informes de {{ alumno.nombre }}</h1>
 
 <table class="records_list">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Nombreinforme</th>
+            <th>Informe</th>
             <th>Fecha</th>
-            <th>Descripcion</th>
+            <th>Descripción</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-    {% for entity in entities %}
+    {% for informe in informes %}
         <tr>
-            <td><a href="{{ path('informe_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.nombreInforme }}</td>
-            <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{{ entity.descripcion }}</td>
+            <td>{{ informe.nombreInforme }}</td>
+            <td>{% if informe.fecha %}{{ informe.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ informe.descripcion }}</td>
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('informe_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('informe_show', { 'id': informe.id }) }}">Mostrar</a>
                     </li>
                     <li>
-                        <a href="{{ path('informe_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('informe_update', { 'id': informe.id }) }}">Editar</a>
                     </li>
                 </ul>
             </td>
@@ -34,8 +32,8 @@
 
 <ul>
     <li>
-        <a href="{{ path('informe_new') }}">
-            Create a new entry
+        <a href="{{ path('informe_new', {'id' : alumno.id}) }}">
+            Nuevo informe
         </a>
     </li>
 </ul>

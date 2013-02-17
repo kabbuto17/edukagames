@@ -1,5 +1,5 @@
 informe:
-    pattern:  /
+    pattern:  /{id}
     defaults: { _controller: "AdminBundle:Informe:index" }
 
 informe_show:
@@ -7,11 +7,11 @@ informe_show:
     defaults: { _controller: "AdminBundle:Informe:show" }
 
 informe_new:
-    pattern:  /new
+    pattern:  /new/{id}
     defaults: { _controller: "AdminBundle:Informe:new" }
 
 informe_create:
-    pattern:  /create
+    pattern:  /create/{id}
     defaults: { _controller: "AdminBundle:Informe:create" }
     requirements: { _method: post }
 
@@ -22,7 +22,6 @@ informe_edit:
 informe_update:
     pattern:  /{id}/update
     defaults: { _controller: "AdminBundle:Informe:update" }
-    requirements: { _method: post }
 
 informe_delete:
     pattern:  /{id}/delete

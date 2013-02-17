@@ -4,36 +4,37 @@
     <tbody>
         <tr>
             <th>Id</th>
-            <td>{{ entity.id }}</td>
+            <td>{{ informe.id }}</td>
         </tr>
         <tr>
-            <th>Nombreinforme</th>
-            <td>{{ entity.nombreInforme }}</td>
+            <th>informe</th>
+            <td><a href="{{ asset('uploads/'~informe.id~'/informes/') }}">{{ informe.nombreInforme }}</a></td>
         </tr>
         <tr>
             <th>Fecha</th>
-            <td>{{ entity.fecha|date('Y-m-d H:i:s') }}</td>
+            <td>{{ informe.fecha|date('Y-m-d H:i:s') }}</td>
         </tr>
         <tr>
             <th>Descripcion</th>
-            <td>{{ entity.descripcion }}</td>
+            <td>{{ informe.descripcion }}</td>
         </tr>
     </tbody>
 </table>
 
 <ul class="record_actions">
     <li>
-        <a href="{{ path('informe') }}">
-            Back to the list
+        <a href="{{ path('informe', { 'id': informe.Alumno.id }) }}">
+            Volver a la lista
         </a>
     </li>
     <li>
-        <a href="{{ path('informe_edit', { 'id': entity.id }) }}">
-            Edit
+       {# <a href="{{ path('informe_edit', { 'id': informe.id }) }}">#}
+       <a href="{{ path('informe_update', { 'id': informe.id }) }}">
+            Editar
         </a>
     </li>
     <li>
-        <form action="{{ path('informe_delete', { 'id': entity.id }) }}" method="post">
+        <form action="{{ path('informe_delete', { 'id': informe.id }) }}" method="post">
             {{ form_widget(delete_form) }}
             <button type="submit">Delete</button>
         </form>

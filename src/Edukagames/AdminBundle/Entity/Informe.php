@@ -114,7 +114,7 @@ class Informe
     /**
      * Set Alumno
      *
-     * @param string $alumno
+     * @param entity $alumno
      * @return Informe
      */
     public function setAlumno(\Edukagames\UserBundle\Entity\Alumno $alumno)

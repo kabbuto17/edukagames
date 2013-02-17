@@ -11,10 +11,13 @@ class InformeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombreInforme')
+            ->add('nombreInforme','file', array('required' => false,'data_class' => null))
             ->add('fecha','date')
-            ->add('alumno')
-            ->add('descripcion')
+//             ->add('alumno','entity',array('class' => 'UserBundle:Alumno',
+//                                 'required' => true,
+//                                 'empty_value' => 'Seleccione una opción'
+//             		))
+            ->add('descripcion','textarea')
         ;
     }
 

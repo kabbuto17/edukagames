@@ -2,6 +2,10 @@
 
 namespace Edukagames\AdminBundle\Controller;
 
+use CG\Tests\Generator\Fixture\Entity;
+
+use Edukagames\UserBundle\Util\SaveFile;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -18,14 +22,16 @@ class InformeController extends Controller
      * Lists all Informe entities.
      *
      */
-    public function indexAction()
+    public function indexAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AdminBundle:Informe')->findAll();
+        $informes = $em->getRepository('AdminBundle:Informe')->findBy(array('Alumno' => $id));
+        $alumno = $em->getRepository('UserBundle:Alumno')->find($id);
 
         return $this->render('AdminBundle:Informe:index.html.twig', array(
-            'entities' => $entities,
+            'informes' => $informes,
+        	'alumno' => $alumno
         ));
     }
 
@@ -37,79 +43,92 @@ class InformeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminBundle:Informe')->find($id);
+        $informe = $em->getRepository('AdminBundle:Informe')->find($id);
 
-        if (!$entity) {
+        if (!$informe) {
             throw $this->createNotFoundException('Unable to find Informe entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('AdminBundle:Informe:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'informe'      => $informe,
+            'delete_form' => $deleteForm->createView(),
+            ));
     }
 
     /**
      * Displays a form to create a new Informe entity.
      *
      */
-    public function newAction()
+    public function newAction($id)
     {
-        $entity = new Informe();
-        $form   = $this->createForm(new InformeType(), $entity);
 
+        $informe = new Informe();
+        $form   = $this->createForm(new InformeType(), $informe);
+        $em = $this->getDoctrine()->getEntityManager();
+        $alumno = $em->getRepository('UserBundle:Alumno')->find($id);
+        $request = $this->getRequest();
+
+        $form->bindRequest($request);
+        if ($form->isValid()) {
+
+        	$filename = $_FILES ["edukagames_adminbundle_informetype"]["name"]["nombreInforme"];
+        	$tmp_filename = $_FILES["edukagames_adminbundle_informetype"]["tmp_name"]["nombreInforme"];
+        	$destination = "uploads/".$_POST["edukagames_adminbundle_informetype"]["alumno"]."/informes";
+        	$informe->setNombreInforme($filename);
+
+        	$informe->setAlumno($alumno);
+
+        	SaveFile::saveFile($destination, $tmp_filename, $filename);
+
+        	$em->persist($informe);
+        	$em->flush();
+
+        	return $this->redirect($this->generateUrl('informe_show', array('id' => $entity->getId())));
+        }
+        //
         return $this->render('AdminBundle:Informe:new.html.twig', array(
-            'entity' => $entity,
+            'informe' => $informe,
             'form'   => $form->createView(),
+        	'alumno' => $alumno
         ));
+		
     }
 
     /**
      * Creates a new Informe entity.
      *
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request,$id)
     {
-        $entity  = new Informe();
-        $form = $this->createForm(new InformeType(), $entity);
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('informe_show', array('id' => $entity->getId())));
+    	
+        $informe  = new Informe();
+        $form = $this->createForm(new InformeType(), $informe);
+        $em = $this->getDoctrine()->getEntityManager();
+        $alumno = $em->getRepository('UserBundle:Alumno')->find($id);
+        if ($request->isMethod('POST')) {
+        	$form->bind($request);
+	        if ($form->isValid()) {
+	        	$filename = $_FILES ["edukagames_adminbundle_informetype"]["name"]["nombreInforme"];
+	        	$tmp_filename = $_FILES["edukagames_adminbundle_informetype"]["tmp_name"]["nombreInforme"];
+	        	$destination = "uploads/".$alumno->getId()."/informes";
+	        	$informe->setNombreInforme($filename);
+	        	$informe->setAlumno($alumno);
+	
+	        	SaveFile::saveFile($destination, $tmp_filename, $filename);
+	
+	            $em->persist($informe);
+	            $em->flush();
+	
+	            return $this->redirect($this->generateUrl('informe_show', array('id' => $alumno->getId())));
+        	}
         }
 
         return $this->render('AdminBundle:Informe:new.html.twig', array(
-            'entity' => $entity,
+            'alumno' => $alumno,
             'form'   => $form->createView(),
-        ));
-    }
-
-    /**
-     * Displays a form to edit an existing Informe entity.
-     *
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AdminBundle:Informe')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Informe entity.');
-        }
-
-        $editForm = $this->createForm(new InformeType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('AdminBundle:Informe:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+        	'informe'=> $informe
         ));
     }
 
@@ -117,32 +136,38 @@ class InformeController extends Controller
      * Edits an existing Informe entity.
      *
      */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    public function updateAction($id)
+    {	
+		$em = $this->getDoctrine()->getEntityManager();
+		$informe = $em->getRepository('AdminBundle:Informe')->find($id);
+		
+		if (!$informe) {
+			throw $this->createNotFoundException("No se encontro la entidad(update)");
+		}
 
-        $entity = $em->getRepository('AdminBundle:Informe')->find($id);
+		$form = $this->createForm(new InformeType(),$informe);
+		$request = $this->getRequest()->getMethod();
+		
+		if ($request == "POST") {
+			$filename = $_FILES ["edukagames_adminbundle_informetype"]["name"]["nombreInforme"];
+        	$tmp_filename = $_FILES["edukagames_adminbundle_informetype"]["tmp_name"]["nombreInforme"];
+        	$destination = "uploads/".$informe->getAlumno()->getId()."/informes";
+ 			$form -> bindRequest($this->getRequest());
+			if ($form->isValid()) {
+				if ($form->getData()->getNombreInforme() != null) {
+					$informe->setNombreInforme($form->getData()->getNombreInforme()->getClientOriginalName());
+					SaveFile::saveFile($destination, $tmp_filename, $filename);
+				}
+				$em->persist($informe);
+				$em->flush();
+				return $this->redirect($this->generateUrl('informe_show', array('id' => $informe->getId())));
+			}
+		}
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Informe entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new InformeType(), $entity);
-        $editForm->bind($request);
-
-        if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('informe_edit', array('id' => $id)));
-        }
-
-        return $this->render('AdminBundle:Informe:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+		return $this->render('AdminBundle:Informe:edit.html.twig', array(
+				'informe'      => $informe,
+				'edit_form'   => $form->createView(),
+		));
     }
 
     /**

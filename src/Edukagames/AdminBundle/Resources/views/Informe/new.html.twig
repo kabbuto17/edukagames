@@ -1,7 +1,7 @@
-<h1>Informe creation</h1>
+<h1>Creacion de informe de {{ alumno.nombre }}</h1>
 
-<form action="{{ path('informe_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+<form action="{{ path('informe_create', {'id' : alumno.id}) }}" method="post" {{ form_enctype(form) }}>
+	{{ form_rest(form) }}
     <p>
         <button type="submit">Create</button>
     </p>
@@ -9,8 +9,8 @@
 
 <ul class="record_actions">
     <li>
-        <a href="{{ path('informe') }}">
+        <a href="{{ path('informe', {'id' : alumno.id}) }}">
             Back to the list
-        </a>
+        </a>   
     </li>
 </ul>
