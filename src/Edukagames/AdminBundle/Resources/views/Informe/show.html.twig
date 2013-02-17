@@ -3,12 +3,8 @@
 <table class="record_properties">
     <tbody>
         <tr>
-            <th>Id</th>
-            <td>{{ informe.id }}</td>
-        </tr>
-        <tr>
             <th>informe</th>
-            <td><a href="{{ asset('uploads/'~informe.id~'/informes/') }}">{{ informe.nombreInforme }}</a></td>
+            <td><a href="{{ asset('uploads/'~informe.alumno.id~'/informes/'~informe.nombreInforme ) }}">{{ informe.nombreInforme }}</a></td>
         </tr>
         <tr>
             <th>Fecha</th>
