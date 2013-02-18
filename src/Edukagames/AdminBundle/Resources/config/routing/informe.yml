@@ -26,4 +26,4 @@ informe_update:
 informe_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "AdminBundle:Informe:delete" }
-    requirements: { _method: post }
+

@@ -72,7 +72,6 @@ class InformeController extends Controller
 
         $form->bindRequest($request);
         if ($form->isValid()) {
-
         	$filename = $_FILES ["edukagames_adminbundle_informetype"]["name"]["nombreInforme"];
         	$tmp_filename = $_FILES["edukagames_adminbundle_informetype"]["tmp_name"]["nombreInforme"];
         	$destination = "uploads/".$_POST["edukagames_adminbundle_informetype"]["alumno"]."/informes";
@@ -102,7 +101,6 @@ class InformeController extends Controller
      */
     public function createAction(Request $request,$id)
     {
-    	
         $informe  = new Informe();
         $form = $this->createForm(new InformeType(), $informe);
         $em = $this->getDoctrine()->getEntityManager();
@@ -120,7 +118,7 @@ class InformeController extends Controller
 	
 	            $em->persist($informe);
 	            $em->flush();
-	
+				
 	            return $this->redirect($this->generateUrl('informe_show', array('id' => $alumno->getId())));
         	}
         }
@@ -137,7 +135,7 @@ class InformeController extends Controller
      *
      */
     public function updateAction($id)
-    {	
+    {	//TODO si el archivo ke se usaba ahora es otro, borrar el archivo antiguo porke ya no vale
 		$em = $this->getDoctrine()->getEntityManager();
 		$informe = $em->getRepository('AdminBundle:Informe')->find($id);
 		
@@ -174,24 +172,29 @@ class InformeController extends Controller
      * Deletes a Informe entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
+//         $form = $this->createDeleteForm($id);
+//         $form->bind($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AdminBundle:Informe')->find($id);
+//         if ($form->isValid()) {
+//             $em = $this->getDoctrine()->getManager();
+//             $entity = $em->getRepository('AdminBundle:Informe')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Informe entity.');
-            }
+//             if (!$entity) {
+//                 throw $this->createNotFoundException('Unable to find Informe entity.');
+//             }
 
-            $em->remove($entity);
-            $em->flush();
-        }
+//             $em->remove($entity);
+//             $em->flush();
+//         }
 
-        return $this->redirect($this->generateUrl('informe'));
+//         return $this->redirect($this->generateUrl('informe'));
+		$em = $this->getDoctrine()->getEntityManager();
+		$informe = $em->getRepository('AdminBundle:Informe')->find($id);
+		$em->remove($informe);
+		$em->flush();
+		return $this->redirect($this->generateUrl('informe', array('id' => $informe->getAlumno()->getId())));
     }
 
     private function createDeleteForm($id)
