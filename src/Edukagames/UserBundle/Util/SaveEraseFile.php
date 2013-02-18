@@ -6,7 +6,7 @@ class SaveEraseFile
 {
 	/**
 	 * @author Chema
-	 * @example SaveFile::saveFile($raizImagen, $_FILES['Alumno_Perfil']['tmp_name']["foto"], $nombreArchivo);
+	 * @example SaveEraseFile::saveFile($raizImagen, $_FILES['Alumno_Perfil']['tmp_name']["foto"], $nombreArchivo);
 	 * @param string $destination
 	 * @param string $tmp_filename
 	 * @param string $filename
