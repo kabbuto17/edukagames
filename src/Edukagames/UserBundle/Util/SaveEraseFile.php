@@ -23,8 +23,9 @@ class SaveEraseFile
     
     public static function eraseFile($dir)
     {
-    	if (file_exists($dir))
-    		unlink($dir);
+    	if ( !is_dir($dir))
+    		if (file_exists($dir))
+    			unlink($dir);
     }
 
 }

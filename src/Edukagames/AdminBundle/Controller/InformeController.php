@@ -135,7 +135,7 @@ class InformeController extends Controller
      *
      */
     public function updateAction($id)
-    {	//TODO si el archivo ke se usaba ahora es otro, borrar el archivo antiguo porke ya no vale
+    {
 		$em = $this->getDoctrine()->getEntityManager();
 		$informe = $em->getRepository('AdminBundle:Informe')->find($id);
 		$informeAntiguo = $informe->getNombreInforme();
@@ -150,15 +150,20 @@ class InformeController extends Controller
 			$filename = $_FILES ["edukagames_adminbundle_informetype"]["name"]["nombreInforme"];
         	$tmp_filename = $_FILES["edukagames_adminbundle_informetype"]["tmp_name"]["nombreInforme"];
         	$destination = "uploads/".$informe->getAlumno()->getId()."/informes";
-        	if($informeAntiguo != $filename) {
-        		SaveEraseFile::eraseFile($destination."/".$informeAntiguo);
-        	}
+        	
  			$form -> bindRequest($this->getRequest());
 			if ($form->isValid()) {
 				if ($form->getData()->getNombreInforme() != null) {
 					$informe->setNombreInforme($form->getData()->getNombreInforme()->getClientOriginalName());
+					if($informeAntiguo != $filename) {
+						SaveEraseFile::eraseFile($destination."/".$informeAntiguo);
+					}
 					SaveEraseFile::saveFile($destination, $tmp_filename, $filename);
 				}
+				else{
+						$informe->setNombreInforme($informeAntiguo);
+					}
+				
 				$em->persist($informe);
 				$em->flush();
 				return $this->redirect($this->generateUrl('informe_show', array('id' => $informe->getId())));
