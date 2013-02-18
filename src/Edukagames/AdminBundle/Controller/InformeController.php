@@ -2,9 +2,9 @@
 
 namespace Edukagames\AdminBundle\Controller;
 
-use CG\Tests\Generator\Fixture\Entity;
+use Edukagames\UserBundle\Util\SaveEraseFile;
 
-use Edukagames\UserBundle\Util\SaveFile;
+use CG\Tests\Generator\Fixture\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -79,7 +79,7 @@ class InformeController extends Controller
 
         	$informe->setAlumno($alumno);
 
-        	SaveFile::saveFile($destination, $tmp_filename, $filename);
+        	SaveEraseFile::saveFile($destination, $tmp_filename, $filename);
 
         	$em->persist($informe);
         	$em->flush();
@@ -114,7 +114,7 @@ class InformeController extends Controller
 	        	$informe->setNombreInforme($filename);
 	        	$informe->setAlumno($alumno);
 	
-	        	SaveFile::saveFile($destination, $tmp_filename, $filename);
+	        	SaveEraseFile::saveFile($destination, $tmp_filename, $filename);
 	
 	            $em->persist($informe);
 	            $em->flush();
@@ -138,7 +138,7 @@ class InformeController extends Controller
     {	//TODO si el archivo ke se usaba ahora es otro, borrar el archivo antiguo porke ya no vale
 		$em = $this->getDoctrine()->getEntityManager();
 		$informe = $em->getRepository('AdminBundle:Informe')->find($id);
-		
+		$informeAntiguo = $informe->getNombreInforme();
 		if (!$informe) {
 			throw $this->createNotFoundException("No se encontro la entidad(update)");
 		}
@@ -150,11 +150,14 @@ class InformeController extends Controller
 			$filename = $_FILES ["edukagames_adminbundle_informetype"]["name"]["nombreInforme"];
         	$tmp_filename = $_FILES["edukagames_adminbundle_informetype"]["tmp_name"]["nombreInforme"];
         	$destination = "uploads/".$informe->getAlumno()->getId()."/informes";
+        	if($informeAntiguo != $filename) {
+        		SaveEraseFile::eraseFile($destination."/".$informeAntiguo);
+        	}
  			$form -> bindRequest($this->getRequest());
 			if ($form->isValid()) {
 				if ($form->getData()->getNombreInforme() != null) {
 					$informe->setNombreInforme($form->getData()->getNombreInforme()->getClientOriginalName());
-					SaveFile::saveFile($destination, $tmp_filename, $filename);
+					SaveEraseFile::saveFile($destination, $tmp_filename, $filename);
 				}
 				$em->persist($informe);
 				$em->flush();
@@ -174,24 +177,11 @@ class InformeController extends Controller
      */
     public function deleteAction($id)
     {
-//         $form = $this->createDeleteForm($id);
-//         $form->bind($request);
-
-//         if ($form->isValid()) {
-//             $em = $this->getDoctrine()->getManager();
-//             $entity = $em->getRepository('AdminBundle:Informe')->find($id);
-
-//             if (!$entity) {
-//                 throw $this->createNotFoundException('Unable to find Informe entity.');
-//             }
-
-//             $em->remove($entity);
-//             $em->flush();
-//         }
-
-//         return $this->redirect($this->generateUrl('informe'));
 		$em = $this->getDoctrine()->getEntityManager();
 		$informe = $em->getRepository('AdminBundle:Informe')->find($id);
+		$directorio = "uploads/".$informe->getAlumno()->getId()."/informes";
+		$dir = $directorio."/".$informe->getNombreInforme();
+		SaveEraseFile::eraseFile($dir);
 		$em->remove($informe);
 		$em->flush();
 		return $this->redirect($this->generateUrl('informe', array('id' => $informe->getAlumno()->getId())));

@@ -2,7 +2,7 @@
 
 namespace Edukagames\UserBundle\Util;
 
-class SaveFile
+class SaveEraseFile
 {
 	/**
 	 * @author Chema
@@ -20,6 +20,13 @@ class SaveFile
     	}
         move_uploaded_file($tmp_filename, "$destination/$filename");
     }
+    
+    public static function eraseFile($dir)
+    {
+    	if (file_exists($dir))
+    		unlink($dir);
+    }
+
 }
 
 ?>
