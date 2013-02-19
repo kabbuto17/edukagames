@@ -29,13 +29,25 @@
 	  </div>
 	  <div class="accordion-group">
 	    <div class="accordion-heading">
+	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#admin">
+	        Gestion de administradores
+	      </a>
+	    </div>
+	    <div id="admin" class="accordion-body collapse">
+	      <div class="accordion-inner">
+	        las opciones
+	      </div>
+	    </div>
+	  </div>
+	  <div class="accordion-group">
+	    <div class="accordion-heading">
 	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
 	        Gestion de alumnos
 	      </a>
 	    </div>
 	    <div id="collapseThree" class="accordion-body collapse">
 	      <div class="accordion-inner">
-	        <i class="icon-plus"></i> <a id="new" href="#">Crear usuario</a>
+	        <i class="icon-plus"></i> <a id="new" href="#">Crear alumno</a>
 	      </div>
 	      <div class="accordion-inner">
 				{% render('UserBundle:Alumno:search') %}	      

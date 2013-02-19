@@ -1,7 +1,3 @@
-{#
-{% extends '::base.html.twig' %}
-{% block body %}
-#}
       	<form id="search"  action={{ path('alumno_search') }} method="post" {{ form_enctype(form) }}>
       		{{ form_widget(form.search, { 'attr': {'placeholder': 'Buscar'} }) }}
       		{{ form_widget(form._token) }}
@@ -11,7 +7,7 @@
    		      	<div id="result">
    		      	{% for res in result %}
    		      		<p>
-	   		      		{{ res.nombreCompleto }}
+	   		      		<a href="{{ path('alumnos_details', {'id': res.id}) }}"><i class="icon-user"></i> {{ res.nombreCompleto }}</a>
 {#	   		
 	   		      		<a id="{{ res.id }}delete" href="{{ path('alumno_delete', { 'id': res.id }) }}">borrar<i class="icon-remove"></i></a>
 #}	   		
@@ -47,9 +43,6 @@
    		    return false;
    		});
 		</script> 
-{#
-{% endblock %}   	 
-#}
 {#
 Borrar tiene q enviarse por post y editar ahora mismo se envia por get, 
 tiene un rule_admin para que solo entre en admin aun asi...

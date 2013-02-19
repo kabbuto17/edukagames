@@ -19,3 +19,7 @@ user_index:
 UserBundle_alumno:
     resource: "@UserBundle/Resources/config/routing/alumno.yml"
     prefix: /alumno
+    
+alumnos_details:
+    pattern: /admin/{id}
+    defaults: { _controller: 'UserBundle:Alumno:AlumnoDetails' }
