@@ -27,6 +27,17 @@ class SaveEraseFile
     		if (file_exists($dir))
     			unlink($dir);
     }
+    
+    public static function eraseDir($dir) 
+    {
+    	foreach(glob($dir . '/*') as $file) {
+        if(is_dir($file))
+            eraseDir($file);
+        else
+            unlink($file);
+	    }
+	    rmdir($dir);
+    }
 
 }
 

@@ -2,6 +2,8 @@
 
 namespace Edukagames\UserBundle\Controller;
 
+use Edukagames\UserBundle\Util\SaveEraseFile;
+
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Symfony\Component\Validator\Constraints\Length;
@@ -162,8 +164,8 @@ class AlumnoController extends Controller
          	if($editForm->getData()->getFoto() != null){
          		$nombreArchivo = $editForm->getData()->getFoto()->getClientOriginalName();
          		$entity->setFoto($nombreArchivo);
-         		$raizImagen = 'uploads/'.$id.'/img';
-          		SaveFile::saveFile($raizImagen, $_FILES['edukagames_userbundle_alumnotype']['tmp_name']["foto"], $nombreArchivo);
+         		$raizImagen = 'uploads/'.$id.'/img/';
+          		SaveEraseFile::saveFile($raizImagen, $_FILES['edukagames_userbundle_alumnotype']['tmp_name']["foto"], $nombreArchivo);
            	} else {
           		$entity->setFoto($fotoOrin);
          	}
@@ -200,7 +202,9 @@ class AlumnoController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Alumno entity.');
             }
-
+            
+			SaveEraseFile::eraseDir("/uploads/".$id."/");
+            
             $em->remove($entity);
             $em->flush();
         }

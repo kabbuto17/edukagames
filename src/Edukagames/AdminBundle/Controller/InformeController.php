@@ -86,7 +86,7 @@ class InformeController extends Controller
 
         	return $this->redirect($this->generateUrl('informe_show', array('id' => $entity->getId())));
         }
-        //
+        
         return $this->render('AdminBundle:Informe:new.html.twig', array(
             'informe' => $informe,
             'form'   => $form->createView(),
@@ -126,7 +126,7 @@ class InformeController extends Controller
         return $this->render('AdminBundle:Informe:new.html.twig', array(
             'alumno' => $alumno,
             'form'   => $form->createView(),
-        	'informe'=> $informe
+        	'informe'=> $informe,
         ));
     }
 
@@ -150,9 +150,9 @@ class InformeController extends Controller
 			$filename = $_FILES ["edukagames_adminbundle_informetype"]["name"]["nombreInforme"];
         	$tmp_filename = $_FILES["edukagames_adminbundle_informetype"]["tmp_name"]["nombreInforme"];
         	$destination = "uploads/".$informe->getAlumno()->getId()."/informes";
-        	
  			$form -> bindRequest($this->getRequest());
 			if ($form->isValid()) {
+// 				ldd($filename,$tmp_filename,$destination);
 				if ($form->getData()->getNombreInforme() != null) {
 					$informe->setNombreInforme($form->getData()->getNombreInforme()->getClientOriginalName());
 					if($informeAntiguo != $filename) {

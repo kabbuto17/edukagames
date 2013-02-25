@@ -1,9 +1,8 @@
 <h1>Edicion de informe de {{ informe.alumno.nombre }}</h1>
 
 <form action="{{ path('informe_update', { 'id': informe.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-{#     {{ form_widget(edit_form) }} #}
-	<div>
-	
+    {{ form_widget(edit_form) }} 
+{#	<div>
 	{{ form_label(edit_form.nombreInforme,informe.nombreInforme) }}
 	{{ form_widget(edit_form.nombreInforme) }}
 	</div>
@@ -15,7 +14,7 @@
 	{{ form_label(edit_form.descripcion,"Descripcion") }}
 	{{ form_widget(edit_form.descripcion) }}
 	</div>
-	<input type="hidden" id="edukagames_adminbundle_informetype__token" name="edukagames_adminbundle_informetype[_token]" value="c8a83058be48ee9bb5cb25cdad49ac4541239e40">
+	<input type="hidden" id="edukagames_adminbundle_informetype__token" name="edukagames_adminbundle_informetype[_token]" >#}
     <p>
         <button type="submit">Editar</button>
     </p>
