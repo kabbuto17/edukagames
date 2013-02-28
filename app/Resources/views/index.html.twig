@@ -6,14 +6,21 @@
 	{{ parent() }}
 	{% if is_granted('ROLE_USER') %}
 	<div class=pull-right>
-		Bienvenid@ {{ app.user.userName }} <a href="{{ path('logout') }}">Cerrar sesión</a>
+		Bienvenid@ {{ app.user.userName }} <a href="{{ path('logout') }}">Cerrar sesion</a>
 	</div>
 	{% endif %}
-{% endblock %}
+{% endblock header %}
 
 {% block body %}
 <div class="row">
-	<div class="span4">{% block menu %} {% include '::menu.html.twig' %} {% endblock %}</div>
-	<div class="span8">{% block content %} {% include '::content.html.twig' %} {% endblock %}</div>
+	<div class="span4">
+	{% block menu %}
+		{% include '::menu.html.twig' %} 
+	{% endblock %}</div>
+	<div class="span8">
+	{% block content %} 
+		{% include '::content.html.twig' %} 
+	{% endblock %}
+	</div>
 </div>
-{% endblock %}
+{% endblock body %}

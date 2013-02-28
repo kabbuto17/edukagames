@@ -5,18 +5,15 @@
 {% block body %}
 <div>
   	{% if error %}
-        <div class="alert alert-error">{{ error.message }}</div>
+        <div id="loginError" class="alert alert-error">{{ error.message }}</div>
     {% endif %}
     
     <form class="form-loggin" action="{{ path("login_check") }}" method="post" id="login">
         <div>
-{#             <label for="username">Username</label>#}
             <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Usuario"/>
         </div>
-
         <div>
-{#             <label for="password">Password</label>#}
-            <input type="password" id="password" name="_password" placeholder="ContraseÃ±a"/>
+            <input type="password" id="password" name="_password" placeholder="Contraseña"/>
         </div>
 
         <input type="submit" class="symfony-button-grey" value="Loggin" />

@@ -2,24 +2,29 @@
 
 namespace Edukagames\UserBundle\Controller;
 
-use Edukagames\UserBundle\Util\SaveFile;
-
-use Edukagames\UserBundle\Entity\Alumno;
-
-use Edukagames\UserBundle\Form\AlumnoPerfilType;
-
 use Symfony\Component\Security\Core\SecurityContext;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
 class DefaultController extends Controller
 {
+	/**
+	 * routing.yml
+	 * name: user_index
+	 * pattern: /usuario
+	 *
+	 * */
     public function indexAction()
     {
         return $this->render('::index.html.twig');
     }
     
+    /**
+     * routing.yml
+     * name: login
+     * pattern: /
+     *
+     * */
     public function loginAction() {
         $request = $this->getRequest();
         $session = $request->getSession();
@@ -35,62 +40,5 @@ class DefaultController extends Controller
 				'last_username' => $session->get(SecurityContext::LAST_USERNAME),
 				'error' => $error)
 		);
-    }
-    public function perfilAction()
-    {
-    	$token = $this->container->get('security.context')->getToken();
-    	$userConnected = $token->getUser();
-    	$rutaImagen = "bundles/user/img/".$userConnected->getId()."/".$userConnected->getFoto();
-    	$formulario = $this->createForm(new AlumnoPerfilType(),$userConnected);
-    	$passwordOriginal = $userConnected->getPassword();
-    	$imagenOriginal = $userConnected->getFoto();
-    	
-    	if ($this->getRequest()->getMethod() == "POST") {
-    		$formulario->bindRequest($this->getRequest());
-    		if ($formulario->isValid()) {
-    			$em = $this->getDoctrine()->getManager();
-    			$alumno = $em->getRepository('UserBundle:Alumno')->find($userConnected->getId());
-    			$passwordNoEncriptado = $formulario->getData()->getPassword();
-    			$newUser = $formulario->getData()->getUserName();
-
-    			if ($passwordNoEncriptado != null) {
-    				$encoder = $this->get('security.encoder_factory')->getEncoder($alumno);
-	    			$passwordCodificado = $encoder->encodePassword($passwordNoEncriptado, $alumno->getSalt());
-	    			$alumno->setPassword($passwordCodificado);
-    				$alumno->setUserName($newUser);
-    			} else {
-    				$alumno->setUserName($newUser);
-    				$alumno->setPassword($passwordOriginal);
-    			}
-    			
-    			if($formulario->getData()->getFoto() != null){
-    				
-    				$nombreArchivo = $formulario->getData()->getFoto()->getClientOriginalName();
-//     				$alumno->setFoto($nombreArchivo);
-    				$raizImagen = 'bundles/user/img/'.$userConnected->getId();
-//     				if(!file_exists($raizImagen)){
-//     					mkdir($raizImagen);
-//     				}
-//     				move_uploaded_file($_FILES['Alumno_Perfil']['tmp_name']["foto"], 'bundles/user/img/'.$userConnected->getId().'/'.$nombreArchivo);
-    				SaveFile::saveFile($raizImagen, $_FILES['Alumno_Perfil']['tmp_name']["foto"], $nombreArchivo);
-    			}else {
-    				$alumno->setFoto($imagenOriginal);
-    			}
-
-    			$em->persist($alumno);
-    			$em->flush($alumno);
-
-    			return $this->redirect($this->generateUrl('user_perfil_edit'));
-
-    		}
-    		
-    	}
-		
-    	return $this->render('UserBundle:Default:perfil.html.twig', array(
-    			'form' => $formulario->createView(),
-    			'user' => $userConnected,
-    			'rutaImg' => $rutaImagen
-    	));
-    	
     }
 }

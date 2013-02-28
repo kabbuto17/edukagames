@@ -25,90 +25,99 @@ class AlumnoController extends Controller
 {
     /**
      * Lists all Alumno entities.
-     *
+     * 
+     * routing/alumno.yml
+	 * name: alumno
+	 * pattern: /alumno/
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $entities = $em->getRepository('UserBundle:Alumno')->findAll();
-
         return $this->render('UserBundle:Alumno:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        		'entities' => $entities,
+        		));
     }
-
-    /**
-     * Finds and displays a Alumno entity.
-     *
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('UserBundle:Alumno')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Alumno entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('UserBundle:Alumno:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
-    }
-
+    
     /**
      * Displays a form to create a new Alumno entity.
      *
+     * routing/alumno.yml
+     * name: alumno_new
+     * pattern: /alumno/create
      */
     public function newAction()
     {
-        $entity = new Alumno();
-        $form   = $this->createForm(new AlumnoType(), $entity);
-
-        return $this->render('UserBundle:Alumno:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+    	$entity = new Alumno();
+    	$form   = $this->createForm(new AlumnoType(), $entity);
+    
+    	return $this->render('UserBundle:Alumno:new.html.twig', array(
+    			'entity' => $entity,
+    			'form'   => $form->createView(),
+    	));
     }
-
+    
     /**
      * Creates a new Alumno entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity  = new Alumno();
-        $form = $this->createForm(new AlumnoType(), $entity);
-        $form->bind($request);
+    	$entity  = new Alumno();
+    	$form = $this->createForm(new AlumnoType(), $entity);
+    	$form->bind($request);
+    
+    	if ($form->isValid()) {
+    		$em = $this->getDoctrine()->getManager();
+    		$encoder = $this->get('security.encoder_factory')->getEncoder($entity);
+    		$entity->setSalt(md5(time()));
+    		$passRAW = $entity->getPassword();
+    		$passCOD = $encoder->encodePassword($passRAW, $entity->getSalt());
+    		$entity->setPassword($passCOD);
+    		$entity->setNombreCompleto($entity->getNombre().' '.$entity->getApellidos());
+    		$entity->setFoto("defaultprofile.png");
+    
+    		$em->persist($entity);
+    		$em->flush();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $encoder = $this->get('security.encoder_factory')->getEncoder($entity);
-            $entity->setSalt(md5(time()));
-            $passRAW = $entity->getPassword();
-            $passCOD = $encoder->encodePassword($passRAW, $entity->getSalt());
-            $entity->setPassword($passCOD);
-            $entity->setNombreCompleto($entity->getNombre().' '.$entity->getApellidos());
-            $entity->setFoto("defaultprofile.png");
-            
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('alumno_show', array('id' => $entity->getId())));
+    		$this->container->get("session")->setFlash("Exito!", "El alumno se ha creado con exito.");
+    		return $this->redirect($this->generateUrl('admin_index'));
+//     		return $this->redirect($this->generateUrl('alumno_show', array('id' => $entity->getId())));
+    	}
+    
+    	return $this->render('UserBundle:Alumno:new.html.twig', array(
+    			'entity' => $entity,
+    			'form'   => $form->createView(),
+    	));
+    }
+    
+    /**
+     * Finds and displays a Alumno entity.
+     *  
+     * routing/alumno.yml
+	 * name: alumno_show
+	 * pattern: /alumno/{id}/show
+     */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('UserBundle:Alumno')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Alumno entity.');
         }
-
-        return $this->render('UserBundle:Alumno:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        $deleteForm = $this->createDeleteForm($id);
+        return $this->render('UserBundle:Alumno:show.html.twig', array(
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),        
+        	));
     }
 
     /**
      * Displays a form to edit an existing Alumno entity.
-     *
+     * 
+     * routing/alumno.yml
+	 * name: alumno_edit
+	 * pattern: /alumno/{id}/edit
      */
     public function editAction($id)
     {
@@ -154,13 +163,18 @@ class AlumnoController extends Controller
         	$encoder = $this->get('security.encoder_factory')->getEncoder($entity);
         	$passRAW = $entity->getPassword();
         	$passCOD = $encoder->encodePassword($passRAW, $entity->getSalt());
-        	$entity->setNombreCompleto($entity->getNombre().' '.$entity->getApellidos());
-        	//si el password esta vacio no se cambia nada
+        	
+        	//si se cambia el nombre o el apellido se actualiza.
+        	if ($editForm->getData()->getNombre() != NULL || $editForm->getData()->getApellidos() != NULL)
+        		$entity->setNombreCompleto($entity->getNombre().' '.$entity->getApellidos());
+        	
+        	//si el password no se cambia se mantiene.
         	if ($editForm->getData()->getPassword() == NULL)
          		$entity->setPassword($passOrin);
          	else 
          		$entity->setPassword($passCOD);
-			//si se pone una foto nueva se actualiza y se guarda	
+         	
+			//si se cambia la foto se actualiza.	
          	if($editForm->getData()->getFoto() != null){
          		$nombreArchivo = $editForm->getData()->getFoto()->getClientOriginalName();
          		$entity->setFoto($nombreArchivo);
@@ -174,8 +188,8 @@ class AlumnoController extends Controller
             $em->flush();
 
             //return $this->redirect($this->generateUrl('alumno_edit', array('id' => $id)));
-            $this->container->get("session")->setFlash("success", "El alumno se ha editado con exito ^^");
-            $url = $this->getRequest()->headers->get("referer");
+            $this->container->get("session")->setFlash("Exito!", "El alumno se ha editado con exito.");
+            //$url = $this->getRequest()->headers->get("referer");
             return $this->redirect($this->generateUrl('admin_index'));
         }
 
@@ -209,7 +223,7 @@ class AlumnoController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('alumno'));
+        return $this->redirect($this->generateUrl('admin_index'));
         //TODO esto falla por que hace falta un DELETE ON CASCADE..
     }
 
@@ -220,7 +234,14 @@ class AlumnoController extends Controller
             ->getForm()
         ;
     }
-	
+    
+    /**
+     * Busca una lista de alumnos a partir de una cadena dada.
+     *
+     * routing/alumno.yml
+     * name: alumno_search
+     * pattern: /alumno/search
+     */
     public function searchAction(){
     	
     	$form = $this->createForm(new SearchType());
@@ -244,9 +265,10 @@ class AlumnoController extends Controller
     }
     /**
      *  Muesta la informacion de un alumno, Datos, Informes, Puntuaciones, etc.
+     *  
+     *  routing.yml
+     *  name: alumno_details
      *  Route: /admin/{id}
-     *  Twig: UserBundle:Alumno:details.html.twig
-     *
      */
     public function AlumnoDetailsAction($id)
     {

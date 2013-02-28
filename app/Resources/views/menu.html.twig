@@ -1,61 +1,55 @@
-	<div class="accordion container span4" id="accordion2">
-	  <div class="accordion-group">
-	    <div class="accordion-heading">
-	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-	        Home
-	      </a>
-	    </div>
-	    <div id="collapseOne" class="accordion-body collapse">
-	      <div class="accordion-inner">
-	        Juegos
-	      </div>
-	      <div class="accordion-inner">
-	        Ultimas puntuaciones
-	      </div>
-	    </div>
-	  </div>
+<div class="accordion container span4" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle"  href="#"> <!-- data-toggle="collapse" data-parent="#accordion2"> -->
+        Juegos - Link directo a juegos
+      </a>
+    </div>
+
 {% if is_granted('ROLE_ADMIN') %}
-	  <div class="accordion-group">
-	    <div class="accordion-heading">
-	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-	        Gestion de juegos
-	      </a>
+  	<div class="accordion-group">
+		<div class="accordion-heading">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+			Gestion de juegos
+	      	</a>
 	    </div>
 	    <div id="collapseTwo" class="accordion-body collapse">
-	      <div class="accordion-inner">
-	        las opciones
-	      </div>
+			<div class="accordion-inner">
+			las opciones
+			</div>
 	    </div>
-	  </div>
-	  <div class="accordion-group">
-	    <div class="accordion-heading">
-	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#admin">
-	        Gestion de administradores
-	      </a>
-	    </div>
-	    <div id="admin" class="accordion-body collapse">
-	      <div class="accordion-inner">
-	        las opciones
-	      </div>
-	    </div>
-	  </div>
-	  <div class="accordion-group">
-	    <div class="accordion-heading">
-	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-	        Gestion de alumnos
-	      </a>
-	    </div>
-	    <div id="collapseThree" class="accordion-body collapse">
-	      <div class="accordion-inner">
-	        <i class="icon-plus"></i> <a id="new" href="#">Crear alumno</a>
-	      </div>
-	      <div class="accordion-inner">
+  	</div>
+  	<div class="accordion-group">
+    	<div class="accordion-heading">
+      		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#admin">
+			Gestion de administradores
+      		</a>
+    	</div>
+    	<div id="admin" class="accordion-body collapse">
+      		<div class="accordion-inner">
+			las opciones
+      		</div>
+   	 	</div>
+  	</div>
+  	<div class="accordion-group">
+    	<div class="accordion-heading">
+      		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+        	Gestion de alumnos
+      		</a>
+    	</div>
+    	<div id="collapseThree" class="accordion-body collapse">
+      		<div class="accordion-inner">
+        		<i class="icon-plus"></i> <a id="new" href="#">Crear alumno</a>
+      		</div>
+      		<div class="accordion-inner">
 				{% render('UserBundle:Alumno:search') %}	      
-	      </div>
-	    </div>
-	  </div>
+      		</div>
+    	</div>
+  	</div>
 {% endif %}
-	</div>
+
+</div>
+
 <script type="text/javascript">
 $('#new').click(function () {
 	$('#content').load("{{ path('alumno_new') }}");
