@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "::index.html.twig" %}
 
 {% block content %}
@@ -34,3 +35,37 @@
     </div>
 </div>
 {% endblock %}
+=======
+{{ entity.nombreCompleto }}
+
+<div class="container">
+    <ul id="tab" class="nav nav-tabs">
+        <li class="active">
+            <a href="#tab1" data-toggle="tab">Datos</a>
+        </li>
+        <li>
+            <a href="#tab2" data-toggle="tab">Informes</a>
+        </li>
+        <li>
+            <a href="#tab3" data-toggle="tab">Puntuaciones</a>
+        </li>
+        <li>
+            <a href="#tab4" data-toggle="tab">Graficas</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="tab1">
+            {% render "UserBundle:Alumno:show" with {'id' : entity.id} %}          
+        </div>
+        <div class="tab-pane fade" id="tab2">
+            {% render "AdminBundle:Informe:index" with {'id' : entity.id } %}
+        </div>
+        <div class="tab-pane fade" id="tab3">
+            falta crud de puntuaciones
+        </div>
+        <div class="tab-pane fade" id="tab4">
+            usar highchartsPHP -> https://github.com/ghunti/HighchartsPHP
+        </div>
+    </div>
+</div>
+>>>>>>> branch 'master' of git@github.com:kabbuto17/edukagames
