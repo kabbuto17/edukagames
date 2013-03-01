@@ -9,3 +9,7 @@ AdminBundle_profesor:
 AdminBundle_informe:
         resource: "@AdminBundle/Resources/config/routing/informe.yml"
         prefix:   /informe
+        
+puntuaciones:
+    pattern: /puntuaciones/{id}
+    defaults: { _controller: 'AdminBundle:Puntuaciones:show' }
