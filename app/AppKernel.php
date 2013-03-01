@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Edukagames\AdminBundle\AdminBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
+        	new Ob\HighchartsBundle\ObHighchartsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

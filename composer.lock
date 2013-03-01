@@ -1,5 +1,5 @@
 {
-    "hash": "e531eba0e3f8247a57fbd0c07d8d48b6",
+    "hash": "5ea09daf8e480bad72cc6217c3c43b1f",
     "packages": [
         {
             "name": "doctrine/common",
@@ -759,17 +759,64 @@
             "time": "2012-08-29 04:53:20"
         },
         {
-            "name": "raulfraile/ladybug",
-            "version": "v0.5",
+            "name": "ob/highcharts-bundle",
+            "version": "dev-master",
+            "target-dir": "Ob/HighchartsBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/raulfraile/Ladybug",
-                "reference": "v0.5"
+                "url": "https://github.com/marcaube/ObHighchartsBundle.git",
+                "reference": "6d3927210c5e055f9704e44b7e18efe21b3b8a74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/raulfraile/Ladybug/zipball/v0.5",
-                "reference": "v0.5",
+                "url": "https://api.github.com/repos/marcaube/ObHighchartsBundle/zipball/6d3927210c5e055f9704e44b7e18efe21b3b8a74",
+                "reference": "6d3927210c5e055f9704e44b7e18efe21b3b8a74",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/symfony": "2.*",
+                "zendframework/zend-json": "2.0.*"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Ob\\HighchartsBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Marc Aubé"
+                }
+            ],
+            "description": "Symfony2 Bundle that ease the use of highcharts to display rich graph and charts in your app",
+            "homepage": "https://github.com/marcaube/ObHighchartsBundle",
+            "keywords": [
+                "Symfony2",
+                "chart",
+                "charting",
+                "charts",
+                "graph",
+                "graphs",
+                "highcharts",
+                "marcaube",
+                "ob"
+            ],
+            "time": "2013-01-31 14:47:41"
+        },
+        {
+            "name": "raulfraile/ladybug",
+            "version": "v0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raulfraile/Ladybug.git",
+                "reference": "v0.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raulfraile/Ladybug/zipball/v0.6",
+                "reference": "v0.6",
                 "shasum": ""
             },
             "require": {
@@ -783,6 +830,7 @@
                     "Ladybug": "lib/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -800,7 +848,7 @@
                 "ladybug",
                 "tree"
             ],
-            "time": "2012-02-25 13:31:12"
+            "time": "2013-01-31 14:38:18"
         },
         {
             "name": "raulfraile/ladybug-bundle",
@@ -1312,12 +1360,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig-extensions.git",
-                "reference": "5c2d515d4624bdd588226d688173cf0399a4d8cf"
+                "reference": "921799aaf05f88af749d72912d6b154dfeb9a03e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig-extensions/zipball/5c2d515d4624bdd588226d688173cf0399a4d8cf",
-                "reference": "5c2d515d4624bdd588226d688173cf0399a4d8cf",
+                "url": "https://api.github.com/repos/fabpot/Twig-extensions/zipball/921799aaf05f88af749d72912d6b154dfeb9a03e",
+                "reference": "921799aaf05f88af749d72912d6b154dfeb9a03e",
                 "shasum": ""
             },
             "require": {
@@ -1334,7 +1382,7 @@
                     "Twig_Extensions_": "lib/"
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1351,7 +1399,7 @@
                 "i18n",
                 "text"
             ],
-            "time": "2013-01-04 16:55:05"
+            "time": "2013-02-28 14:21:30"
         },
         {
             "name": "twig/twig",
@@ -1401,6 +1449,82 @@
                 "templating"
             ],
             "time": "2013-02-09 18:21:53"
+        },
+        {
+            "name": "zendframework/zend-json",
+            "version": "2.0.7",
+            "target-dir": "Zend/Json",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendJson.git",
+                "reference": "release-2.0.7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendJson/zipball/release-2.0.7",
+                "reference": "release-2.0.7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-stdlib": "self.version"
+            },
+            "suggest": {
+                "zendframework/zend-server": "Zend\\Server component"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Json\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides convenience methods for serializing native PHP to JSON and decoding JSON to native PHP",
+            "keywords": [
+                "json",
+                "zf2"
+            ],
+            "time": "2013-01-29 11:33:51"
+        },
+        {
+            "name": "zendframework/zend-stdlib",
+            "version": "2.0.7",
+            "target-dir": "Zend/Stdlib",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendStdlib.git",
+                "reference": "release-2.0.7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendStdlib/zipball/release-2.0.7",
+                "reference": "release-2.0.7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "pecl-weakref": "Implementation of weak references for Stdlib\\CallbackHandler"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Stdlib\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "keywords": [
+                "stdlib",
+                "zf2"
+            ],
+            "time": "2013-01-22 20:50:52"
         }
     ],
     "packages-dev": null,
@@ -1413,6 +1537,7 @@
         "kriswallsmith/assetic": 20,
         "doctrine/data-fixtures": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
-        "raulfraile/ladybug-bundle": 20
+        "raulfraile/ladybug-bundle": 20,
+        "ob/highcharts-bundle": 20
     }
 }

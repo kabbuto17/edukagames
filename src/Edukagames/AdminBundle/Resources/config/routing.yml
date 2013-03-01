@@ -13,3 +13,7 @@ AdminBundle_informe:
 puntuaciones:
     pattern: /puntuaciones/{id}
     defaults: { _controller: 'AdminBundle:Puntuaciones:show' }
+    
+grafica:
+    pattern: /grafica
+    defaults: { _controller: 'AdminBundle:Grafica:chart' }
