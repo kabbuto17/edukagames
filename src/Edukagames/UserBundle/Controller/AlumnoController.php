@@ -263,7 +263,6 @@ class AlumnoController extends Controller
         		'form'   => $form->createView(),
         		));	
     }
-<<<<<<< HEAD
     /**
      *  Muesta la informacion de un alumno, Datos, Informes, Puntuaciones, etc.
      *  
@@ -280,20 +279,7 @@ class AlumnoController extends Controller
         }
         return $this->render('UserBundle:Alumno:details.html.twig', array(
                 'entity'    => $entity));
-=======
-    /**
-     *  Muesta la informacion de un alumno, Datos, Informes, Puntuaciones, etc.
-     *  Route: /admin/{id}
-     *  Twig: UserBundle:Alumno:details.html.twig
-     *
-     */
-    public function AlumnoDetailsAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('UserBundle:Alumno')->find($id);
-        return $this->render('UserBundle:Alumno:details.html.twig', array(
-                'entity'    => $entity));
->>>>>>> branch 'master' of git@github.com:kabbuto17/edukagames
+
     }
 }
 //TODO editar al guardar cambios hay que mirar a donde redirije, se podria cambiar y poner un flush emergente de que se creo correctamente.
