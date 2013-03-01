@@ -39,7 +39,7 @@
     	</div>
     	<div id="collapseThree" class="accordion-body collapse">
       		<div class="accordion-inner">
-        		<i class="icon-plus"></i> <a id="new" href="#">Crear alumno</a>
+        		<i class="icon-plus"></i> <a id="new" href="{{ path('alumno_new') }}">Crear alumno</a>
       		</div>
       		<div class="accordion-inner">
 				{% render('UserBundle:Alumno:search') %}	      
@@ -49,9 +49,9 @@
 {% endif %}
 
 </div>
-
-<script type="text/javascript">
-$('#new').click(function () {
-	$('#content').load("{{ path('alumno_new') }}");
-});
-</script>
+</div>
+{# <script type="text/javascript">#}
+{# $('#new').click(function () {#}
+{# 	$('#content').load("{{ path('alumno_new') }}");#}
+{# });#}
+{# </script>#}

@@ -80,7 +80,7 @@ class AlumnoController extends Controller
     		$em->persist($entity);
     		$em->flush();
 
-    		$this->container->get("session")->setFlash("Exito!", "El alumno se ha creado con exito.");
+    		$this->container->get("session")->setFlash("success", "El alumno se ha creado con exito.");
     		return $this->redirect($this->generateUrl('admin_index'));
 //     		return $this->redirect($this->generateUrl('alumno_show', array('id' => $entity->getId())));
     	}
@@ -274,6 +274,9 @@ class AlumnoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('UserBundle:Alumno')->find($id);
+        if (!$entity) {
+        	throw $this->createNotFoundException('Unable to find Alumno entity.');
+        }
         return $this->render('UserBundle:Alumno:details.html.twig', array(
                 'entity'    => $entity));
     }

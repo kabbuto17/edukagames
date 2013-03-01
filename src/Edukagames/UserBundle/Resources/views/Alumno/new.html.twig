@@ -1,36 +1,14 @@
-{#
- <h1>Alumno creation</h1>
+{% extends "::index.html.twig" %}
 
- <form action="{{ path('alumno_create') }}" method="post" {{ form_enctype(form) }}>
- {{ ld (form.userName) }}
-	   	{{ form_errors(form.userName) }}
- 		{{ form_errors(form.password.Contrasena) }}
- 		{{ form_errors(form.password.Repita_contrasena) }}
-     {{ form_widget(form) }}
-     <p>
-         <button type="submit">Create</button>
-     </p>
- </form>
-
- <ul class="record_actions">
-     <li>
-         <a href="{{ path('alumno') }}">
-             Back to the list
-         </a>
-     </li>
- </ul>
-
-
-{% extends "::base.html.twig" %}
-
-{% block body %}
-#}
+{% block content %}
 	<form action="{{ path('alumno_create') }}" method="post" {{ form_enctype(form) }}>
 	{% if not(form.getVars().valid)  %}
  	   <div id="errors" class="alert alert-error"> 
-	   	{{ form_errors(form.userName) }}
+ 		{{ form_errors(form) }}
+ 	   	{{ form_errors(form.userName) }}
  		{{ form_errors(form.password.Contrasena) }}
- 		{{ form_errors(form.password.Repita_contrasena) }}
+ 		{{ form_errors(form.password.Repita_contrasena) }} 
+ 
 	   </div>
 	{% endif %}
    	{{ form_widget(form.userName, { 'attr': {'placeholder': 'Nombre de Usuario'} }) }}<br />
@@ -48,11 +26,4 @@
  <br /> 
   <button type="submit">Crear Usuario</button>
  </form>
-  <ul class="record_actions">
-     <li>
-         <a href="{{ path('alumno') }}">
-             Volver a la lista de alumnos
-         </a>
-     </li>
- </ul>
-{# {% endblock %} #}
+{% endblock %}

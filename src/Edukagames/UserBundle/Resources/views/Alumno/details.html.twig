@@ -1,5 +1,8 @@
-{{ entity.nombreCompleto }}
+{% extends "::index.html.twig" %}
 
+{% block content %}
+
+<h2>{{ entity.nombreCompleto }}</h2>
 <div class="container">
     <ul id="tab" class="nav nav-tabs">
         <li class="active">
@@ -30,3 +33,4 @@
         </div>
     </div>
 </div>
+{% endblock %}

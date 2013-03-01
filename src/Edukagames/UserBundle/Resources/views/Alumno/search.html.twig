@@ -16,9 +16,10 @@
    		      	{% endfor %}
 	       		</div>
 {#         	</div>#}
-   		</div>	
+   		</div>
+				
    		<script type="text/javascript">
-  		
+  	/**
 		$('#result').click(function (e){
 			if( $(e.target).is('a') ){
 				//alert(e.target.href);
@@ -27,7 +28,8 @@
 			}
 			return false;
    	   	});
-
+   	*/
+	
    		$('#Search_search').bind('keyup', function() { $('#search').submit(); } );
 		$('#search').submit(function(e) {
    		    var url = $(this).attr("action");
@@ -43,6 +45,7 @@
    		    return false;
    		});
 		</script> 
+	
 {#
 Borrar tiene q enviarse por post y editar ahora mismo se envia por get, 
 tiene un rule_admin para que solo entre en admin aun asi...
