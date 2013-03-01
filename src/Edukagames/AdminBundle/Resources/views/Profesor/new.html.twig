@@ -1,16 +1,12 @@
-<h1>Profesor creation</h1>
+{% extends '::index.html.twig' %}
+
+{% block content %}
+<h1>Nuevo Administrador</h1>
 
 <form action="{{ path('profesor_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
-        <button type="submit">Create</button>
+        <button type="submit">Crear</button>
     </p>
 </form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('profesor') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+{% endblock %}

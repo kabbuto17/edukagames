@@ -2,7 +2,7 @@
 
 namespace Edukagames\AdminBundle\Entity;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @UniqueEntity(fields= "nombre", message="El nombre de administrador ya esta en uso")
  */
 class Profesor implements UserInterface {
 	/**

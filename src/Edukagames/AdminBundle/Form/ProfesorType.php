@@ -11,8 +11,14 @@ class ProfesorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('password')
+            ->add('nombre' )
+            ->add('password', 'repeated', array(
+            'type' => 'password',
+            'required' => true,
+            'invalid_message' => 'Las dos contrasenas deben coincidir',
+            'first_name' =>"Contrasena",
+            'second_name' =>"Repita_contrasena",
+            'error_bubbling' => 'true'))
         ;
     }
 

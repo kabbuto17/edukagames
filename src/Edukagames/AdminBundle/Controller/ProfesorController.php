@@ -77,7 +77,7 @@ class ProfesorController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity->setSalt("aleatoriototalmuaahahahhahaha");
+            $entity->setSalt(md5(time()));
             $encoder = $enconder = $this->container->get('security.encoder_factory')->getEncoder($entity);
             $passwordEncriptado= $encoder->encodePassword($form->getData()->getPassword(),$entity->getSalt());
             $entity->setPassword($passwordEncriptado);
