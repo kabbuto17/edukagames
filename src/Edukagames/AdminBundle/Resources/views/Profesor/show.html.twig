@@ -1,5 +1,6 @@
 {% extends '::index.html.twig' %}
 {% block content %}
+
 <h1>{{ entity.nombre }}</h1>
 
 <table class="table table-striped table-condensed" cellspacing="0">
@@ -13,10 +14,9 @@
         <tr>
             <td>{{ entity.nombre }}</td>
             <td>
-            	<a href="{{ path('profesor_show', { 'id': entity.id }) }}"><i class="icon-eye-open"></i></a>
-				<a href="{{ path('profesor_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
 		        <form action="{{ path('profesor_delete', { 'id': entity.id }) }}" method="post">
 		            {{ form_widget(delete_form) }}
+		            <a href="{{ path('profesor_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
 		            <button class="btn btn-link" type="submit"><i class="icon-remove"></i></button>
 		        </form>
             </td>
@@ -24,19 +24,7 @@
     </tbody>
 </table>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('profesor') }}">
-            Volver a la lista
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('profesor_edit', { 'id': entity.id }) }}">
-           Editar
-        </a>
-    </li>
-    <li>
-
-    </li>
-</ul>
+<a href="{{ path('profesor') }}">
+	<i class="icon-arrow-left"></i> Volver a la lista
+</a>
 {% endblock %}

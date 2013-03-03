@@ -27,6 +27,7 @@ class InformeController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $informes = $em->getRepository('AdminBundle:Informe')->findBy(array('Alumno' => $id));
+        //TODO estudiar si es necesario $alumno
         $alumno = $em->getRepository('UserBundle:Alumno')->find($id);
 
         return $this->render('AdminBundle:Informe:index.html.twig', array(

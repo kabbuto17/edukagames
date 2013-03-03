@@ -1,3 +1,5 @@
+{% extends '::index.html.twig' %}
+{% block content %}
 <h1>Edicion de informe de {{ informe.alumno.nombre }}</h1>
 
 <form action="{{ path('informe_update', { 'id': informe.id }) }}" method="post" {{ form_enctype(edit_form) }}>
@@ -19,11 +21,9 @@
         <button type="submit">Editar</button>
     </p>
 </form>
+	<a href="{{ path('informe', { 'id': informe.Alumno.id }) }}">
+		<i class="icon-arrow-left"></i>Volver a la lista
+	</a>
 
-<ul class="record_actions">
-    <li>
-		<a href="{{ path('informe', { 'id': informe.Alumno.id }) }}">
-            Volver a la lista
-        </a>
-    </li>
-</ul>
+
+{% endblock %}

@@ -6,20 +6,13 @@
     {{ form_widget(edit_form) }}
     <p>
         <button type="submit">Editar</button>
-    </p>
+		<form action="{{ path('profesor_delete', { 'id': entity.id }) }}" method="post">
+			{{ form_widget(delete_form) }}
+			<button class="btn btn-danger" type="submit">Borrar</button>
+		</form>
+	</p>
 </form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('profesor') }}">
-            Volver a la lista
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('profesor_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Borrar</button>
-        </form>
-    </li>
-</ul>
+	<a href="{{ path('profesor') }}">
+		<i class="icon-arrow-left"></i> Volver a la lista
+	</a>
 {% endblock %}

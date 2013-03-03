@@ -23,7 +23,7 @@ class ProfesorController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AdminBundle:Profesor')->findAll();
-
+        
         return $this->render('AdminBundle:Profesor:index.html.twig', array(
             'entities' => $entities,
         ));
