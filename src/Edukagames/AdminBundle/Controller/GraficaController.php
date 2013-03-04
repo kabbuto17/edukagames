@@ -2,6 +2,8 @@
 
 namespace Edukagames\AdminBundle\Controller;
 
+use Edukagames\AdminBundle\Form\GraficaType;
+
 use Ladybug\Processor\Zend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,80 +16,50 @@ use Zend\Json\Expr;
  */
 class GraficaController extends Controller
 {
+	
+	public function indiceAction()
+	{
+		$em = $this->getDoctrine()->getEntityManager();
+// 		$puntuaciones = $em->getRepository('AdminBundle:Puntuacion')-> findby(array('Alumno'=>1));
+		$juego = $em->getRepository('AdminBundle:Juego')->findAll();
+		$form = $this->createForm(new GraficaType(), $juego);
+		
+		return $this->render('AdminBundle:Grafica:index.html.twig', array(
+				'form' => $form->createView()));
+	}
 
     public function chartAction()
     {
-        // Chart
         $em = $this->getDoctrine()->getEntityManager();
         $alumno = $em->getRepository('UserBundle:Alumno')->find(1);
-        $puntuacionesJuego1 = $em->getRepository('AdminBundle:Puntuacion')->findby(array('Alumno' => $alumno, 'Juego'=>1));
+        $puntuacionesJuego1 = $em->getRepository('AdminBundle:Puntuacion')->findby(array('Alumno' => $alumno, 'Juego'=>1),array('Fase' => 'ASC'));
         $puntuacionesJuego2 = $em->getRepository('AdminBundle:Puntuacion')->findby(array('Alumno' => $alumno, 'Juego'=>2));
         $puntuacionesJuego3 = $em->getRepository('AdminBundle:Puntuacion')->findby(array('Alumno' => $alumno, 'Juego'=>3));
         $puntuacionesJuego4 = $em->getRepository('AdminBundle:Puntuacion')->findby(array('Alumno' => $alumno, 'Juego'=>4));
         $puntuacionesJuego5 = $em->getRepository('AdminBundle:Puntuacion')->findby(array('Alumno' => $alumno, 'Juego'=>5));
-        $nivel = array();
-        $puntos = array();
-        foreach ($puntuacionesJuego1 as $puntuacion){        	
-        	$nivel[] = $puntuacion->getNivel();
-        	$puntos[] = $puntuacion->getPuntos();
-        }
-        
-        $series = array(
-		    array(
-		        'name'  => 'Nivel',
-		        'type'  => 'column',
-		        'color' => '#4572A7',
-		        'yAxis' => 1,
-		        'data'  => $nivel,
-		    ),
-		    array(
-		        'name'  => 'Puntos',
-		        'type'  => 'spline',
-		        'color' => '#AA4643',
-		        'data'  => $puntos,
-		    ),
-		);
-		$yData = array(
-		    array(
-		        'labels' => array(
-		            'formatter' => new Expr('function () { return this.value + " " }'),
-		            'style'     => array('color' => '#AA4643')
-		        ),
-		        'title' => array(
-		            'text'  => 'puntos',
-		            'style' => array('color' => '#AA4643')
-		        ),
-		        'opposite' => true,
-		    ),
-		    array(
-		        'labels' => array(
-		            'formatter' => new Expr('function () { return this.value + " " }'),
-		            'style'     => array('color' => '#4572A7')
-		        ),
-		        'gridLineWidth' => 0,
-		        'title' => array(
-		            'text'  => 'nivel',
-		            'style' => array('color' => '#4572A7')
-		        ),
-		    ),
-		);
-// 		$categories = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
 		
+		$datos = array();
+		//TODO sacar numero de niveles por nivel
+		for($i = 0; $i<=10; $i++){
+			$datos[$i] = 0;
+		}
+        foreach ($puntuacionesJuego1 as $puntuacion){
+			if(array_key_exists($puntuacion->getFase(), $datos)){
+				if($datos[$puntuacion->getFase()] < $puntuacion->getPuntos())
+					$datos[$puntuacion->getFase()] = $puntuacion->getPuntos();
+			}else{
+				$datos[$puntuacion->getFase()] = $puntuacion->getPuntos();
+			}
+        }
+        $series = array(
+        		array("name" => "Data Serie Name",    "data" => $datos)
+        );
+        
 		$ob = new Highchart();
-		$ob->chart->renderTo('container'); // The #id of the div where to render the chart
+		$ob->chart->renderTo('container');
 		$ob->chart->type('column');
 		$ob->title->text('Nivel frente a puntos');
-// 		$ob->xAxis->categories($categories);
-		$ob->yAxis($yData);
 		$ob->legend->enabled(false);
-		$formatter = new Expr('function () {
-		                 var unit = {
-		                     "nivel": " ",
-		                     "Puntos": " "
-		                 }[this.series.name];
-		                 return this.x + ": <b>" + this.y + "</b> " + unit;
-		             }');
-		$ob->tooltip->formatter($formatter);
 		$ob->series($series);
 		
         return $this->render('::your_template.html.twig', array(

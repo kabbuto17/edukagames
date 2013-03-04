@@ -48,6 +48,20 @@ class Juego
      * @ORM\Column(name="XML", type="string", length=255)
      */
     private $XML;
+    
+    /**
+     * @var string $nivel
+     *
+     * @ORM\Column(name="nivel", type="string", length=255)
+     */
+    private $nivel;
+    
+    /**
+     * @var string $fase
+     *
+     * @ORM\Column(name="fase", type="string", length=255)
+     */
+    private $fase;
 
     /**
      * Get id
@@ -149,5 +163,25 @@ class Juego
     public function getXML()
     {
         return $this->XML;
+    }
+    
+    public function getNivel()
+    {
+    	return $this->nivel;
+    }
+    
+    public function setNivel($nivel)
+    {
+    	$this->nivel = $nivel;
+    }
+    
+    public function getFase()
+    {
+    	return $this->fase;
+    }
+    
+    public function setFase($fase)
+    {
+    	$this->fase= $fase;
     }
 }

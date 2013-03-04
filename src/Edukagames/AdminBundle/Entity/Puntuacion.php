@@ -2,6 +2,8 @@
 
 namespace Edukagames\AdminBundle\Entity;
 
+use Symfony\Component\Validator\Constraints\Date;
+
 use Edukagames\UserBundle\Entity\Alumno;
 
 use Edukagames\AdminBundle\AdminBundle;
@@ -40,20 +42,6 @@ class Puntuacion
     private $Alumno;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="Nivel", type="integer", nullable=true)
-     */
-    private $Nivel;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="Fase", type="integer", nullable=true)
-     */
-    private $Fase;
-
-    /**
      * @var float
      *
      * @ORM\Column(name="Puntos", type="float", nullable=true)
@@ -73,8 +61,14 @@ class Puntuacion
      * @ORM\Column(name="Tiempo", type="float", nullable=true)
      */
     private $Tiempo;
-
-
+    
+    /**
+     * @var \Date $fecha
+     *
+     * @ORM\Column(name="fecha", type="datetime")
+     */
+    private $fecha;
+    
     /**
      * Get id
      *
@@ -129,52 +123,6 @@ class Puntuacion
     public function getAlumno()
     {
         return $this->Alumno;
-    }
-
-    /**
-     * Set Nivel
-     *
-     * @param integer $nivel
-     * @return Puntuacion
-     */
-    public function setNivel($nivel)
-    {
-        $this->Nivel = $nivel;
-    
-        return $this;
-    }
-
-    /**
-     * Get Nivel
-     *
-     * @return integer 
-     */
-    public function getNivel()
-    {
-        return $this->Nivel;
-    }
-
-    /**
-     * Set Fase
-     *
-     * @param integer $fase
-     * @return Puntuacion
-     */
-    public function setFase($fase)
-    {
-        $this->Fase = $fase;
-    
-        return $this;
-    }
-
-    /**
-     * Get Fase
-     *
-     * @return integer 
-     */
-    public function getFase()
-    {
-        return $this->Fase;
     }
 
     /**
@@ -244,5 +192,28 @@ class Puntuacion
     public function getTiempo()
     {
         return $this->Tiempo;
+    }
+    
+    /**
+     * Set fecha
+     *
+     * @param Date $fecha
+     * @return Puntuacion
+     */
+    public function setFecha($fecha)
+    {
+    	$this->fecha = $fecha;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get fecha
+     *
+     * @return Date
+     */
+    public function getFecha()
+    {
+    	return $this->fecha;
     }
 }

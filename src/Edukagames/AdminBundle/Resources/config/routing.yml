@@ -17,3 +17,7 @@ puntuaciones:
 grafica:
     pattern: /grafica
     defaults: { _controller: 'AdminBundle:Grafica:chart' }
+    
+grafica_index:
+    pattern: /grafica/indice
+    defaults: { _controller: 'AdminBundle:Grafica:indice' }
