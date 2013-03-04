@@ -14,12 +14,12 @@
 {% block body %}
 <div class="container-fluid">
 	<div class="row-fluid">
-
+		<div class="span3">
 			{% block menu %}
 				{% include '::menu.html.twig' %} 
 			{% endblock %}
-
-		<div class="span8">
+		</div>
+		<div class="span9">
 			{% block content %} 
 				{% include '::content.html.twig' %} 
 			{% endblock %}
