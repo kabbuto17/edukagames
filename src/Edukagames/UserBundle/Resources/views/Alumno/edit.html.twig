@@ -27,7 +27,9 @@
 
 {% block body %}
 #}
-{% if is_granted('ROLE_ADMIN') %}
+{% extends '::index.html.twig' %}
+{% block content %}
+
    	<form action="{{ path('alumno_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
 	{% if not(edit_form.getVars().valid)  %}
  	   <div id="errors" class="alert alert-error"> 
@@ -39,20 +41,23 @@
  		{{ form_errors(edit_form.foto) }}
 	   </div>
 	{% endif %}
-   	Nombre de Usuario:{{ form_widget(edit_form.userName, { 'attr': {'placeholder': 'Nombre de Usuario'} }) }}<br />
-   	Contraseña: {{ form_widget(edit_form.password.Contrasena, { 'attr': {'placeholder': 'Password'} }) }}
-   	{{ form_widget(edit_form.password.Repita_contrasena, { 'attr': {'placeholder': 'Repita el password'} }) }}
-   	<span class="help-block">Si dejas las contraseñas en blanco no se modificaran.</span><br />
+	<div>
+	   	Nombre de Usuario:{{ form_widget(edit_form.userName, { 'attr': {'placeholder': 'Nombre de Usuario'} }) }}<br />
+	   	Contraseña: {{ form_widget(edit_form.password.Contrasena, { 'attr': {'placeholder': 'Password'} }) }}
+	   	{{ form_widget(edit_form.password.Repita_contrasena, { 'attr': {'placeholder': 'Repita el password'} }) }}
+	   	<a id="tooltip" href="#" rel="tooltip" title="Si dejas las contrase�as en blanco no se modificaran."><i class="icon-info-sign"></i></a>
+	</div>
 
-  	Nombre: {{ form_widget(edit_form.nombre, { 'attr': {'placeholder': 'Nombre'} }) }}
+
+   	Nombre: {{ form_widget(edit_form.nombre, { 'attr': {'placeholder': 'Nombre'} }) }}
    	{{ form_widget(edit_form.apellidos, { 'attr': {'placeholder': 'Apellidos'} }) }}<br />
     Diagnostico: {{ form_widget(edit_form.diagnostico, { 'attr': {'placeholder': 'Diagnostico'} }) }}<br />
   	Curso: {{ form_widget(edit_form.curso, { 'attr': {'placeholder': 'Curso'} }) }}<br />
-    Fecha Nacimiento: <br/>{{ form_widget(edit_form.fechaNacimiento.day, {'attr': {'class': 'span1'} }) }}
-					   {{ form_widget(edit_form.fechaNacimiento.month, {'attr': {'class': 'span1'} }) }}
-					   {{ form_widget(edit_form.fechaNacimiento.year, {'attr': {'class': 'span1'} }) }}<br />
+    <div class="span3">Fecha Nacimiento: {{ form_widget(edit_form.fechaNacimiento.day, {'attr': {'class': 'span5'} }) }}
+					   {{ form_widget(edit_form.fechaNacimiento.month, {'attr': {'class': 'span5'} }) }}
+					   {{ form_widget(edit_form.fechaNacimiento.year, {'attr': {'class': 'span5'} }) }}</div><br />
 	{% if (entity.foto == 'defaultprofile.png') %}
-		<img alt="" width="150" src="{{ asset('bundles/user/img/defaultprofile.png') }}">
+		<img alt="" width="150" src="{{ asset('bundles/defaultprofile.png') }}">
 	{% else %}				   
  		<img alt="" width="150" src="{{ asset('uploads/'~entity.id~'/img/'~entity.foto) }}">
     {% endif %}
@@ -61,49 +66,17 @@
  <br /> 
   <button type="submit">Editar Alumno</button>
  </form>
-
-<!-- <ul class="record_actions"> -->
-<!--     <li> -->
-{#        <a href="{{ path('alumno') }}">#}
-<!--             Back to the list -->
-<!--         </a> -->
-<!--     </li> -->
-<!--     <li> -->
         <form action="{{ path('alumno_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
             <button class="btn-danger" type="submit">Borrar Alumno</button>
         </form>
-<!--     </li> -->
-<!-- </ul> -->
-{% endif %}
-{# {% else %}#}
-{# 	<form action="{{ path('alumno_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>#}
-{# 	{% if not(edit_form.getVars().valid)  %}#}
-{#  	   <div id="errors" class="alert alert-error"> #}
-{#  	   	{{ form_errors(edit_form.nombre) }}#}
-{#  	   	{{ form_errors(edit_form.apellidos) }}#}
-{# 	   	{{ form_errors(edit_form.userName) }}#}
-{#  		{{ form_errors(edit_form.password.Contrasena) }}#}
-{#  		{{ form_errors(edit_form.password.Repita_contrasena) }}#}
-{#  		{{ form_errors(edit_form.foto) }}#}
-{# 	   </div>#}
-{# 	{% endif %}#}
-{#    	Nombre de Usuario: {{ form_widget(edit_form.userName, { 'attr': {'disabled':'true', 'placeholder': 'Nombre de Usuario'} }) }}<br />#}
-{#    	Contraseña: {{ form_widget(edit_form.password.Contrasena, { 'attr': {'placeholder': 'Password'} }) }}#}
-{#    	{{ form_widget(edit_form.password.Repita_contrasena, { 'attr': {'placeholder': 'Repita el password'} }) }}<br />#}
-
-{#   	Nombre: {{ form_widget(edit_form.nombre, { 'attr': {'disabled':'true', 'placeholder': 'Nombre'} }) }}#}
-{#    	{{ form_widget(edit_form.apellidos, { 'attr': {'disabled':'true', 'placeholder': 'Apellidos'} }) }}<br />#}
-   	
-{#    	{% if (entity.foto == 'defaultprofile.png') %}#}
-{# 		<img alt="" src="{{ asset('bundles/user/img/defaultprofile.png') }}">#}
-{# 	{% else %}				   #}
-{#  		<img alt="" src="{{ asset('bundles/user/img/'~entity.id~'/'~entity.foto) }}">#}
-{#     {% endif %}		   #}
-{# 	{{ form_widget(edit_form.foto) }}#}
-{#    {{ form_widget(edit_form._token) }}#}
-{#  <br /> #}
-{#   <button type="submit">Editar Usuario</button>#}
-{#  </form>#}
-{# {% endif %}
-{% endblock %} #}
+<<script type="text/javascript">
+<!--
+$(document).ready(function () {
+    $("#tooltip").tooltip({
+      'selector': '',
+      'placement': 'right'
+    });
+  });
+</script>
+{% endblock %}

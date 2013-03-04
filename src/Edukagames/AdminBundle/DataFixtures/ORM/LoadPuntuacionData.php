@@ -25,20 +25,19 @@ class LoadPuntuacionData implements FixtureInterface, ContainerAwareInterface {
 		$emAlumno = $this->container->get('doctrine')->getEntityManager()->getRepository('UserBundle:Alumno')->findAll();
 		foreach ($emAlumno as $alumno){
 			foreach ($emJuego as $juego) {
-				for ($i = 0; $i < 21; $i++) {
 					$puntuacionFixture = new Puntuacion();
 					$puntuacionFixture->setAlumno($alumno);
 					$puntuacionFixture->setJuego($juego);
-					$puntuacionFixture->setNivel(rand(1, 5));
-					$puntuacionFixture->setFase(rand(1, 10));
 					$puntuacionFixture->setAciertos(rand(0, 20));
 					$puntuacionFixture->setPuntos(rand(0, 100));
 					$puntuacionFixture->setTiempo((microtime(true)+rand(5, 240)) - microtime(true)); //20.08 segundos.
+					$puntuacionFixture->setFecha(new \DateTime('now'));
 					
 					$manager->persist($puntuacionFixture);
-				}
-				$manager->flush();				
+				
+					
 			}
+			$manager->flush();
 		}
 	}
 	public function setContainer(ContainerInterface $container = null) {
