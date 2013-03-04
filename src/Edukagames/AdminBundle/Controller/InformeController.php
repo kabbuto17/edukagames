@@ -22,17 +22,14 @@ class InformeController extends Controller
      * Lists all Informe entities.
      *
      */
-    public function indexAction($id)
+    public function indexAction($id, $count)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $informes = $em->getRepository('AdminBundle:Informe')->findBy(array('Alumno' => $id));
-        //TODO estudiar si es necesario $alumno
-        $alumno = $em->getRepository('UserBundle:Alumno')->find($id);
+		$informes = $em->getRepository('AdminBundle:Informe')->findBy(array('Alumno' => $id), array('fecha' => 'DESC'),($count>0)?$count:null);
 
         return $this->render('AdminBundle:Informe:index.html.twig', array(
             'informes' => $informes,
-        	'alumno' => $alumno
+        	'id'	=> $id,
         ));
     }
 

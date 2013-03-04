@@ -1,4 +1,5 @@
-<a href="{{ path('informe_new', {'id' : alumno.id}) }}"><i class="icon-plus"></i> Nuevo informe</a>
+<a href="{{ path('informe_new', {'id' : id}) }}">
+<i class="icon-plus"></i> Nuevo informe</a>
 <table class="table table-striped table-condensed" cellspacing="0">
     <thead>
         <tr>
@@ -13,7 +14,7 @@
         <tr>
             <td><i class="icon-download"></i> <a target="_blank" href="{{ asset('uploads/'~informe.alumno.id~'/informes/'~informe.nombreInforme ) }}">{{ informe.nombreInforme }}</td>
             <td>{% if informe.fecha %}{{ informe.fecha|date('d-m-Y') }}{% endif %}</td>
-            <td>{{ informe.descripcion }}</td>
+            <td>{{ informe.descripcion|slice(0,26)~'...' }}</td>
             <td>
 				<a href="{{ path('informe_show', { 'id': informe.id }) }}"><i class="icon-eye-open"></i></a>
 				<a href="{{ path('informe_update', { 'id': informe.id }) }}"><i class="icon-pencil"></i></a>
@@ -23,3 +24,4 @@
     {% endfor %}
     </tbody>
 </table>
+

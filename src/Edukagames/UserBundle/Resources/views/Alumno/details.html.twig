@@ -23,7 +23,7 @@
             {% render "UserBundle:Alumno:show" with {'id' : entity.id} %}          
         </div>
         <div class="tab-pane fade" id="tab2">
-            {% render "AdminBundle:Informe:index" with {'id' : entity.id } %}
+			{% render "AdminBundle:Informe:index" with {'id' : entity.id, 'count': -1 } %}
         </div>
         <div class="tab-pane fade" id="tab3">
             {% render "AdminBundle:Puntuaciones:show" with {'id' : entity.id} %}

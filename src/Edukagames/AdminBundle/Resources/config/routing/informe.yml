@@ -1,6 +1,6 @@
 informe:
     pattern:  /{id}
-    defaults: { _controller: "AdminBundle:Informe:index" }
+    defaults: { _controller: "AdminBundle:Informe:index", count: -1 }
 
 informe_show:
     pattern:  /{id}/show
