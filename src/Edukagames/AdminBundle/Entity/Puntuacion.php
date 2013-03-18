@@ -49,12 +49,26 @@ class Puntuacion
     private $Puntos;
 
     /**
+     * @var string $dificultad
+     *
+     * @ORM\Column(name="Dificultad", type="string", length=255)
+     */
+    private $Dificultad;
+    
+    /**
      * @var integer
      *
      * @ORM\Column(name="Aciertos", type="integer", nullable=true)
      */
     private $Aciertos;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="Fallos", type="integer", nullable=true)
+     */
+    private $Fallos;
+    
     /**
      * @var float
      *
@@ -126,6 +140,29 @@ class Puntuacion
     }
 
     /**
+     * Set Dificultad
+     *
+     * @param float $dificultad
+     * @return Puntuacion
+     */
+    public function setDificultad($dificultad)
+    {
+    	$this->Dificultad = $dificultad;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get Dificultad
+     *
+     * @return float
+     */
+    public function getDificultad()
+    {
+    	return $this->Dificultad;
+    }
+    
+    /**
      * Set Puntos
      *
      * @param float $puntos
@@ -149,6 +186,16 @@ class Puntuacion
     }
 
     /**
+     * Get Aciertos
+     *
+     * @return integer
+     */
+    public function getAciertos()
+    {
+    	return $this->Aciertos;
+    }
+    
+    /**
      * Set Aciertos
      *
      * @param integer $aciertos
@@ -162,15 +209,30 @@ class Puntuacion
     }
 
     /**
-     * Get Aciertos
+     * Get Fallos
      *
      * @return integer 
      */
-    public function getAciertos()
+    public function getFalloss()
     {
-        return $this->Aciertos;
+        return $this->Fallos;
     }
 
+    /**
+     * Set Fallos
+     *
+     * @param integer $fallos
+     * @return Puntuacion
+     */
+    public function setFallos($fallos)
+    {
+    	$this->Fallos = $fallos;
+    
+    	return $this;
+    }
+    
+
+    
     /**
      * Set Tiempo
      *

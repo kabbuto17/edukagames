@@ -3,19 +3,13 @@
       		{{ form_widget(form._token) }}
       	</form>
    		<div>
-{#     	    <div class="accordion-inner span3">#}
-   		      	<div id="result">
+			<div id="result">
    		      	{% for res in result %}
    		      		<p>
 	   		      		<a href="{{ path('alumnos_details', {'id': res.id}) }}"><i class="icon-user"></i> {{ res.nombreCompleto }}</a>
-{#	   		
-	   		      		<a id="{{ res.id }}delete" href="{{ path('alumno_delete', { 'id': res.id }) }}">borrar<i class="icon-remove"></i></a>
-#}	   		
-	   		      		<a id="{{ res.id }}edit" href="{{ path('alumno_edit', { 'id': res.id }) }}">editar<i class="icon-pencil"></i></a>
    		      		</p>
    		      	{% endfor %}
-	       		</div>
-{#         	</div>#}
+			</div>
    		</div>
 				
    		<script type="text/javascript">
@@ -29,7 +23,7 @@
 			return false;
    	   	});
    	*/
-	
+	//buscar como asociar al keyCode=13 que es el enter, si pulsas enter buscara mientras no...
    		$('#Search_search').bind('keyup', function() { $('#search').submit(); } );
 		$('#search').submit(function(e) {
    		    var url = $(this).attr("action");
@@ -42,6 +36,7 @@
    		           $('#result').html($(msg).find("#result").html());
    		        }
    		    });
+   		    console.log("buscando");
    		    return false;
    		});
 		</script> 

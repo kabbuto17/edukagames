@@ -164,9 +164,7 @@ class AlumnoController extends Controller
         	$passRAW = $entity->getPassword();
         	$passCOD = $encoder->encodePassword($passRAW, $entity->getSalt());
         	
-//         	//si se cambia el nombre o el apellido se actualiza.
-//         	if ($editForm->getData()->getNombre() != NULL || $editForm->getData()->getApellidos() != NULL)
-//         		$entity->setNombreCompleto($entity->getNombre().' '.$entity->getApellidos());
+	   		$entity->setNombreCompleto($entity->getNombre().' '.$entity->getApellidos());
         	
         	//si el password no se cambia se mantiene.
         	if ($editForm->getData()->getPassword() == NULL)

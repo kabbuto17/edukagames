@@ -20,7 +20,7 @@ class LoadPuntuacionData implements FixtureInterface, ContainerAwareInterface {
 	private $container;
 	
 	public function load(ObjectManager $manager) {
-		
+		$dificultad = Array("facil","medio","dificil");
 		$emJuego = $this->container->get('doctrine')->getEntityManager()->getRepository('AdminBundle:Juego')->findAll();
 		$emAlumno = $this->container->get('doctrine')->getEntityManager()->getRepository('UserBundle:Alumno')->findAll();
 		foreach ($emAlumno as $alumno){
@@ -28,7 +28,9 @@ class LoadPuntuacionData implements FixtureInterface, ContainerAwareInterface {
 					$puntuacionFixture = new Puntuacion();
 					$puntuacionFixture->setAlumno($alumno);
 					$puntuacionFixture->setJuego($juego);
+					$puntuacionFixture->setDificultad($dificultad[rand(0, 2)]);
 					$puntuacionFixture->setAciertos(rand(0, 20));
+					$puntuacionFixture->setFallos(rand(0, 20));
 					$puntuacionFixture->setPuntos(rand(0, 100));
 					$puntuacionFixture->setTiempo((microtime(true)+rand(5, 240)) - microtime(true)); //20.08 segundos.
 					$puntuacionFixture->setFecha(new \DateTime('now'));

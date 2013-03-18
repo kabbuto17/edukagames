@@ -4,11 +4,15 @@ admin_index:
 
 AdminBundle_profesor:
         resource: "@AdminBundle/Resources/config/routing/profesor.yml"
-        prefix:   /profesor
+        prefix:   admin/profesor
 
 AdminBundle_informe:
         resource: "@AdminBundle/Resources/config/routing/informe.yml"
-        prefix:   /informe
+        prefix:   admin/informe
+
+AdminBundle_juego:
+        resource: "@AdminBundle/Resources/config/routing/juego.yml"
+        prefix:   admin/juego
         
 puntuaciones:
     pattern: /puntuaciones/{id}

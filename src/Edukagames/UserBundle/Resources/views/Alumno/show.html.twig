@@ -1,13 +1,13 @@
 <div class="row-fluid">
-	<div class="span3">
+	<div class="span2">
 		{% if(entity.foto != "defaultprofile.png") %}
 			<img alt="" src="{{ asset('uploads/'~entity.id~'/img/'~entity.foto) }}">
 		{% else %}
 			<img alt="" src="{{ asset('uploads/'~entity.foto) }}">
 		{% endif %}
 	</div>
-	<div class="span3">
-		<table class="record_properties">
+	<div class="span4">
+		<table class="table table-striped table-condensed">
 		    <tbody>
 		        <tr>
 		            <th>Nombre</th>

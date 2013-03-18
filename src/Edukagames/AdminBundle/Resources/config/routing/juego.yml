@@ -1,0 +1,30 @@
+juego:
+    pattern:  /
+    defaults: { _controller: "AdminBundle:Juego:index" }
+
+juego_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AdminBundle:Juego:show" }
+
+juego_new:
+    pattern:  /new
+    defaults: { _controller: "AdminBundle:Juego:new" }
+
+juego_create:
+    pattern:  /create
+    defaults: { _controller: "AdminBundle:Juego:create" }
+    requirements: { _method: post }
+
+juego_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AdminBundle:Juego:edit" }
+
+juego_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AdminBundle:Juego:update" }
+    requirements: { _method: post }
+
+juego_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AdminBundle:Juego:delete" }
+    requirements: { _method: post }

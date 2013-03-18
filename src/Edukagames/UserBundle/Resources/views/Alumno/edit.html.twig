@@ -48,10 +48,9 @@
 	   	<a id="tooltip" href="#" rel="tooltip" title="Si dejas las contraseñas en blanco no se modificaran."><i class="icon-info-sign"></i></a>
 	</div>
 
-
    	Nombre: {{ form_widget(edit_form.nombre, { 'attr': {'placeholder': 'Nombre'} }) }}
    	{{ form_widget(edit_form.apellidos, { 'attr': {'placeholder': 'Apellidos'} }) }}<br />
-    Diagnostico: {{ form_widget(edit_form.diagnostico, { 'attr': {'placeholder': 'Diagnostico'} }) }}<br />
+    Diagnostico: {{ form_widget(edit_form.diagnostico, { 'attr': {'placeholder': 'Diagnostico', 'maxlength':255, 'row':6, 'cols':40} }) }}<br />
   	Curso: {{ form_widget(edit_form.curso, { 'attr': {'placeholder': 'Curso'} }) }}<br />
     <div class="span3">Fecha Nacimiento: {{ form_widget(edit_form.fechaNacimiento.day, {'attr': {'class': 'span5'} }) }}
 					   {{ form_widget(edit_form.fechaNacimiento.month, {'attr': {'class': 'span5'} }) }}

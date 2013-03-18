@@ -18,22 +18,15 @@ class LoadJuegoData implements FixtureInterface, ContainerAwareInterface {
 	public function load(ObjectManager $manager) {
 		
 		for ($i = 1; $i <= 5; $i++) {
-			for($j = 1; $j <= 5; $j++){
-				for($k = 1; $k <= 5; $k++){
-					$juegoFixture = new Juego();
-					$juegoFixture->setNombre('Juego'.$i);
-					$juegoFixture->setDescripcion('Descripcion del juego');
-					$juegoFixture->setImagen('Defaultprofile.png');
-					$juegoFixture->setXML('Juego'.$i.'.xml');
-					$juegoFixture->setNivel('Nivel'.$j);
-					$juegoFixture->setFase('Fase'.$k);
-					$manager->persist($juegoFixture);
-					
-				}
-			}
-			$manager->flush();
+			$juegoFixture = new Juego();
+			$juegoFixture->setNombre('Juego'.$i);
+			$juegoFixture->setDescripcion('Descripcion del juego'.$i.'.');
+			$juegoFixture->setImagen('Defaultprofile.png');
+			$juegoFixture->setXML('Juego'.$i.'.xml');
+			
+			$manager->persist($juegoFixture);
 		}
-		
+		$manager->flush();
 	}
 	public function setContainer(ContainerInterface $container = null) {
 		$this->container = $container;
