@@ -1,6 +1,6 @@
 security:
     encoders:
-        Edukagames\UserBundle\Entity\Alumno:  { algorithm: sha512, iterations: 10 }
+        Edukagames\UserBundle\Entity\Alumno: { algorithm: md5, iterations: 1,  encode-as-base64: false }
         Edukagames\AdminBundle\Entity\Profesor: { algorithm: sha512, iterations: 10 }
 
     role_hierarchy:

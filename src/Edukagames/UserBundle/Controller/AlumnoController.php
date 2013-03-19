@@ -2,6 +2,8 @@
 
 namespace Edukagames\UserBundle\Controller;
 
+use Symfony\Component\Security\Core\Encoder\EncoderFactory;
+
 use Edukagames\UserBundle\Util\SaveEraseFile;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -69,17 +71,21 @@ class AlumnoController extends Controller
     
     	if ($form->isValid()) {
     		$em = $this->getDoctrine()->getManager();
+    		//$encoder = $this->container->get('acme.test.sha256salted_encoder')->getEncoder($user);
+    		//$encoder = $this->container->get('edukagames.user.md5salt_encoder')->getEncoder($entity);
     		$encoder = $this->get('security.encoder_factory')->getEncoder($entity);
     		$entity->setSalt(md5(time()));
+    		//$entity->setSalt("");
     		$passRAW = $entity->getPassword();
-    		$passCOD = $encoder->encodePassword($passRAW, $entity->getSalt());
+    		//$passCOD = md5($passRAW);
+    		//$passCOD = $encoder->encodePassword($passRAW,"");// $entity->getSalt());
+    		$passCOD = $encoder->encodePassword($passRAW,$entity->getSalt()) ;
     		$entity->setPassword($passCOD);
     		$entity->setNombreCompleto($entity->getNombre().' '.$entity->getApellidos());
     		$entity->setFoto("defaultprofile.png");
     
     		$em->persist($entity);
     		$em->flush();
-
     		$this->container->get("session")->setFlash("success", "El alumno se ha creado con exito.");
     		return $this->redirect($this->generateUrl('admin_index'));
 //     		return $this->redirect($this->generateUrl('alumno_show', array('id' => $entity->getId())));

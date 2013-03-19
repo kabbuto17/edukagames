@@ -20,8 +20,7 @@ class LoadAlumnoData implements FixtureInterface, ContainerAwareInterface {
 
 			$pwd = 'alumno' . $i;
 			$salt = md5(time());
-			$enconder = $this->container->get('security.encoder_factory')
-					->getEncoder($alumnoFixture);
+			$enconder = $this->container->get('security.encoder_factory')->getEncoder($alumnoFixture);
 
 			$alumnoFixture->setNombre("alumno" . $i);
 			$alumnoFixture->setApellidos("Apellidos" . $i);

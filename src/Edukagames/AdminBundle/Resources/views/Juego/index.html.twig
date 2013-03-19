@@ -3,39 +3,39 @@
 {% block content %}
 <h1>Juego list</h1>
 
-<table class="records_list">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Imagen</th>
-            <th>Xml</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('juego_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.nombre }}</td>
-            <td>{{ entity.descripcion }}</td>
-            <td>{{ entity.imagen }}</td>
-            <td>{{ entity.XML }}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('juego_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('juego_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+ <table class="records_list">
+     <thead>
+         <tr>
+             <th>id</th>
+             <th>nombre</th>
+             <th>descripcion</th>
+             <th>imagen</th>
+             <th>xml</th>
+             <th>actions</th>
+         </tr>
+     </thead>
+     <tbody>
+     {% for entity in entities %}
+         <tr>
+             <td><a href="{{ path('juego_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+             <td>{{ entity.nombre }}</td>
+             <td>{{ entity.descripcion }}</td>
+             <td>{{ entity.imagen }}</td>
+             <td>{{ entity.xml }}</td>
+             <td>
+                 <ul>
+                     <li>
+                         <a href="{{ path('juego_show', { 'id': entity.id }) }}">show</a>
+                     </li>
+                     <li>
+                         <a href="{{ path('juego_edit', { 'id': entity.id }) }}">edit</a>
+                     </li>
+                 </ul>
+             </td>
+         </tr>
+     {% endfor %}
+     </tbody>
+ </table>
 
 <ul>
     <li>

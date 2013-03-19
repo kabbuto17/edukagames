@@ -1,6 +1,8 @@
 <?php
 
 namespace Edukagames\UserBundle\Entity;
+use Symfony\Component\Validator\Constraints\Date;
+
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
@@ -296,9 +298,7 @@ class Alumno implements UserInterface {
 	}
 
 	public function getEdad() {
-		$fechaActual = date("now");
-		$fechaNacimiento = $this->getFechaNacimiento();
-		return ($fechaActual - $fechaNacimiento);
+		return $this->getFechaNacimiento()->diff(new \DateTime("now"))->format('%y');
 	}
 	public function getRoles() {
 		return Array('ROLE_USER');
