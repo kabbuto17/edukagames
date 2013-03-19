@@ -1,7 +1,8 @@
-      	<form id="search"  action={{ path('alumno_search') }} method="post" {{ form_enctype(form) }}>
-      		{{ form_widget(form.search, { 'attr': {'placeholder': 'Buscar'} }) }}
-      		{{ form_widget(form._token) }}
-      	</form>
+	      	<form class="form-search" id="search"  action={{ path('alumno_search') }} method="post" {{ form_enctype(form) }}>
+	      		{{ form_widget(form.search, { 'attr': {'placeholder': 'Buscar', 'class':'span9'} }) }}
+	      		{{ form_widget(form._token) }}
+	      		<button class="btn" type="submit"><i class="icon-search"></i></button>
+	      	</form>
    		<div>
 			<div id="result">
    		      	{% for res in result %}
@@ -24,8 +25,9 @@
    	   	});
    	*/
 	//buscar como asociar al keyCode=13 que es el enter, si pulsas enter buscara mientras no...
-   		$('#Search_search').bind('keyup', function() { $('#search').submit(); } );
+   		$('#Search_search').bind('keyup', function(key) {if(key.keyCode==13)  $('#search').submit(); });//{ $('#search').submit(); } );
 		$('#search').submit(function(e) {
+			$('#result').html("Buscando... <img src='http://localhost/edukagames/web/bundles/user/img/ajax-loader.gif'>");
    		    var url = $(this).attr("action");
    		    $.ajax({
    		        type: "POST",
@@ -33,10 +35,15 @@
    		        data: $(this).serialize(),
    		        dataType: "html",
    		        success: function(msg){
-   		           $('#result').html($(msg).find("#result").html());
+   	   		       // console.log($(msg).find("#result").html().trim());
+   	   		       if($(msg).find("#result").html().trim() == ""){
+   	   	   		       $('#result').html("No hay coincidencias");
+   	   	   		   }else{
+   	   	   	   		   $('#result').html($(msg).find("#result").html());
+   	   	   		   }
    		        }
    		    });
-   		    console.log("buscando");
+   		   // console.log("buscando");
    		    return false;
    		});
 		</script> 
