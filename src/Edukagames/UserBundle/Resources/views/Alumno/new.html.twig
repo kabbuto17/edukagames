@@ -1,13 +1,15 @@
 {% extends "::index.html.twig" %}
-
 {% block content %}
+	<h1>Nuevo Alumno</h1>
+	
 	<form action="{{ path('alumno_create') }}" method="post" {{ form_enctype(form) }}>
 	{% if not(form.getVars().valid)  %}
  	   <div id="errors" class="alert alert-error"> 
  		{{ form_errors(form) }}
  	   	{{ form_errors(form.userName) }}
  		{{ form_errors(form.password.Contrasena) }}
- 		{{ form_errors(form.password.Repita_contrasena) }} 
+ 		{{ form_errors(form.password.Repita_contrasena) }}
+ 		{{ form_errors(form.fechaNacimiento) }} 
  
 	   </div>
 	{% endif %}
@@ -17,13 +19,24 @@
 
   	{{ form_widget(form.nombre, { 'attr': {'placeholder': 'Nombre'} }) }}
    	{{ form_widget(form.apellidos, { 'attr': {'placeholder': 'Apellidos'} }) }}<br />
-   	{{ form_widget(form.diagnostico, { 'attr': {'placeholder': 'Diagnostico', 'class': 'span6', 'resize': 'none'} }) }}<br />
+   	{{ form_widget(form.diagnostico, { 'attr': {'placeholder': 'Diagnostico','maxlength':255, 'style': 'width:430px; height:110px'} }) }}<br />
   	{{ form_widget(form.curso, { 'attr': {'placeholder': 'Curso'} }) }}<br />
-   Fecha Nacimiento <br/>{{ form_widget(form.fechaNacimiento.day, {'attr': {'class': 'span1'} }) }}
-					   {{ form_widget(form.fechaNacimiento.month, {'attr': {'class': 'span1'} }) }}
-					   {{ form_widget(form.fechaNacimiento.year, {'attr': {'class': 'span1'} }) }}
-   {{ form_widget(form._token) }}
+	{{ form_widget(form.fechaNacimiento, { 'attr': {'placeholder': 'Fecha de Nacimiento'} }) }}
+	<a id="tooltip2" href="#" rel="tooltip" title="El formato de la fecha es dd-mm-yyyy"><i class="icon-info-sign"></i></a>
+    
+    {{ form_widget(form._token) }}
  <br /> 
   <button type="submit">Crear Usuario</button>
  </form>
+ 
+<script type="text/javascript">
+$(document).ready(function () {
+	$('*[id*=tooltip]:visible').each(function() {
+	    $(this).tooltip({
+	      'selector': '',
+	      'placement': 'right'
+	    });
+    });
+});
+</script>
 {% endblock %}

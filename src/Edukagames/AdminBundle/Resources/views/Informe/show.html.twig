@@ -20,13 +20,13 @@
             	<form action="{{ path('informe_delete', { 'id': informe.id }) }}" method="post">
             		{{ form_widget(delete_form) }}
             		<a href="{{ path('informe_update', { 'id': informe.id }) }}"><i class="icon-pencil"></i></a>
-            		<button class="btn btn-link" type="submit"><i class="icon-remove"></i></button>
-        		</form>
+            		<button class="btn btn-link" type="submit" onclick="return confirm('¿Esta seguro que desea eliminarlo?')"><i class="icon-remove"></i></button>
+          		</form>
         	</td>
         </tr>
     </tbody>
 </table>
-	<a href="{{ path('informe', { 'id': informe.Alumno.id }) }}">
+	<a href="{{ path('alumnos_details', { 'id': informe.Alumno.id }) }}">
 		<i class="icon-arrow-left"></i>Volver a la lista
 	</a>
 {% endblock %}

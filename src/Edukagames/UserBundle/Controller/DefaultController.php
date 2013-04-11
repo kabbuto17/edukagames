@@ -11,7 +11,7 @@ class DefaultController extends Controller
 	/**
 	 * routing.yml
 	 * name: user_index
-	 * pattern: /usuario
+	 * pattern: /home
 	 *
 	 * */
     public function indexAction()

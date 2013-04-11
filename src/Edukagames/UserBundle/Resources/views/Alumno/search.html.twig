@@ -14,17 +14,7 @@
    		</div>
 				
    		<script type="text/javascript">
-  	/**
-		$('#result').click(function (e){
-			if( $(e.target).is('a') ){
-				//alert(e.target.href);
-				var url = e.target.href;
-			$('#content').load(url);
-			}
-			return false;
-   	   	});
-   	*/
-	//buscar como asociar al keyCode=13 que es el enter, si pulsas enter buscara mientras no...
+		//buscar como asociar al keyCode=13 que es el enter, si pulsas enter buscara mientras no...
    		$('#Search_search').bind('keyup', function(key) {if(key.keyCode==13)  $('#search').submit(); });//{ $('#search').submit(); } );
 		$('#search').submit(function(e) {
 			$('#result').html("Buscando... <img src='http://localhost/edukagames/web/bundles/user/img/ajax-loader.gif'>");
@@ -35,7 +25,6 @@
    		        data: $(this).serialize(),
    		        dataType: "html",
    		        success: function(msg){
-   	   		       // console.log($(msg).find("#result").html().trim());
    	   		       if($(msg).find("#result").html().trim() == ""){
    	   	   		       $('#result').html("No hay coincidencias");
    	   	   		   }else{
@@ -43,12 +32,6 @@
    	   	   		   }
    		        }
    		    });
-   		   // console.log("buscando");
    		    return false;
    		});
 		</script> 
-	
-{#
-Borrar tiene q enviarse por post y editar ahora mismo se envia por get, 
-tiene un rule_admin para que solo entre en admin aun asi...
-#}

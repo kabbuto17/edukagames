@@ -42,7 +42,7 @@
     <li>
         <form action="{{ path('juego_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button type="submit" onclick="return confirm('¿Esta seguro que desea eliminarlo?')">Delete</button>
         </form>
     </li>
 </ul>

@@ -10,17 +10,14 @@ logout:
 
 #pagina principal de alumno
 user_index:
-    pattern: /usuario
+    pattern: /juegos/
     defaults: { _controller: 'UserBundle:Default:index'}
 #   
 
 UserBundle_alumno:
     resource: "@UserBundle/Resources/config/routing/alumno.yml"
     prefix: /alumno
-
-
-
     
 alumnos_details:
-    pattern: /admin/{id}
-    defaults: { _controller: 'UserBundle:Alumno:AlumnoDetails' }
+    pattern: /alumno/{id}
+    defaults: { _controller: 'UserBundle:Alumno:AlumnoDetails'}

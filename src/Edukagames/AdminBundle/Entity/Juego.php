@@ -45,10 +45,16 @@ class Juego
     /**
      * @var string $XML
      *
-     * @ORM\Column(name="XML", type="string", length=255)
+     * @ORM\Column(name="XML", type="string", length=255, nullable=true)
      */
     private $XML;
-
+    
+    /**
+     * @var string $URL
+     *
+     * @ORM\Column(name="URL", type="string", length=255)
+     */
+    private $URL;
     /**
      * Get id
      *
@@ -149,5 +155,28 @@ class Juego
     public function getXML()
     {
         return $this->XML;
+    }
+    
+    /**
+     * Set URL
+     *
+     * @param string $URL
+     * @return Juego
+     */
+    public function setURL($URL)
+    {
+    	$this->URL = $URL;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get URL
+     *
+     * @return string
+     */
+    public function getURL()
+    {
+    	return $this->URL;
     }
 }

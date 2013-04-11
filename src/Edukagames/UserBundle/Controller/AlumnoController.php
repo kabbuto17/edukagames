@@ -2,6 +2,8 @@
 
 namespace Edukagames\UserBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Session\Session;
+
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 use Edukagames\UserBundle\Util\SaveEraseFile;
@@ -71,14 +73,9 @@ class AlumnoController extends Controller
     
     	if ($form->isValid()) {
     		$em = $this->getDoctrine()->getManager();
-    		//$encoder = $this->container->get('acme.test.sha256salted_encoder')->getEncoder($user);
-    		//$encoder = $this->container->get('edukagames.user.md5salt_encoder')->getEncoder($entity);
     		$encoder = $this->get('security.encoder_factory')->getEncoder($entity);
     		$entity->setSalt(md5(time()));
-    		//$entity->setSalt("");
     		$passRAW = $entity->getPassword();
-    		//$passCOD = md5($passRAW);
-    		//$passCOD = $encoder->encodePassword($passRAW,"");// $entity->getSalt());
     		$passCOD = $encoder->encodePassword($passRAW,$entity->getSalt()) ;
     		$entity->setPassword($passCOD);
     		$entity->setNombreCompleto($entity->getNombre().' '.$entity->getApellidos());
@@ -86,9 +83,8 @@ class AlumnoController extends Controller
     
     		$em->persist($entity);
     		$em->flush();
-    		$this->container->get("session")->setFlash("success", "El alumno se ha creado con exito.");
-    		return $this->redirect($this->generateUrl('admin_index'));
-//     		return $this->redirect($this->generateUrl('alumno_show', array('id' => $entity->getId())));
+    		$this->container->get("session")->setFlash("success", 'El alumno '.$entity->getNombreCompleto().' se ha creado con exito.');
+    		return $this->redirect($this->generateUrl('alumnos_details', array('id' => $entity->getId())));
     	}
     
     	return $this->render('UserBundle:Alumno:new.html.twig', array(
@@ -191,10 +187,8 @@ class AlumnoController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            //return $this->redirect($this->generateUrl('alumno_edit', array('id' => $id)));
-            $this->container->get("session")->setFlash("Exito!", "El alumno se ha editado con exito.");
-            //$url = $this->getRequest()->headers->get("referer");
-            return $this->redirect($this->generateUrl('admin_index'));
+            $this->container->get("session")->setFlash("success", 'El alumno '.$entity->getNombreCompleto().' se ha editado con exito.');
+            return $this->redirect($this->generateUrl('alumnos_details', array('id' => $entity->getId())));
         }
 
         return $this->render('UserBundle:Alumno:edit.html.twig', array(
@@ -225,6 +219,7 @@ class AlumnoController extends Controller
             
             $em->remove($entity);
             $em->flush();
+            $this->container->get("session")->setFlash("success", 'El alumno '.$entity->getNombreCompleto().' se ha borrado con exito.');
         }
 
         return $this->redirect($this->generateUrl('admin_index'));
@@ -256,8 +251,9 @@ class AlumnoController extends Controller
 		   		$em = $this->getDoctrine()->getEntityManager();
 		    	$query = $em->createQuery(
 		    			'SELECT alumno FROM UserBundle:Alumno alumno 
-		    			WHERE alumno.nombreCompleto
-		    			LIKE :search ORDER BY alumno.nombreCompleto ASC')->setParameter('search', '%'.$form["search"]->getData().'%');
+		    			WHERE alumno.nombreCompleto	LIKE :search OR
+		    			alumno.diagnostico LIKE :search
+		    			ORDER BY alumno.nombreCompleto ASC')->setParameter('search', '%'.$form["search"]->getData().'%');
 		    	$result = $query->getResult();
      		}
      	}

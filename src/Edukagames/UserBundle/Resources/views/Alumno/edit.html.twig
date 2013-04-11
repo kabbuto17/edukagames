@@ -29,53 +29,57 @@
 #}
 {% extends '::index.html.twig' %}
 {% block content %}
+	<h1>Editar Alumno</h1>	
 
    	<form action="{{ path('alumno_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-	{% if not(edit_form.getVars().valid)  %}
- 	   <div id="errors" class="alert alert-error"> 
-	   	{{ form_errors(edit_form.userName) }}
-	   	{{ form_errors(edit_form.Nombre) }}
-	   	{{ form_errors(edit_form.Apellidos) }}
- 		{{ form_errors(edit_form.password.Contrasena) }}
- 		{{ form_errors(edit_form.password.Repita_contrasena) }}
- 		{{ form_errors(edit_form.foto) }}
-	   </div>
-	{% endif %}
-	<div>
-	   	Nombre de Usuario:{{ form_widget(edit_form.userName, { 'attr': {'placeholder': 'Nombre de Usuario'} }) }}<br />
-	   	Contrase√±a: {{ form_widget(edit_form.password.Contrasena, { 'attr': {'placeholder': 'Password'} }) }}
-	   	{{ form_widget(edit_form.password.Repita_contrasena, { 'attr': {'placeholder': 'Repita el password'} }) }}
-	   	<a id="tooltip" href="#" rel="tooltip" title="Si dejas las contraseÒas en blanco no se modificaran."><i class="icon-info-sign"></i></a>
-	</div>
+		{% if not(edit_form.getVars().valid)  %}
+	 	   <div id="errors" class="alert alert-error"> 
+		   	{{ form_errors(edit_form.userName) }}
+		   	{{ form_errors(edit_form.Nombre) }}
+		   	{{ form_errors(edit_form.Apellidos) }}
+	 		{{ form_errors(edit_form.password.Contrasena) }}
+	 		{{ form_errors(edit_form.password.Repita_contrasena) }}
+	 		{{ form_errors(edit_form.foto) }}
+	 		{{ form_errors(edit_form.fechaNacimiento) }}
+		   </div>
+		{% endif %}
+		<div>
+		   	{{ form_widget(edit_form.userName, { 'attr': {'placeholder': 'Nombre de Usuario'} }) }}<br />
+		   	{{ form_widget(edit_form.password.Contrasena, { 'attr': {'placeholder': 'Password'} }) }}
+		   	{{ form_widget(edit_form.password.Repita_contrasena, { 'attr': {'placeholder': 'Repita el password'} }) }}
+		   	<a id="tooltip1" href="#" rel="tooltip" title="Si dejas las contraseÒas en blanco no se modificaran."><i class="icon-info-sign"></i></a>
+		</div>
 
-   	Nombre: {{ form_widget(edit_form.nombre, { 'attr': {'placeholder': 'Nombre'} }) }}
-   	{{ form_widget(edit_form.apellidos, { 'attr': {'placeholder': 'Apellidos'} }) }}<br />
-    Diagnostico: {{ form_widget(edit_form.diagnostico, { 'attr': {'placeholder': 'Diagnostico', 'maxlength':255, 'row':6, 'cols':40} }) }}<br />
-  	Curso: {{ form_widget(edit_form.curso, { 'attr': {'placeholder': 'Curso'} }) }}<br />
-    <div class="span3">Fecha Nacimiento: {{ form_widget(edit_form.fechaNacimiento.day, {'attr': {'class': 'span5'} }) }}
-					   {{ form_widget(edit_form.fechaNacimiento.month, {'attr': {'class': 'span5'} }) }}
-					   {{ form_widget(edit_form.fechaNacimiento.year, {'attr': {'class': 'span5'} }) }}</div><br />
-	{% if (entity.foto == 'defaultprofile.png') %}
-		<img alt="" width="150" src="{{ asset('bundles/defaultprofile.png') }}">
-	{% else %}				   
- 		<img alt="" width="150" src="{{ asset('uploads/'~entity.id~'/img/'~entity.foto) }}">
-    {% endif %}
-	{{ form_widget(edit_form.foto) }}
-    {{ form_widget(edit_form._token) }}
- <br /> 
-  <button type="submit">Editar Alumno</button>
- </form>
-        <form action="{{ path('alumno_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button class="btn-danger" type="submit">Borrar Alumno</button>
-        </form>
-<<script type="text/javascript">
-<!--
+	   	{{ form_widget(edit_form.nombre, { 'attr': {'placeholder': 'Nombre'} }) }}
+	   	{{ form_widget(edit_form.apellidos, { 'attr': {'placeholder': 'Apellidos'} }) }}<br />
+	    {{ form_widget(edit_form.diagnostico, { 'attr': {'placeholder': 'Diagnostico', 'maxlength':255, 'style': 'width:430px; height:110px'} }) }}<br />
+	  	{{ form_widget(edit_form.curso, { 'attr': {'placeholder': 'Curso'} }) }}<br />
+	    {{ form_widget(edit_form.fechaNacimiento, { 'attr': {'placeholder': 'Fecha de Nacimiento'} }) }}
+	    <a id="tooltip2" href="#" rel="tooltip" title="El formato de la fecha es dd-mm-yyyy"><i class="icon-info-sign"></i></a>
+	    <br />
+	
+	    {% if (entity.foto == 'defaultprofile.png') %}
+			<img alt="" width="150" src="{{ asset('bundles/defaultprofile.png') }}">
+		{% else %}				   
+	 		<img alt="" width="150" src="{{ asset('uploads/'~entity.id~'/img/'~entity.foto) }}">
+	    {% endif %}
+	
+	    {{ form_widget(edit_form.foto) }}<p />
+	    {{ form_widget(edit_form._token) }}
+  		<button class="btn" type="submit">Guardar Cambios</button>
+ 	    <form action="{{ path('alumno_delete', { 'id': entity.id }) }}" method="post">
+	    	{{ form_widget(delete_form) }}
+	        <button class="btn btn-danger" type="submit" onclick="return confirm('øEsta seguro que desea eliminarlo?')"><i class="icon-remove"></i> Borrar Alumno</button>
+		</form>
+ 	</form>
+<script type="text/javascript">
 $(document).ready(function () {
-    $("#tooltip").tooltip({
-      'selector': '',
-      'placement': 'right'
+	$('*[id*=tooltip]:visible').each(function() {
+	    $(this).tooltip({
+	      'selector': '',
+	      'placement': 'right'
+	    });
     });
-  });
+});
 </script>
 {% endblock %}

@@ -84,8 +84,8 @@ class ProfesorController extends Controller
 
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('profesor_show', array('id' => $entity->getId())));
+            $this->get("session")->getFlashBag()->add('success', 'Se creo correctamente el administrador "'.$entity->getNombre().'".');
+            return $this->redirect($this->generateUrl('profesor'));//, array('id' => $entity->getId())));
         }
 
         return $this->render('AdminBundle:Profesor:new.html.twig', array(
@@ -127,7 +127,7 @@ class ProfesorController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminBundle:Profesor')->find($id);
-
+		$passOrin = $entity->getPassword();
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Profesor entity.');
         }
@@ -139,12 +139,16 @@ class ProfesorController extends Controller
         if ($editForm->isValid()) {
         	$encoder = $enconder = $this->container->get('security.encoder_factory')->getEncoder($entity);
         	$passwordEncriptado= $encoder->encodePassword($editForm->getData()->getPassword(),$entity->getSalt());
-        	$entity->setPassword($passwordEncriptado);
+        	
+        	if ($editForm->getData()->getPassword() == NULL)
+        		$entity->setPassword($passOrin);
+        	else
+        		$entity->setPassword($passwordEncriptado);
         	
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('profesor_edit', array('id' => $id)));
+            $this->get("session")->getFlashBag()->add('success', 'Se edito correctamente al administrador "'.$entity->getNombre().'".');
+            return $this->redirect($this->generateUrl('profesor'));//, array('id' => $id)));
         }
 
         return $this->render('AdminBundle:Profesor:edit.html.twig', array(
@@ -174,7 +178,7 @@ class ProfesorController extends Controller
             $em->remove($entity);
             $em->flush();
         }
-
+        $this->get("session")->getFlashBag()->add('success', 'Se elimino correctamente al administrador "'.$entity->getNombre().'".');
         return $this->redirect($this->generateUrl('profesor'));
     }
 

@@ -16,7 +16,8 @@
     $real_hash = md5($username.$secretKey); 
     if($real_hash == $hash) { 
         // Send variables for the MySQL database class. 
-        $query = "SELECT `alumno`.`id`, `alumno`.`password`, `alumno`.`nombreCompleto`, `alumno`.`salt`, `juego`.`id` FROM `alumno`, `juego` WHERE `userName` = '$username' AND `juego`.`nombre` = 'Efecto Stroop'";
+        $query = "SELECT `alumno`.`id`, `alumno`.`password`, `alumno`.`nombreCompleto`, `alumno`.`salt`, `juego`.`id` 
+        FROM `alumno`, `juego` WHERE `userName` = '$username' AND `juego`.`nombre` = 'Efecto Stroop'";
         $result = mysql_query($query) or die('Query failed: ' . mysql_error());
 		$result = mysql_fetch_array($result);
 		echo $result[0].":".$result[1].":".$result[2].":".$result[3].":".$result[4];

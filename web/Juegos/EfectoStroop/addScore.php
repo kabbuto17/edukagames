@@ -18,7 +18,7 @@
     $date = mysql_real_escape_string($_GET['date']);
     
     $secretKey="EfectoStroop";
-    $real_hash = md5($puntos.$dificultad.$aciertos.$fallos.$date.$id_juego.$id_alumno.$secretKey); //falta date
+    $real_hash = md5($puntos.$dificultad.$aciertos.$fallos.$date.$id_juego.$id_alumno.$secretKey);
     if($real_hash == $hash) { 
         // Send variables for the MySQL database class.
         $query = "INSERT INTO `edukagames`.`puntuacion`". 

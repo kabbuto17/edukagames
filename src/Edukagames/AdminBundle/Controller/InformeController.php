@@ -81,8 +81,9 @@ class InformeController extends Controller
 
         	$em->persist($informe);
         	$em->flush();
-
-        	return $this->redirect($this->generateUrl('informe_show', array('id' => $entity->getId())));
+        	$this->get("session")->getFlashBag()->add('success', 'Se añadio correctamente el informe '.$filename.' al usuario '.$alumno.getNombreCompleto().'.');
+        	
+        	return $this->redirect($this->generateUrl('alumnos_details', array('id' => $id)));
         }
         
         return $this->render('AdminBundle:Informe:new.html.twig', array(
@@ -116,8 +117,8 @@ class InformeController extends Controller
 	
 	            $em->persist($informe);
 	            $em->flush();
-				
-	            return $this->redirect($this->generateUrl('informe_show', array('id' => $alumno->getId())));
+	            $this->get("session")->getFlashBag()->add('success', 'Se añadio correctamente el informe '.$filename.' al usuario '.$alumno->getNombreCompleto().'.');
+	            return $this->redirect($this->generateUrl('alumnos_details', array('id' => $id)));
         	}
         }
 
@@ -164,7 +165,8 @@ class InformeController extends Controller
 				
 				$em->persist($informe);
 				$em->flush();
-				return $this->redirect($this->generateUrl('informe_show', array('id' => $informe->getId())));
+				$this->get("session")->getFlashBag()->add('success', 'Se actualizo correctamente el informe '.$informe->getNombreInforme().' al usuario '.$informe->getAlumno()->getNombreCompleto().'.');
+				return $this->redirect($this->generateUrl('alumnos_details', array('id' => $informe->getAlumno()->getId())));
 			}
 		}
 
@@ -187,7 +189,8 @@ class InformeController extends Controller
 		SaveEraseFile::eraseFile($dir);
 		$em->remove($informe);
 		$em->flush();
-		return $this->redirect($this->generateUrl('informe', array('id' => $informe->getAlumno()->getId())));
+		$this->get("session")->getFlashBag()->add('success', 'Se elimino correctamente el informe '.$informe->getNombreInforme().' al usuario '.$informe->getAlumno()->getNombreCompleto().'.');
+		return $this->redirect($this->generateUrl('alumnos_details', array('id' => $informe->getAlumno()->getId())));
     }
 
     private function createDeleteForm($id)

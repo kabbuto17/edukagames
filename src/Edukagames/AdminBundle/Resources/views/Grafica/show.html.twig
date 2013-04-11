@@ -1,0 +1,31 @@
+<div class="accordion" id="parent_juego">
+	{% for juego in juegos %}
+	<div class="accordion-group">
+		<div class="accordion-heading">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#parent_juego" href="#_{{ juego.nombre | replace({' ':''}) }}">
+				{{ juego.nombre }}
+	      	</a>
+	    </div>
+	    <div id="_{{ juego.nombre | replace({' ':''}) }}" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<div class="accordion" id="parent_dificultad">
+					{% for dificultad in juego.Dificultad %}
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#parent_dificultad" href="#graf_{{ juego.nombre | replace({' ':''}) }}_{{ dificultad | replace({' ':''}) }}">
+								{{ dificultad }}
+					      	</a>
+					    </div>
+					    <div id="graf_{{ juego.nombre | replace({' ':''}) }}_{{ dificultad | replace({' ':''}) }}" class="accordion-body collapse">
+							<div class="accordion-inner">
+								{% render 'AdminBundle:Grafica:DrawChart' with {'div':juego.nombre|replace({' ':''})~"_"~dificultad | replace({' ':''}),'id_juego':juego.id , 'id': id, 'dificultad':dificultad} %}
+							</div>			
+					    </div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>			
+	    </div>
+	</div>
+	{% endfor %}
+ </div>

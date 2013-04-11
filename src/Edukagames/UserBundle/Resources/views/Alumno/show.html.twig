@@ -22,7 +22,7 @@
 		            <td>{{ entity.curso }}</td>
 		        </tr>
 		        <tr>
-		            <th>Fechanacimiento</th>
+		            <th>Fecha de nacimiento</th>
 		            <td>{{ entity.fechaNacimiento|date('d-m-Y') }}</td>
 		        </tr>
 		        <tr>
@@ -40,7 +40,7 @@
 		        </a>
 		        <form action="{{ path('alumno_delete', { 'id': entity.id }) }}" method="post">
 		            {{ form_widget(delete_form) }}
-		            <button class="btn btn-danger" type="submit"><i class="icon-remove"></i> Borrar Alumno</button>
+		            <button class="btn btn-danger" type="submit" onclick="return confirm('¿Esta seguro que desea eliminarlo?')"><i class="icon-remove"></i> Borrar Alumno</button>
 		        </form>
 	</div>
 	<div class="span6">
@@ -62,11 +62,11 @@
 <div class="row-fluid">
 	<div class="span5">
 		<h2>Ultimas Puntuaciones</h2> 
-		Falta por desarrollar...
+		{% render 'AdminBundle:Puntuaciones:UltimasPuntuaciones' with {'id': entity.id} %}
 	</div>
 	<div class="span7">
 		<h2>Ultimos Informes</h2>
-		{% render 'AdminBundle:Informe:index' with {'id': entity.id, 'count':3} %}
+		{% render 'AdminBundle:Informe:index' with {'id': entity.id, 'count':5} %}
 	</div>
 </div>
 

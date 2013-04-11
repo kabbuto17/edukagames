@@ -2,6 +2,8 @@
 
 namespace Edukagames\AdminBundle\Controller;
 
+use Edukagames\UserBundle\Util\SaveEraseFile;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -77,10 +79,15 @@ class JuegoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $foto = $form->getData()->getImagen()->getClientOriginalName();
+            $entity->setImagen($foto);
+            $raizFoto = 'Juegos/'. str_replace(' ', '', $entity->getNombre()).'/';
+            //ldd($_FILES);
+            SaveEraseFile::saveFile($raizFoto, $_FILES['edukagames_adminbundle_juegotype']['tmp_name']["imagen"], $foto);
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('juego_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('juego')); //, array('id' => $entity->getId())));
         }
 
         return $this->render('AdminBundle:Juego:new.html.twig', array(
@@ -126,15 +133,22 @@ class JuegoController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Juego entity.');
         }
-
+		$imgenOri = $entity->getImagen();
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new JuegoType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
+        	if($editForm->getData()->getImagen() != null){
+        		$nombreArchivo = $editForm->getData()->getImagen()->getClientOriginalName();
+        		$entity->setImagen($nombreArchivo);
+        		$raizImagen = 'Juegos/'. str_replace(' ', '', $entity->getNombre()).'/';
+        		SaveEraseFile::saveFile($raizImagen, $_FILES['edukagames_adminbundle_juegotype']['tmp_name']["imagen"], $nombreArchivo);
+        	} else {
+        		$entity->setImagen($imgenOri);
+        	}
+        	$em->persist($entity);
             $em->flush();
-
             return $this->redirect($this->generateUrl('juego_edit', array('id' => $id)));
         }
 
@@ -161,7 +175,9 @@ class JuegoController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Juego entity.');
             }
-
+            $directorio = "Juegos/".str_replace(' ', '', $entity->getNombre())."/";
+            $dir = $directorio."/".$entity->getImagen();
+            SaveEraseFile::eraseFile($dir);
             $em->remove($entity);
             $em->flush();
         }

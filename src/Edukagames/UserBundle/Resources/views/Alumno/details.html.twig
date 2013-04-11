@@ -20,17 +20,31 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade in active" id="tab1">
-            {% render "UserBundle:Alumno:show" with {'id' : entity.id} %}          
+            {% render "UserBundle:Alumno:show" with {'id' : entity.id } %}          
         </div>
         <div class="tab-pane fade" id="tab2">
 			{% render "AdminBundle:Informe:index" with {'id' : entity.id, 'count': -1 } %}
         </div>
         <div class="tab-pane fade" id="tab3">
-			{# {% render "AdminBundle:Puntuaciones:show" with {'id' : entity.id} %} #}
+			{% render "AdminBundle:Puntuaciones:show" with {'id' : entity.id } %}
         </div>
         <div class="tab-pane fade" id="tab4">
-            usar highchartsPHP -> https://github.com/ghunti/HighchartsPHP
+        	{% render "AdminBundle:Grafica:show" with {'id' : entity.id } %}
         </div>
     </div>
 </div>
+<script>
+//Javascript to enable link to tab
+var url = document.location.toString();
+console.log(url);
+if (url.match('#')) {
+    $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+} 
+
+// Change hash for page-reload
+$('.nav-tabs a').on('shown', function (e) {
+    window.location.hash = e.target.hash;
+})
+</script>
+
 {% endblock %}

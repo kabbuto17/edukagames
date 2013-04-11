@@ -1,47 +1,41 @@
 {% extends '::index.html.twig' %}
 
 {% block content %}
-<h1>Juego list</h1>
+<h1>Juegos</h1>
+{% if is_granted('ROLE_ADMIN') %}
+<a class="btn" href="{{ path('juego_new') }}">Nuevo juego</a>
+{% endif %}
 
- <table class="records_list">
-     <thead>
-         <tr>
-             <th>id</th>
-             <th>nombre</th>
-             <th>descripcion</th>
-             <th>imagen</th>
-             <th>xml</th>
-             <th>actions</th>
-         </tr>
-     </thead>
-     <tbody>
-     {% for entity in entities %}
-         <tr>
-             <td><a href="{{ path('juego_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-             <td>{{ entity.nombre }}</td>
-             <td>{{ entity.descripcion }}</td>
-             <td>{{ entity.imagen }}</td>
-             <td>{{ entity.xml }}</td>
-             <td>
-                 <ul>
-                     <li>
-                         <a href="{{ path('juego_show', { 'id': entity.id }) }}">show</a>
-                     </li>
-                     <li>
-                         <a href="{{ path('juego_edit', { 'id': entity.id }) }}">edit</a>
-                     </li>
-                 </ul>
-             </td>
-         </tr>
-     {% endfor %}
-     </tbody>
- </table>
+{% for entity in entities %}
+<div class="row-fluid accordion-group" style="padding: 20px 20px;">
+	<div class="span4">
+		<h3>{{ entity.nombre }}</h3>
+		<img alt="" src="{{ asset('Juegos/'~entity.nombre |replace({' ':''}) ~'/'~entity.imagen) }}">
+	</div>
+	<div class="span5">
+		<table class="table">
+			<thead>
+				<tr>
+	            	<th>Descripcion</th>
+	            </tr>
+			</thead>
+			<tbody>
+		        <tr>
+		            <td>{{ entity.descripcion }}</td>
+		        </tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="span3">
+		<a class="btn" href="{{ entity.URL }}">Jugar!</a>
+		{% if is_granted('ROLE_ADMIN') %}
+			<a class="btn" href="{{ path('juego_edit', { 'id': entity.id }) }}">Editar</a>
+		{% endif %}
+	</div>
+	<div class="span4">
 
-<ul>
-    <li>
-        <a href="{{ path('juego_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
+	</div>
+	
+</div>
+{% endfor %}
 {% endblock %}

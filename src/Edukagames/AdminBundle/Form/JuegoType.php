@@ -13,8 +13,10 @@ class JuegoType extends AbstractType
         $builder
             ->add('nombre')
             ->add('descripcion')
-            ->add('imagen')
+            ->add('imagen','file', array('required' => false,'data_class' => null))
+            //->add('imagen')
             ->add('XML')
+            ->add('URL')
         ;
     }
 

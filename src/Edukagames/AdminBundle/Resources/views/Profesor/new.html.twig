@@ -4,7 +4,18 @@
 <h1>Nuevo Administrador</h1>
 
 <form action="{{ path('profesor_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+	{% if not(form.getVars().valid)  %}
+ 	   <div id="errors" class="alert alert-error"> 
+ 		{{ form_errors(form) }}
+ 	   	{{ form_errors(form.nombre) }}
+ 		{{ form_errors(form.password.Contrasena) }}
+ 		{{ form_errors(form.password.Repita_contrasena) }} 
+	   </div>
+	{% endif %}
+  	{{ form_widget(form.nombre, { 'attr': {'placeholder': 'Nombre'} }) }}<br />
+	{{ form_widget(form.password.Contrasena, { 'attr': {'placeholder': 'Password', 'required': "required"} }) }}
+	{{ form_widget(form.password.Repita_contrasena, { 'attr': {'placeholder': 'Repita el password', 'required': "required"} }) }}<br />
+    {{ form_widget(form._token) }}
     <p>
         <button type="submit">Crear</button>
     </p>

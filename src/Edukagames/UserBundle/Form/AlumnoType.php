@@ -24,9 +24,9 @@ class AlumnoType extends AbstractType
             ->add('curso')
             ->add('fechaNacimiento', 'date', array(
 				    'input'  => 'datetime',
-				    'widget' => 'choice',
+				    'widget' => 'single_text',
             		'format' => 'dd-MM-yyyy',
-            		'years' => range(1950,2013)))
+            		'invalid_message' => 'El formato de la fecha o la fecha no son correctos. DD-MM-YYYY',))
             ->add('userName')
             ->add('foto','file', array(
 					'required' => false,

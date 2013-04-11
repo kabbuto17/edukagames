@@ -18,7 +18,7 @@
             <td>
 				<a href="{{ path('informe_show', { 'id': informe.id }) }}"><i class="icon-eye-open"></i></a>
 				<a href="{{ path('informe_update', { 'id': informe.id }) }}"><i class="icon-pencil"></i></a>
-				<a href="{{ path('informe_delete', { 'id': informe.id }) }}"><i class="icon-remove"></i></a>
+				<a href="{{ path('informe_delete', { 'id': informe.id }) }}" onclick="return confirm('¿Esta seguro que desea eliminarlo?')"><i class="icon-remove"></i></a>
             </td>
         </tr>
     {% endfor %}

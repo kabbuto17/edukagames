@@ -2,19 +2,20 @@
 	{% for juego in juegos %}
 	<div class="accordion-group">
 		<div class="accordion-heading">
-			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#{{ juego.nombre }}">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#{{ juego.nombre | replace({' ':''}) }}">
 				{{ juego.nombre }}
 	      	</a>
 	    </div>
-	    <div id="{{ juego.nombre }}" class="accordion-body collapse">
+	    <div id="{{ juego.nombre | replace({' ':''}) }}" class="accordion-body collapse">
 			<div class="accordion-inner">
 				<table class = "table table-striped table-condensed" cellspacing="0">
 					<thead>
 						<tr>
-							<th>Nivel</th>
-							<th>Fase</th>
+							<th>Dificultad</th>
+							<th>Fecha</th>
 							<th>Puntos</th>
 							<th>Aciertos</th>
+							<th>Fallos</th>
 							<th>Tiempo</th>
 						</tr>
 					</thead>
@@ -23,11 +24,12 @@
 							{% for punt in puntuacion %}
 								{% if punt.juego.nombre == juego.nombre %}
 									<tr>
-										<td>{{ punt.nivel }}</td>
-										<td>{{ punt.fase }}</td>
-										<td>{{ punt.puntos }}</td>
-										<td>{{ punt.aciertos }}</td>
-										<td>{{ punt.tiempo }}</td>
+										<td>{{ punt.Dificultad }}</td>
+										<td>{{ punt.Fecha | date () }}</td>
+										<td>{{ punt.Puntos }}</td>
+										<td>{{ punt.Aciertos }}</td>
+										<td>{{ punt.Fallos }}</td>
+										<td>{{ punt.Tiempo }}</td>
 									</tr>
 								{% endif %}
 							{% endfor %}
@@ -39,6 +41,3 @@
 	</div>
 	{% endfor %}
  </div>
- 
- 
- 

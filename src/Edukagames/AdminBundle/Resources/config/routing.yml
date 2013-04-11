@@ -1,26 +1,28 @@
 admin_index:
-    pattern: /admin
+    pattern: /home
     defaults: { _controller: 'AdminBundle:Default:index' }
 
 AdminBundle_profesor:
         resource: "@AdminBundle/Resources/config/routing/profesor.yml"
-        prefix:   admin/profesor
+        prefix:   /administradores
 
 AdminBundle_informe:
         resource: "@AdminBundle/Resources/config/routing/informe.yml"
-        prefix:   admin/informe
+        prefix:   /informes
 
 AdminBundle_juego:
         resource: "@AdminBundle/Resources/config/routing/juego.yml"
-        prefix:   admin/juego
+        prefix:   /juegos
+
+
         
 puntuaciones:
     pattern: /puntuaciones/{id}
     defaults: { _controller: 'AdminBundle:Puntuaciones:show' }
     
 grafica:
-    pattern: /grafica
-    defaults: { _controller: 'AdminBundle:Grafica:chart' }
+    pattern: /grafica/{div}/{id}/{dificultad}
+    defaults: { _controller: 'AdminBundle:Grafica:DrawChart' }
     
 grafica_index:
     pattern: /grafica/indice

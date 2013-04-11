@@ -213,7 +213,7 @@ class Puntuacion
      *
      * @return integer 
      */
-    public function getFalloss()
+    public function getFallos()
     {
         return $this->Fallos;
     }
