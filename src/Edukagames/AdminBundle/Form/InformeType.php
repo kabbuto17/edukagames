@@ -12,11 +12,11 @@ class InformeType extends AbstractType
     {
         $builder
             ->add('nombreInforme','file', array('required' => false,'data_class' => null))
-            ->add('fecha','date')
-//             ->add('alumno','entity',array('class' => 'UserBundle:Alumno',
-//                                 'required' => true,
-//                                 'empty_value' => 'Seleccione una opción'
-//             		))
+            ->add('fecha', 'date', array(
+				    'input'  => 'datetime',
+				    'widget' => 'single_text',
+            		'format' => 'dd-MM-yyyy',
+            		'invalid_message' => 'El formato de la fecha o la fecha no son correctos. DD-MM-AAAA',))
             ->add('descripcion','textarea')
         ;
     }

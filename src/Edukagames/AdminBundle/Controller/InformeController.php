@@ -26,12 +26,18 @@ class InformeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 		$informes = $em->getRepository('AdminBundle:Informe')->findBy(array('Alumno' => $id), array('fecha' => 'DESC'),($count>0)?$count:null);
-
-        return $this->render('AdminBundle:Informe:index.html.twig', array(
+		if($count >0 ){
+		return $this->render('AdminBundle:Informe:indexComprimido.html.twig', array(
+				'informes' => $informes,
+				'id'	=> $id,
+		));			
+		}else{
+	    return $this->render('AdminBundle:Informe:index.html.twig', array(
             'informes' => $informes,
         	'id'	=> $id,
         ));
-    }
+		}
+	}
 
     /**
      * Finds and displays a Informe entity.
@@ -61,31 +67,10 @@ class InformeController extends Controller
      */
     public function newAction($id)
     {
-
         $informe = new Informe();
         $form   = $this->createForm(new InformeType(), $informe);
-        $em = $this->getDoctrine()->getEntityManager();
-        $alumno = $em->getRepository('UserBundle:Alumno')->find($id);
-        $request = $this->getRequest();
-
-        $form->bindRequest($request);
-        if ($form->isValid()) {
-        	$filename = $_FILES ["edukagames_adminbundle_informetype"]["name"]["nombreInforme"];
-        	$tmp_filename = $_FILES["edukagames_adminbundle_informetype"]["tmp_name"]["nombreInforme"];
-        	$destination = "uploads/".$_POST["edukagames_adminbundle_informetype"]["alumno"]."/informes";
-        	$informe->setNombreInforme($filename);
-
-        	$informe->setAlumno($alumno);
-
-        	SaveEraseFile::saveFile($destination, $tmp_filename, $filename);
-
-        	$em->persist($informe);
-        	$em->flush();
-        	$this->get("session")->getFlashBag()->add('success', 'Se añadio correctamente el informe '.$filename.' al usuario '.$alumno.getNombreCompleto().'.');
-        	
-        	return $this->redirect($this->generateUrl('alumnos_details', array('id' => $id)));
-        }
-        
+        $alumno = $this->getDoctrine()->getEntityManager()->getRepository('UserBundle:Alumno')->find($id);
+      
         return $this->render('AdminBundle:Informe:new.html.twig', array(
             'informe' => $informe,
             'form'   => $form->createView(),
@@ -102,24 +87,23 @@ class InformeController extends Controller
     {
         $informe  = new Informe();
         $form = $this->createForm(new InformeType(), $informe);
-        $em = $this->getDoctrine()->getEntityManager();
-        $alumno = $em->getRepository('UserBundle:Alumno')->find($id);
-        if ($request->isMethod('POST')) {
-        	$form->bind($request);
-	        if ($form->isValid()) {
-	        	$filename = $_FILES ["edukagames_adminbundle_informetype"]["name"]["nombreInforme"];
-	        	$tmp_filename = $_FILES["edukagames_adminbundle_informetype"]["tmp_name"]["nombreInforme"];
-	        	$destination = "uploads/".$alumno->getId()."/informes";
-	        	$informe->setNombreInforme($filename);
-	        	$informe->setAlumno($alumno);
+        $alumno = $this->getDoctrine()->getEntityManager()->getRepository('UserBundle:Alumno')->find($id);
+
+        $form->bind($request);
+	    if ($form->isValid()) {
+	    	$em = $this->getDoctrine()->getManager();
+	       	$filename = $_FILES ["edukagames_adminbundle_informetype"]["name"]["nombreInforme"];
+	       	$tmp_filename = $_FILES["edukagames_adminbundle_informetype"]["tmp_name"]["nombreInforme"];
+	       	$destination = "uploads/".$alumno->getId()."/informes";
+	       	$informe->setNombreInforme($filename);
+	       	$informe->setAlumno($alumno);
+
+	       	SaveEraseFile::saveFile($destination, $tmp_filename, $filename);
 	
-	        	SaveEraseFile::saveFile($destination, $tmp_filename, $filename);
-	
-	            $em->persist($informe);
-	            $em->flush();
-	            $this->get("session")->getFlashBag()->add('success', 'Se añadio correctamente el informe '.$filename.' al usuario '.$alumno->getNombreCompleto().'.');
-	            return $this->redirect($this->generateUrl('alumnos_details', array('id' => $id)));
-        	}
+	        $em->persist($informe);
+	        $em->flush();
+	        $this->get("session")->getFlashBag()->add('success', 'Se añadio correctamente el informe '.$filename.' al usuario '.$alumno->getNombreCompleto().'.');
+	        return $this->redirect($this->generateUrl('alumnos_details', array('id' => $id)));
         }
 
         return $this->render('AdminBundle:Informe:new.html.twig', array(

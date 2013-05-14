@@ -1,29 +1,28 @@
 {% extends '::index.html.twig' %}
 {% block content %}
-<h1>Edicion de informe de {{ informe.alumno.nombre }}</h1>
+<h1>Editar informe de {{ informe.alumno.nombre }}</h1>
 
 <form action="{{ path('informe_update', { 'id': informe.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }} 
-{#	<div>
-	{{ form_label(edit_form.nombreInforme,informe.nombreInforme) }}
-	{{ form_widget(edit_form.nombreInforme) }}
-	</div>
-	<div>
-	{{ form_label(edit_form.fecha,"Fecha") }}
-	{{ form_widget(edit_form.fecha) }}
-	</div>
-	<div>
-	{{ form_label(edit_form.descripcion,"Descripcion") }}
-	{{ form_widget(edit_form.descripcion) }}
-	</div>
-	<input type="hidden" id="edukagames_adminbundle_informetype__token" name="edukagames_adminbundle_informetype[_token]" >#}
+	{% if not (edit_form.getVars().valid)  %}
+		<div id="errors" class="alert alert-error"> 
+	 		{{ form_errors(edit_form) }}
+	 	   	{{ form_errors(edit_form.nombreInforme) }}
+	 		{{ form_errors(edit_form.fecha) }}
+	 		{{ form_errors(edit_form.descripcion) }} 
+	  	</div>
+	{% endif %}
+  	{{ form_widget(edit_form.nombreInforme, { 'attr': {'placeholder': 'Nombre Informe'} }) }}<br />
+  	<small>actualmente el archivo es "<a href="{{ asset('uploads/'~informe.alumno.id~'/informes/'~informe.nombreInforme ) }}">{{ informe.nombreInforme }}</a>"</small><br />
+	{{ form_widget(edit_form.fecha, { 'attr': {'placeholder': 'DD/MM/AAAA'} }) }}<br />
+	{{ form_widget(edit_form.descripcion, { 'attr': {'placeholder': 'Descripcion','maxlength':255, 'style': 'width:430px; height:110px'} }) }}<br />
+  	{{ form_widget(edit_form._token) }}
+
     <p>
-        <button type="submit">Editar</button>
+        <button type="submit">Guardar</button>
     </p>
 </form>
-	<a href="{{ path('informe', { 'id': informe.Alumno.id }) }}">
-		<i class="icon-arrow-left"></i>Volver a la lista
-	</a>
-
+<a href="{{ path('alumnos_details', {'id' : informe.alumno.id}) }}#tab2">
+	<i class="icon-arrow-left"></i> Volver
+</a> 
 
 {% endblock %}

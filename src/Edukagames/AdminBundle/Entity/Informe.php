@@ -5,7 +5,7 @@ namespace Edukagames\AdminBundle\Entity;
 use Edukagames\UserBundle\Entity\Alumno;
 
 use Symfony\Component\Validator\Constraints\Date;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Annotations\Annotation\Target;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -29,7 +29,12 @@ class Informe
 
     /**
      * @var string $Archivo
-     * ej: Informe1.pdf
+     * 
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Por favor seleccione un archivo con formato PDF."
+     * )
      *
      * @ORM\Column(name="nombreArchivo", type="string", length=255)
      */

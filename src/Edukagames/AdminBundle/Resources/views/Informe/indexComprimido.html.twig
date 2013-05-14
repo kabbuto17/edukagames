@@ -1,0 +1,28 @@
+<a href="{{ path('informe_new', {'id' : id}) }}">
+<i class="icon-plus"></i> Nuevo informe</a>
+<table class="table table-striped table-condensed">
+	<tbody>
+		{% for informe in informes %}
+        	<tr>
+            	<td>
+					<i class="icon-download"></i> <a target="_blank" href="{{ asset('uploads/'~informe.alumno.id~'/informes/'~informe.nombreInforme ) }}">{{informe.fecha|date('d-m-Y')}} {{ informe.nombreInforme }}</a>
+			   		<span>	
+						<a href="{{ path('informe_update', { 'id': informe.id }) }}"><i class="icon-pencil"></i></a>
+						<a href="{{ path('informe_delete', { 'id': informe.id }) }}" onclick="return confirm('¿Esta seguro que desea eliminarlo?')"><i class="icon-remove"></i></a>
+						<a href="#" rel="tooltip" title="{{ informe.descripcion }}"><i class="icon-info-sign"></i></a>
+					</span>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<script type="text/javascript">
+$(document).ready(function () {
+	$('*[rel*=tooltip]:visible').each(function() {
+	    $(this).tooltip({
+	      'selector': '',
+	      'placement': 'right'
+	    });
+    });
+});
+</script>

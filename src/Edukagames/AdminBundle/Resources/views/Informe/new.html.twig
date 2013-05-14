@@ -1,19 +1,25 @@
 {% extends '::index.html.twig' %}
 {% block content %}
-<h1>Creacion de informe de {{ alumno.nombre }}</h1>
+<h1>Creacion de informes para {{ alumno.nombre }}</h1>
 
 <form action="{{ path('informe_create', {'id' : alumno.id}) }}" method="post" {{ form_enctype(form) }}>
-	{{ form_rest(form) }}
+	{% if not (form.getVars().valid)  %}
+		<div id="errors" class="alert alert-error"> 
+	 		{{ form_errors(form) }}
+	 	   	{{ form_errors(form.nombreInforme) }}
+	 		{{ form_errors(form.fecha) }}
+	 		{{ form_errors(form.descripcion) }} 
+	  	</div>
+	{% endif %}
+  	{{ form_widget(form.nombreInforme, { 'attr': {'placeholder': 'Nombre Informe', 'required': "required"} }) }}<br /><br />
+	{{ form_widget(form.fecha, { 'attr': {'placeholder': 'DD/MM/AAAA'} }) }}<br />
+	{{ form_widget(form.descripcion, { 'attr': {'placeholder': 'Descripcion','maxlength':255, 'style': 'width:430px; height:110px'} }) }}<br />
+  	{{ form_widget(form._token) }}
     <p>
-        <button type="submit">Create</button>
+        <button type="submit">Crear</button>
     </p>
 </form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('informe', {'id' : alumno.id}) }}">
-            Back to the list
-        </a>   
-    </li>
-</ul>
+<a href="{{ path('alumnos_details', {'id' : alumno.id}) }}#tab2">
+	<i class="icon-arrow-left"></i> Volver
+</a> 
 {% endblock %}

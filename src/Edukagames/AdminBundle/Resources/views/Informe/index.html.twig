@@ -14,9 +14,9 @@
         <tr>
             <td><i class="icon-download"></i> <a target="_blank" href="{{ asset('uploads/'~informe.alumno.id~'/informes/'~informe.nombreInforme ) }}">{{ informe.nombreInforme }}</td>
             <td>{% if informe.fecha %}{{ informe.fecha|date('d-m-Y') }}{% endif %}</td>
-            <td>{{ informe.descripcion|slice(0,26)~'...' }}</td>
+            <td>{{ informe.descripcion}}</td>
             <td>
-				<a href="{{ path('informe_show', { 'id': informe.id }) }}"><i class="icon-eye-open"></i></a>
+			    {#<a href="{{ path('informe_show', { 'id': informe.id }) }}"><i class="icon-eye-open"></i></a>#}
 				<a href="{{ path('informe_update', { 'id': informe.id }) }}"><i class="icon-pencil"></i></a>
 				<a href="{{ path('informe_delete', { 'id': informe.id }) }}" onclick="return confirm('¿Esta seguro que desea eliminarlo?')"><i class="icon-remove"></i></a>
             </td>
