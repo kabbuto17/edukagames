@@ -40,3 +40,4 @@ security:
 #        - { path: /, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: /user/profile, roles: ROLE_ADMIN }
 #        - { path: /.*, roles: ROLE_ADMIN }
+         - { path: %kernel.root_dir%/../web/*, roles: ROLE_ADMIN }
